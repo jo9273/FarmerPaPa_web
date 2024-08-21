@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 		// 檢查必要欄位是否輸入
 		if(email == null || (email = email.trim()).length() == 0) errors.add("必須輸入emaill");
 		
-		if(password == null || password.length() == 0) errors.add("必須輸入password");
+		if(password == null || password.length() == 0) errors.add("必須輸入密碼");	// 因為密碼有可能空白，所以.trim() 沒擋
 		
 		if(captcha == null || (captcha = captcha.trim()).length() == 0 ) errors.add("必須輸入驗證碼");
 		
