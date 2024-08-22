@@ -1,3 +1,5 @@
+<%@ page import="jojo.farmerpapa.entity.Customer"%>
+<%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,7 +12,11 @@
         <h2><a href="./">FarmerPaPa </a><sub>登入成功</sub></h2>
         <hr>
         <p>
-            XXX, 你好! 10秒後自動轉址至<a href="./">首頁</a>
+            <% 
+            	Customer member = (Customer)request.getAttribute("memberLogin");
+            	out.println(member != null ? member.getName() : "name不見了");
+            %>
+            , 你好! 10秒後自動轉址至<a href="./">首頁</a>
         </p>
 
     </body>

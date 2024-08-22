@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,24 +61,18 @@ public class LoginServlet extends HttpServlet {
 			try {
 				Customer c = service.login(email, password);
 				
-				//3.1 顯示成功畫面
-				response.setContentType("text/html");
-				response.setCharacterEncoding("utf-8");
+				// 3.1 內部轉交(forward)登入成功html
 				
-				try(
-					PrintWriter out = response.getWriter();
-				){
-					out.println("<!DOCTYPE html>");
-					out.println("<html>");
-					out.println("<head>");
-					out.println("<title>登入成功</title>");
-					out.println("</head>");
-					out.println("<body>");
-					out.printf("<h2>%s, 登入成功</h2>", c.getName());
-					out.println("</body>");
-					out.println("</html>");
-				}
+				// 將物件傳給jsp
+				request.setAttribute("memberLogin", c);
+				
+				// 派遣器把控制權轉交給前端畫面
+				RequestDispatcher dispatcher = request.getRequestDispatcher("login_ok.jsp");
+				dispatcher.forward(request, response);
+				
+				// ***return不可移除, 不然執行有問題時，後續處理的程式碼無法執行到
 				return;
+				
 			} catch (LoginFailedException e) {
 				errors.add(e.getMessage());
 				
