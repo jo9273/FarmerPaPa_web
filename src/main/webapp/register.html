@@ -10,8 +10,18 @@
                 //alert("refreshCaptcha");
                 var captchaImg = document.getElementById("captchaImg");
                 captchaImg.src = "images/captcha.png?refresh=" + new Date();
-                
             }
+
+            function displayPwd(){
+                //alert(theCheckbox.checked);
+                if(theCheckbox.checked){
+                    thePassword.type = "text";
+				}else{
+					thePassword.type = "password";
+				}
+            }
+
+
         </script>
 
 	</head>
@@ -29,8 +39,8 @@
 			
 			<p>
 				<label>密碼：</label>
-				<input type="password" name="password" required placeholder="請輸入密碼6~20字" minlength="6" maxlength="20">
-				<input type="checkbox"><label>顯示密碼</label>
+				<input id="thePassword" type="password" name="password" required placeholder="請輸入密碼6~20字" minlength="6" maxlength="20">
+				<input id="theCheckbox" type="checkbox" onchange="displayPwd()"><label>顯示密碼</label>
 			</p>
 
             <p>
