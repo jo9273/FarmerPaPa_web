@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jojo.farmerpapa.entity.Customer;
+import jojo.farmerpapa.exception.DataInvalidException;
 import jojo.farmerpapa.exception.FarmerpapaException;
 import jojo.farmerpapa.exception.LoginFailedException;
-import jojo.farmerpapa.exception.RegisterFailedException;
 import jojo.farmerpapa.service.CustomerService;
 
 /**
@@ -37,6 +37,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<String> errors = new ArrayList();
+		request.setCharacterEncoding("utf-8");
 		
 		// 1. 讀取request的form data:
 		String email = request.getParameter("email");
@@ -55,16 +56,15 @@ public class RegisterServlet extends HttpServlet {
 		if(phone == null || (phone = phone.trim()).length() == 0) errors.add("必須輸入手機號碼");
 		if(name == null || (name = name.trim()).length() == 0) errors.add("必須輸入姓名");
 		if(birthday == null || birthday.length() == 0) errors.add("必須輸入生日");
-		if(gender == null || gender.length() == 0) errors.add("必須輸入性別");
+		if(gender == null || gender.length() != 1) errors.add("必須選擇性別");
 		if(captcha == null || (captcha = captcha.trim()).length() == 0) errors.add("必須輸入驗證碼");
 		
 		// 2. 檢查無誤才呼叫商業邏輯:CustomerService.register
 		if(errors.isEmpty()) {
 			
-			CustomerService service = new CustomerService();
+			Customer c = new Customer();
 			
 			try {
-				Customer c = new Customer();
 				c.setEmail(email);
 				c.setPassword(password);
 				c.setPhone(phone);
@@ -72,39 +72,39 @@ public class RegisterServlet extends HttpServlet {
 				c.setBirthday(birthday);
 				c.setGender(gender.charAt(0));
 				c.setAddress(address);
+				c.setSubscribed(subscribed != null);
 				
-				if(subscribed == "on") {
-					c.setSubscribed(true);
-				}else {
-					c.setSubscribed(false);
-				}
-				
+				CustomerService service = new CustomerService();
 				service.register(c);
 				
 				//3.1 顯示成功畫面
-				response.setContentType("text/html");
-				response.setCharacterEncoding("utf-8");
+				response.setContentType("text/html ; charset = utf-8");
+				//response.setCharacterEncoding("utf-8");	//也可以用上面的寫法
 				
 				try(
 						PrintWriter out = response.getWriter();
 					){
-						out.print("<!DOCTYPE html>");
-						out.print("<html>");
-						out.print("<head>");
-						out.print("<title>註冊成功</title>");
-						out.print("</head>");
-						out.print("<body>");
-						out.print("<h2>" + c.getName() + "</h2>");
-						out.print("</body>");
-						out.print("</html>");
+						out.println("<!DOCTYPE html>");
+						out.println("<html>");
+						out.println("<head>");
+						out.println("<title>註冊成功</title>");
+						out.println("</head>");
+						out.println("<body>");
+						out.println("<h2>" + c.getName() + "註冊成功</h2>");
+						out.println("</body>");
+						out.println("</html>");
 					}
 					return;
-				} catch (RegisterFailedException e) {
+				} catch (DataInvalidException e) {
 					errors.add(e.getMessage());
 					
 				} catch (FarmerpapaException e) {
 					this.log(e.getMessage(), e);	//for admin
-					errors.add(e.getMessage());		//for user
+					errors.add(e.getMessage() + "請聯絡Admin");		//for user
+				
+				}catch (Exception e) {		// 幾乎是RuntimeException , 非預期的錯誤用父類別Exception拋出錯誤訊息
+					this.log("會員註冊時，系統發生錯誤", e);  //for admin
+					errors.add("系統發生錯誤" + e + ", 請聯絡Admin");		//for user
 				}
 						
 		}
@@ -118,15 +118,15 @@ public class RegisterServlet extends HttpServlet {
 		try(
 			PrintWriter out = response.getWriter();
 		){
-			out.print("<!DOCTYPE html>");
-			out.print("<html>");
-			out.print("<head>");
-			out.print("<title>註冊失敗</title>");
-			out.print("</head>");
-			out.print("<body>");
-			out.print("<h2>" + errors + "</h2>");
-			out.print("</body>");
-			out.print("</html>");
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title>註冊失敗</title>");
+			out.println("</head>");
+			out.println("<body>");
+			out.println("<h2>" + errors + "</h2>");
+			out.println("</body>");
+			out.println("</html>");
 			
 		}
 		

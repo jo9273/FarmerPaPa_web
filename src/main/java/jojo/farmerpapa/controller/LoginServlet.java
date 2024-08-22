@@ -67,15 +67,15 @@ public class LoginServlet extends HttpServlet {
 				try(
 					PrintWriter out = response.getWriter();
 				){
-					out.print("<!DOCTYPE html>");
-					out.print("<html>");
-					out.print("<head>");
-					out.print("<title>登入成功</title>");
-					out.print("</head>");
-					out.print("<body>");
-					out.print("<h2>" + c.getName() + "</h2>");
-					out.print("</body>");
-					out.print("</html>");
+					out.println("<!DOCTYPE html>");
+					out.println("<html>");
+					out.println("<head>");
+					out.println("<title>登入成功</title>");
+					out.println("</head>");
+					out.println("<body>");
+					out.printf("<h2>%s, 登入成功</h2>", c.getName());
+					out.println("</body>");
+					out.println("</html>");
 				}
 				return;
 			} catch (LoginFailedException e) {
@@ -84,6 +84,10 @@ public class LoginServlet extends HttpServlet {
 			} catch (FarmerpapaException e) {
 				this.log(e.getMessage(), e);	//for admin
 				errors.add(e.getMessage());		//for user
+			
+			} catch (Exception e) {		// 幾乎是RuntimeException , 非預期的錯誤用父類別Exception拋出錯誤訊息
+				this.log("會員登入時，系統發生錯誤", e);  //for admin
+				errors.add("系統發生錯誤" + e + ", 請聯絡Admin");		//for user
 			}
 		}
 		
@@ -94,15 +98,15 @@ public class LoginServlet extends HttpServlet {
 		try(
 			PrintWriter out = response.getWriter();
 		){
-			out.print("<!DOCTYPE html>");
-			out.print("<html>");
-			out.print("<head>");
-			out.print("<title>登入失敗</title>");
-			out.print("</head>");
-			out.print("<body>");
-			out.print("<h2>" + errors + "</h2>");
-			out.print("</body>");
-			out.print("</html>");
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title>登入失敗</title>");
+			out.println("</head>");
+			out.println("<body>");
+			out.println("<h2>" + errors + "</h2>");
+			out.println("</body>");
+			out.println("</html>");
 		} 
 	}
 
