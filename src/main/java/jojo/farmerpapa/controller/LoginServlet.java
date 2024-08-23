@@ -37,7 +37,8 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		
 		List<String> errors = new ArrayList(); 
 		
@@ -55,18 +56,17 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		// 2. 檢查無誤才呼叫商業邏輯:CustomerService.login
-		
 		if(errors.isEmpty()) {
 			CustomerService service = new CustomerService();
 			try {
 				Customer c = service.login(email, password);
 				
-				// 3.1 內部轉交(forward)登入成功html
+				// 3.1 內部轉交(forward)登入成功 login_ok.jsp
 				
 				// 將物件傳給jsp
 				request.setAttribute("memberLogin", c);
 				
-				// 派遣器把控制權轉交給前端畫面
+				// 派遣器把控制權轉交給前端畫面(相對路徑)
 				RequestDispatcher dispatcher = request.getRequestDispatcher("login_ok.jsp");
 				dispatcher.forward(request, response);
 				
@@ -86,23 +86,15 @@ public class LoginServlet extends HttpServlet {
 			}
 		}
 		
-		//3.2TODO
-		response.setContentType("text/html");
-		response.setCharacterEncoding("utf-8");
+		//3.2 內部轉交(forward)登入失敗 login.jsp
 		
-		try(
-			PrintWriter out = response.getWriter();
-		){
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>登入失敗</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h2>" + errors + "</h2>");
-			out.println("</body>");
-			out.println("</html>");
-		} 
+		// 將物件傳給jsp
+		request.setAttribute("errors", errors);
+		
+		// 派遣器把控制權轉交給前端畫面(相對路徑)
+		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 }

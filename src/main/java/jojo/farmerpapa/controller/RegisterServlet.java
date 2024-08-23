@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -77,24 +78,17 @@ public class RegisterServlet extends HttpServlet {
 				CustomerService service = new CustomerService();
 				service.register(c);
 				
-				//3.1 顯示成功畫面
-				response.setContentType("text/html ; charset = utf-8");
-				//response.setCharacterEncoding("utf-8");	//也可以用上面的寫法
+				// 3.1 內部轉交(forward)註冊成功 register_ok.jsp
+				// 將物件傳給jsp
+				request.setAttribute("member", c);
 				
-				try(
-						PrintWriter out = response.getWriter();
-					){
-						out.println("<!DOCTYPE html>");
-						out.println("<html>");
-						out.println("<head>");
-						out.println("<title>註冊成功</title>");
-						out.println("</head>");
-						out.println("<body>");
-						out.println("<h2>" + c.getName() + "註冊成功</h2>");
-						out.println("</body>");
-						out.println("</html>");
-					}
-					return;
+				// 派遣器把控制權轉交給前端畫面(相對路徑)
+				RequestDispatcher dispatcher = request.getRequestDispatcher("register_ok.jsp");
+				dispatcher.forward(request, response);
+				
+				// ***return不可移除, 不然執行有問題時，後續處理的程式碼無法執行到
+				return;
+				
 				} catch (DataInvalidException e) {
 					errors.add(e.getMessage());
 					
@@ -109,28 +103,15 @@ public class RegisterServlet extends HttpServlet {
 						
 		}
 		
-		//3.2TODO
+		//3.2 內部轉交(forward)登入失敗 login.jsp
 		
-		response.setContentType("text/html");
-		response.setCharacterEncoding("utf-8");
+		// 將物件傳給jsp
+		request.setAttribute("errors", errors);
+				
+		// 派遣器把控制權轉交給前端畫面(相對路徑)
+		RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+		dispatcher.forward(request, response);
 		
-		
-		try(
-			PrintWriter out = response.getWriter();
-		){
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>註冊失敗</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h2>" + errors + "</h2>");
-			out.println("</body>");
-			out.println("</html>");
-			
-		}
-		
-	
 	}
 
 }

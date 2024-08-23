@@ -1,3 +1,5 @@
+<!-- <%@ page pageEncoding="UTF-8"%>-->
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -28,9 +30,21 @@
 	<body>
 		<h2><a href="./">FarmerPaPa </a><sub>註冊</sub></h2>
 		<hr>
-			<a href="/fpapa/login.html">登入</a>
-			<a href="">註冊</a>
+			<a href="/fpapa/login.jsp">登入</a>
+			<a href="/fpapa/register.jsp">註冊</a>
 		<hr>
+		
+		<% 
+			List<String> errors = (List<String>)request.getAttribute("errors"); 
+		%>
+		<div id="theErrorsDiv">
+			<%
+				out.println(errors != null ? errors : "");
+			%>
+		
+		</div>
+		
+		
 		<form action="register.do" method="post">
 			<p>
 				<label>帳號：</label>
