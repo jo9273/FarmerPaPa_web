@@ -1,11 +1,11 @@
-<!-- <%@ page pageEncoding="UTF-8"%>-->
+<%@ page pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta charset="UTF-8">
 		<title>FarmerPaPa login</title>
+		<link rel="stylesheet" type="text/css" href="style/fpapa.css">
 
 		<script>
             function refreshCaptcha(){
