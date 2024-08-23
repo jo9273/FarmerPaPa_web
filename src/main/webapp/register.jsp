@@ -23,15 +23,18 @@
 				}
             }
 
-
         </script>
+        
+        <style>
+        	#theErrorsDiv{color:darkred;background-color:lightgray}
+        </style>
 
 	</head>
 	<body>
 		<h2><a href="./">FarmerPaPa </a><sub>註冊</sub></h2>
 		<hr>
 			<a href="/fpapa/login.jsp">登入</a>
-			<a href="/fpapa/register.jsp">註冊</a>
+			<a href="register.jsp">註冊</a>
 		<hr>
 		
 		<% 
