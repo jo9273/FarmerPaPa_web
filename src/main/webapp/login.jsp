@@ -36,6 +36,7 @@
 		<hr>
 			<a href="login.jsp">登入</a>
 			<a href="/fpapa/register.jsp">註冊</a>
+			<a href="product_list.jsp">買水果</a>
 		<hr>
 		
 		<% 

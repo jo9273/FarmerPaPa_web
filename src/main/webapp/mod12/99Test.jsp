@@ -60,21 +60,25 @@
 			<table id="_99table">
 				<caption>99乘法表</caption>
 				<tbody>
+				
+				<% 
+				for(int m = 1 ; m <= 3 ; m++){
+				%>	
 					<tr>
-						<td>1*1=1</td>
-						<td>1*2=2</td>
-						<td>1*3=3</td>
+					<% 
+					for(int n = 1 ; n <= 5 ; n++){
+					%>
+						<td><%= m %>*<%= n %>= <%= m * n %></td>
+
+				<% 	
+					}
+				%>
 					</tr>
-					<tr>
-						<td>2*1=1</td>
-						<td>2*2=4</td>
-						<td>2*3=6</td>
-					</tr>
-					<tr>
-						<td>3*1=3</td>
-						<td>3*2=6</td>
-						<td>3*3=9</td>
-					</tr>
+				<%	
+				}
+				%>
+					
+					
 				</tbody>
 			
 			</table>

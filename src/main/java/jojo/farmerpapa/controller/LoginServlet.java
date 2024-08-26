@@ -22,6 +22,7 @@ import jojo.farmerpapa.service.CustomerService;
  */
 // Servlet宣告的假網址一定要加/, ContextPath後加/login.do, http://localhost:8080/fpapa/login.do
 // urlPatterns = "/login.do"
+// @WebServlet("/login.do") 註解就呼叫不到了，不用把整支程式刪除
 @WebServlet("/login.do")	
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

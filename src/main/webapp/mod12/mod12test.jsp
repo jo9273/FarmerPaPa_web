@@ -19,7 +19,7 @@
 	<% 
 	Random random = new Random();
 	int i = random.nextInt(20)+1;
-	out.println(i>10?"<p>i大於10</p>":"<p>i小於10</p>");
+	out.println(i>10 ? "<p>i大於10</p>" : "<p>i小於10</p>");
 	%>
 	
 	
