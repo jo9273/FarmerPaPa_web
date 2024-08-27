@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jojo.farmerpapa.entity.Customer;
 import jojo.farmerpapa.exception.FarmerpapaException;
@@ -23,7 +24,8 @@ import jojo.farmerpapa.service.CustomerService;
 // Servlet宣告的假網址一定要加/, ContextPath後加/login.do, http://localhost:8080/fpapa/login.do
 // urlPatterns = "/login.do"
 // @WebServlet("/login.do") 註解就呼叫不到了，不用把整支程式刪除
-@WebServlet("/login.do")	
+// loadOnStartup = 1 伺服器啟動時就優先加載這個servlet
+@WebServlet(urlPatterns = "/login.do", loadOnStartup = 1)
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,6 +44,10 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		List<String> errors = new ArrayList(); 
+		
+		// 取得client request 的 session
+		HttpSession session = request.getSession();
+		
 		
 		// 1. 讀取request中的form data: email, password, captcha
 		String email = request.getParameter("email");
@@ -63,9 +69,9 @@ public class LoginServlet extends HttpServlet {
 				Customer c = service.login(email, password);
 				
 				// 3.1 內部轉交(forward)登入成功 login_ok.jsp
-				
 				// 將物件傳給jsp
-				request.setAttribute("memberLogin", c);
+				// 將 c 存在session中, jsp也要改session.getAttribute
+				session.setAttribute("memberLogin", c);
 				
 				// 派遣器把控制權轉交給前端畫面(相對路徑)
 				RequestDispatcher dispatcher = request.getRequestDispatcher("login_ok.jsp");

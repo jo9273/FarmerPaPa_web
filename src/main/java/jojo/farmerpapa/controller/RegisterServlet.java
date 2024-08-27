@@ -38,7 +38,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<String> errors = new ArrayList();
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8"); 	//因為前端request的字串有中文 name
 		
 		// 1. 讀取request的form data:
 		String email = request.getParameter("email");
