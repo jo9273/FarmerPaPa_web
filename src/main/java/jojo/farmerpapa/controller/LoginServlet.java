@@ -59,7 +59,17 @@ public class LoginServlet extends HttpServlet {
 		
 		if(password == null || password.length() == 0) errors.add("必須輸入密碼");	// 因為密碼有可能空白，所以.trim() 沒擋
 		
-		if(captcha == null || (captcha = captcha.trim()).length() == 0 ) errors.add("必須輸入驗證碼");
+		if(captcha == null || (captcha = captcha.trim()).length() == 0 ) { 
+			errors.add("必須輸入驗證碼");
+		}else {
+			String captchaString = (String) session.getAttribute("captchaString");
+			
+			if(!captcha.equalsIgnoreCase(captchaString)) {
+				errors.add("驗證碼不正確");
+			}
+		}
+		// 資安和記憶體考量,做完驗證碼就要清掉, 不論對錯
+		session.removeAttribute("captchaString");
 		
 		
 		// 2. 檢查無誤才呼叫商業邏輯:CustomerService.login

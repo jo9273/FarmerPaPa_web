@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jojo.farmerpapa.entity.Customer;
 import jojo.farmerpapa.exception.DataInvalidException;
@@ -40,6 +41,10 @@ public class RegisterServlet extends HttpServlet {
 		List<String> errors = new ArrayList();
 		request.setCharacterEncoding("utf-8"); 	//因為前端request的字串有中文 name
 		
+		// 取得client request 的 session
+		HttpSession session = request.getSession();
+		
+		
 		// 1. 讀取request的form data:
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -58,7 +63,18 @@ public class RegisterServlet extends HttpServlet {
 		if(name == null || (name = name.trim()).length() == 0) errors.add("必須輸入姓名");
 		if(birthday == null || birthday.length() == 0) errors.add("必須輸入生日");
 		if(gender == null || gender.length() != 1) errors.add("必須選擇性別");
-		if(captcha == null || (captcha = captcha.trim()).length() == 0) errors.add("必須輸入驗證碼");
+		if(captcha == null || (captcha = captcha.trim()).length() == 0) {
+				errors.add("必須輸入驗證碼");
+		}else {
+			String captchaString = (String)session.getAttribute("captchaString");
+			
+			if(!captcha.equalsIgnoreCase(captchaString)) {
+				errors.add("驗證碼不正確");
+			}
+		}
+		// 資安和記憶體考量,做完驗證碼就要清掉, 不論對錯
+		session.removeAttribute("captchaString");
+		
 		
 		// 2. 檢查無誤才呼叫商業邏輯:CustomerService.register
 		if(errors.isEmpty()) {

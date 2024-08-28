@@ -28,6 +28,7 @@
         
         <style>
         	#theErrorsDiv{color:darkred;background-color:lightgray}
+        	
         </style>
 
 	</head>
@@ -43,11 +44,9 @@
 			List<String> errors = (List<String>)request.getAttribute("errors"); 
 		%>
 		<div id="theErrorsDiv">
-			<% 
-				out.println(errors != null ? errors : "");
-			%>
+			<%= errors != null ? errors : "" %>
 		</div>
-
+		
 		<form action="login.do" method="post">
 			<p>
 				<label>帳號：</label>
@@ -59,6 +58,7 @@
 				<input id="thePassword" type="password" name="password" required placeholder="請輸入密碼" minlength="2" maxlength="20">
 				<input id="theCheckbox" type="checkbox" onchange="displayPwd()"><label>顯示密碼</label>
 			</p>
+			
 			<p>
 				<label>驗證碼：</label>
 				<input type="text" name="captcha" required placeholder="請輸入驗證碼">
@@ -67,5 +67,6 @@
 			</p>
 			<input type="submit" value="送出">
 		</form>
+		
 	</body>
 </html>
