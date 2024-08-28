@@ -24,7 +24,7 @@ import jojo.farmerpapa.service.CustomerService;
 // Servlet宣告的假網址一定要加/, ContextPath後加/login.do, http://localhost:8080/fpapa/login.do
 // urlPatterns = "/login.do"
 // @WebServlet("/login.do") 註解就呼叫不到了，不用把整支程式刪除
-// loadOnStartup = 1 伺服器啟動時就優先加載這個servlet
+// loadOnStartup = 1 伺服器啟動時就優先加載這個servlet (因為登入較常用可以加)
 @WebServlet(urlPatterns = "/login.do", loadOnStartup = 1)
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -82,6 +82,10 @@ public class LoginServlet extends HttpServlet {
 				// 將物件傳給jsp
 				// 將 c 存在session中, jsp也要改session.getAttribute
 				session.setAttribute("memberLogin", c);
+				
+				// 在單一功能就session-timeout (測試用)
+				// 單位為秒(可以用*60秒, 做為分鐘算)
+				//session.setMaxInactiveInterval(10*60);
 				
 				// 派遣器把控制權轉交給前端畫面(相對路徑)
 				RequestDispatcher dispatcher = request.getRequestDispatcher("login_ok.jsp");

@@ -9,7 +9,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
 		<title>FarmerPaPa Product list</title>
-		<link rel="stylesheet" type="text/css" href="style/fpapa.css">
+		<link rel="stylesheet" type="text/css" href="/fpapa/style/fpapa.css">
 		
 		<style>
 			#productListDiv{}
@@ -21,24 +21,15 @@
 		
 	</head>
 	<body>
-		<header>
-			<h2><a href="./">FarmerPaPa </a><sub>產品列表</sub></h2>
-			
-			<form action="product_list.jsp" method="GET">
-				<input type="search" name="keyword" required placeholder="請輸入關鍵字">
-				<input type="submit" value="查詢">
-			</form>
-			
-		</header>
+		<% request.setCharacterEncoding("utf-8"); %>
 		
-		<nav>	
-			<hr>
-				<a href="login.jsp">登入</a> |
-				<a href="/fpapa/register.jsp">註冊</a> |
-				<a href="?">買水果</a>	<!-- ? 意思是產品列表預設為查詢全部產品或直接寫product_list.jsp -->
-			<hr>
-		</nav>
+		<jsp:include page="./subviews/header.jsp">
+			<jsp:param value="果物市集" name="subheader"/>
+		</jsp:include>
 		
+		<%@include file="./subviews/nav.jsp" %>
+		
+
 		<article>
 			<section>
 				<a href="?latest=">新品</a>
@@ -115,10 +106,8 @@
 			<%  } %>
 		</article>
 		
-		<footer>
-			<hr>
-			<h3>FarmerPaPa&copy;2024-08</h3>				
-		</footer>
+		<%@include file="./subviews/footer.jsp" %>
+
 
 	</body>
 </html>

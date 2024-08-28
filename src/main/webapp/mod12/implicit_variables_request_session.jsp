@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -47,6 +48,9 @@
 		<hr>
 		<h3>session(邏輯的連線)</h3>
 		<p><label> session id: </label> <%= session.getId() %></p>
+		<p><label> session timeout:</label> <%= session.getMaxInactiveInterval() %> sec.</p>
+		<p><label> session.getCreationTime:</label> <%= new java.util.Date(session.getCreationTime()) %></p>
+		<p><label> session.getLastAccessedTime:</label> <%= new Date(session.getLastAccessedTime()) %></p>
 	
 	</body>
 </html>

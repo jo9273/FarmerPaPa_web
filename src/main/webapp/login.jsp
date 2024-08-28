@@ -5,7 +5,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>FarmerPaPa login</title>
-		<link rel="stylesheet" type="text/css" href="style/fpapa.css">
+		<link rel="stylesheet" type="text/css" href="/fpapa/style/fpapa.css">
 
 		<script>
             function refreshCaptcha(){
@@ -33,12 +33,12 @@
 
 	</head>
 	<body>
-		<h2><a href="./">FarmerPaPa </a><sub>登入</sub></h2>
-		<hr>
-			<a href="login.jsp">登入</a>
-			<a href="/fpapa/register.jsp">註冊</a>
-			<a href="product_list.jsp">買水果</a>
-		<hr>
+		<% request.setCharacterEncoding("utf-8"); %>
+		<jsp:include page="./subviews/header.jsp">
+			<jsp:param value="果物市集" name="subheader"/>
+		</jsp:include>
+		
+		<%@include file="./subviews/nav.jsp" %>
 		
 		<% 
 			List<String> errors = (List<String>)request.getAttribute("errors"); 
@@ -68,5 +68,6 @@
 			<input type="submit" value="送出">
 		</form>
 		
+		<%@include file="./subviews/footer.jsp" %>
 	</body>
 </html>
