@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+#productListDiv{}
+.productItem{display: inline-block ; width: 250px ; height: 370px ; vertical-align: top ; box-shadow: lightgray 2px 3px ; margin: 5px ;}	/*border: lightgray 1px solid ;*/
+.productItem img{width: 250px ; display: block ; margin: auto}
+.productItem div{text-align: center;}

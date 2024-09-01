@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+header{
+	text-align: center;
+	margin: 0;
+	background-color: #476730;
+	width: 100%;
+}
+
+.headerContent{
+	display: inline-block;
+	align-items: center;
+	width: 100%;
+}
+
+.logo h2 a{
+	text-decoration: none;
+	color:#E3E3DC;
+}
+
+.menu a{
+	margin-right: 15px;
+	text-decoration: none;
+	color:#E3E3DC;
+}
+
+.headerActions{
+	margin: 15px;
+	display: inline-block;
+}
+
+.cartButton{
+	color:#E3E3DC;
+	text-decoration: none;
+	display: flex;
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+
+.searchForm{
+	
+}
+
+
