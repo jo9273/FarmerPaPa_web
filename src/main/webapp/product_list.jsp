@@ -25,7 +25,7 @@
 		<%@include file="./subviews/header.jsp" %>
 		
 	
-		<div class="content">	
+		<div class="productContent">	
 			<article>
 				<section>
 					<a href="?latest=">新品</a>

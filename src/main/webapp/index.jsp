@@ -23,7 +23,7 @@
 		
 		<%@include file="./subviews/header.jsp" %>
 			
-		<div class="content">	
+		<div class="indexContent">	
 			<article>
 				<div class="banner">
 					<h2>banner</h2>

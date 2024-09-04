@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+
+.formContent{
+	flex: 1;
+	text-align: center;
+	margin: 15px auto;
+	align-content: center;
+}
+
+.theForm{
+	text-align: left;
+}
+
+.theForm input{
+	width: 200px;
+	height: 30px;
+	border: 1px solid #476730;
+}
+
+#theCheckbox{
+	width: 30px;
+	height: 20px;
+}
+
+
+.theForm img{
+	width: 120px;
+	height: 30px;
+	margin: 0px 15px -10px 0px;
+}
+
+.theForm button{
+	background: #476730;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 120px;
+    border: 0px;
+    color: #E3E3DC;
+	width: 200px;
+	display: block; /* 讓按鈕變為塊級元素 */
+    margin: 0 auto; /* 水平置中 */
+}

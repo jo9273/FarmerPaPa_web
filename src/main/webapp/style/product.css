@@ -1,6 +1,64 @@
 @charset "UTF-8";
 
-#productListDiv{}
-.productItem{display: inline-block ; width: 250px ; height: 370px ; vertical-align: top ; box-shadow: lightgray 2px 3px ; margin: 5px ;}	/*border: lightgray 1px solid ;*/
-.productItem img{width: 250px ; display: block ; margin: auto}
-.productItem div{text-align: center;}
+
+.productContent{
+	
+}
+
+.productContent section{
+	text-align: center;
+	padding: 10px;
+	margin: 10px;
+}
+
+.productContent section a{
+	display:inline-block;
+	text-decoration: none;
+	margin: 5px;
+	color: #476730;
+	width: 100px;
+	height:30px;
+	border-radius: 120px;
+	padding: 3px;
+	
+}
+
+.productContent section a:hover{
+	text-decoration: underline;
+	background-color: #476730;
+	color: #E3E3DC;
+}
+
+
+#productListDiv{
+	width: 65%;  /* 固定寬度的容器 */
+    margin: 0 auto; /* 將整個容器水平居中 */
+	
+	
+   
+}
+.productItem{
+	display: inline-block;
+	width: 250px;
+	height: 370px;
+	vertical-align: top;
+	box-shadow: lightgray 2px 3px;
+	margin: 23px ;
+	}	/*border: lightgray 1px solid ;*/
+	
+	
+.productItem img{
+	width: 250px;
+	display: block;
+	margin: auto
+	}
+
+
+
+
+
+
+	
+.productItem div{
+	text-align: center;
+	}

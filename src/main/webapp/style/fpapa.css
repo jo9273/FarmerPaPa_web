@@ -18,9 +18,10 @@ body{
 	flex-direction: column;
 	}
 
-.content{
+.indexContent{
 	flex: 1;
 	text-align: center;
+
 }
 
 .banner{
@@ -44,12 +45,9 @@ body{
 }
 
 
-<!--
+
+
+
 .welcomSpan{color:Chocolate}	
 
-
-section{
-	text-align: center;
-}
--->
 

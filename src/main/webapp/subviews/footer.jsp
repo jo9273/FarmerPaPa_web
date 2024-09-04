@@ -3,10 +3,10 @@
 		<footer>
 			<div class="footerContent">
 				<div class="footerInfo">
-					<a href="" class="infoButton">台北市大安區大安路999號999樓</a>
+					<a href="" class="info">台北市大安區大安路999號999樓</a>
 					<br>
-					<a href="" class="infoButton">02-1234-6666</a>
-					<a href="" class="infoButton">聯絡我們</a>
+					<a href="" class="info">02-1234-6666</a>
+					<a href="" class="info">聯絡我們</a>
 				</div>
 				<div class="footerSocial">
 					<img class="socialIcon" src="images/fb.png" alt="facebook">

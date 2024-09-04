@@ -19,18 +19,18 @@ footer{
     margin-bottom: 20px;
 }
 
-.infoButton {
+.info {
     background: none;
-    border: solid #E3E3DC;
+    border: 1px solid #E3E3DC;
     font-size: 16px;
     cursor: pointer;
-    padding: 15px 5px;
-    margin: 5px 15px;
+    margin: 5px;
     color: #E3E3DC;
 	width: 35%;
-	height: 100%;
+	height: 50px;
 	display: inline-block;
 	text-decoration: none;
+	align-content: center;
 
 }
 

@@ -7,7 +7,7 @@
 		<title>FarmerPaPa login</title>
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/header.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/fpapa.css">
-		<link rel="stylesheet" type="text/css" href="/fpapa/style/login.css">
+		<link rel="stylesheet" type="text/css" href="/fpapa/style/form.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/footer.css">
 
 		<script>
@@ -40,7 +40,7 @@
 	
 		<%@include file="./subviews/header.jsp" %>
 		
-		<div class="content">
+		<div class="formContent">
 			<article>
 				<% 
 					List<String> errors = (List<String>)request.getAttribute("errors"); 
@@ -48,7 +48,7 @@
 				<div id="theErrorsDiv">
 					<%= errors != null ? errors : "" %>
 				</div>
-				<div class="loginForm">
+				<div class="theForm">
 					<form action="login.do" method="post">
 						<p>
 							<label>帳號：</label>
@@ -64,10 +64,10 @@
 						<p>
 							<label>驗證碼：</label>
 							<input type="text" name="captcha" required placeholder="請輸入驗證碼">
-							<br>
 							<img id="captchaImg" src="images/captcha.png" onclick="refreshCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
 						</p>
-						<input type="submit" value="送出">
+						<!--  <input type="submit" value="送出"> -->
+						<button type="submit">送出</button>
 					</form>
 				</div>
 			</article>
