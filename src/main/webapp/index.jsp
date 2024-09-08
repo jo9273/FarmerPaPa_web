@@ -26,7 +26,8 @@
 		<div class="indexContent">	
 			<article>
 				<div class="banner">
-					<h2>banner</h2>
+					<img class="banner" alt="banner" src="images/banner01.jpg">
+					
 				</div>
 				
 				<div class="newsList">

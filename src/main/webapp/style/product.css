@@ -2,48 +2,69 @@
 
 
 .productContent{
+	width: 88%;
+	margin: 50px auto;
+	position: relative;
 	
 }
 
 .productContent section{
+	position: absolute; /* 絕對定位左側區塊 */
+    left: 0;            /* 固定在容器的左側 */
+    top: 0;             /* 與容器頂部對齊 */
+	width: 15%;
 	text-align: center;
-	padding: 10px;
-	margin: 10px;
+	padding: 0px 25px 0px 0px;
+	
+	display: inline-block;
 }
 
-.productContent section a{
-	display:inline-block;
-	text-decoration: none;
-	margin: 5px;
-	color: #476730;
+.category{
+	margin-bottom: 25px;
+}
+
+.category hr{
 	width: 100px;
-	height:30px;
+}
+
+
+.category a{
+	display: block;
+	text-decoration: none;
+	margin: 5px auto;
+	color: #476730;
+	width: 150px;
+	height:25px;
 	border-radius: 120px;
 	padding: 3px;
-	
+	align-content: center;
 }
 
 .productContent section a:hover{
-	text-decoration: underline;
 	background-color: #476730;
 	color: #E3E3DC;
 }
 
+.productContent article{
+	margin-left: 250px;
+	width: 80%;
+	padding: 0px 0px 0px 25px;
+	text-align: center;
+	display: inline-block;	
+}
 
 #productListDiv{
-	width: 65%;  /* 固定寬度的容器 */
     margin: 0 auto; /* 將整個容器水平居中 */
-	
-	
-   
 }
+
 .productItem{
 	display: inline-block;
+	float: left;
 	width: 250px;
 	height: 370px;
 	vertical-align: top;
 	box-shadow: lightgray 2px 3px;
-	margin: 23px ;
+	margin: 25px ;
 	}	/*border: lightgray 1px solid ;*/
 	
 	
@@ -52,11 +73,6 @@
 	display: block;
 	margin: auto
 	}
-
-
-
-
-
 
 	
 .productItem div{

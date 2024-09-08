@@ -83,9 +83,9 @@
 			
 			            <p>
 			                <label>性別</label>
-			                <input type="radio" name="gender" required value="M"><label>男</label>
-			                <input type="radio" name="gender" required value="F"><label>女</label>
-			                <input type="radio" name="gender" required value="O"><label>不願透漏</label>
+			                <input id="theRadio" type="radio" name="gender" required value="M"><label>男</label>
+			                <input id="theRadio" type="radio" name="gender" required value="F"><label>女</label>
+			                <input id="theRadio" type="radio" name="gender" required value="O"><label>不願透漏</label>
 			                <!--
 			                <select name="gender" required>
 			                    <option value="">請選擇性別</option>
@@ -103,7 +103,7 @@
 			            </p>
 			
 			            <p>
-			                <input type="checkbox" name="subscribed"><label>我願意訂閱電子報</label>
+			                <input id="theCheckbox" type="checkbox" name="subscribed"><label>我願意訂閱電子報</label>
 			            </p>
 			
 			            <p>

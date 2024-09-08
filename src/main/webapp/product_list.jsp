@@ -24,19 +24,41 @@
 		
 		<%@include file="./subviews/header.jsp" %>
 		
+		<div>
+			<img class="banner" alt="banner" src="images/banner01.jpg">
+		</div>
 	
 		<div class="productContent">	
-			<article>
-				<section>
-					<a href="?latest=">新品</a>
+			<section>
+				<div class="category">
+					<h3>送禮推薦</h3>
+					<hr>
+					<a href="?">台灣小農精選禮盒</a>
+					<a href="?">進口農園契作禮盒</a>
+				</div>
+				<div class="category">
+					<h3>產地專區</h3>
+					<hr>
+					<a href="?">台灣特色小農</a>
+					<a href="?">海外空運直送</a>
+				</div>
+				<div class="category">
+				<h3>當季新品</h3>
+				<hr>
+				<a href="?latest=">秋季限定</a>
+				</div>
+				<div class="category">
+					<h3>商品類別</h3>
+					<hr>
 					<a href="?">全部</a>
 					<a href="?category=葡萄">葡萄</a>
 					<a href="?category=蘋果">蘋果</a>
-					<a href="?category=桃子">桃子</a>
+					<a href="?category=桃子">桃子</a>	
 					<a href="?category=梨子">梨子</a>
-				
-				</section>
+				</div>
+			</section>
 			
+			<article>
 				<%
 					// 1. 取得request的form data
 					String keyword = request.getParameter("keyword");

@@ -18,9 +18,16 @@
 	border: 1px solid #476730;
 }
 
-#theCheckbox{
-	width: 30px;
+#theRadio{
+	width: 20px;
 	height: 20px;
+	vertical-align: bottom;
+}
+
+#theCheckbox{
+	width: 20px;
+	height: 20px;
+	vertical-align: bottom;
 }
 
 
