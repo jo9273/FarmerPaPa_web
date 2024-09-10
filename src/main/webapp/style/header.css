@@ -3,35 +3,26 @@
 header{
 	margin: 0;
 	background-color: #476730;
+	opacity: 0.8;
 	width: 100%;
-	height: 80px;
+	padding: 10px;
+	position: fixed; /* 固定在頁面頂部 */
+    top: 0;
+	z-index: 1000; /* 確保 header 位於頁面最上層 */
 }
 
 .headerContent{
+	width: 90%;
+	margin: 0 auto;
 	display: flex;
-	flex-direction: row;
-	width: 100%;
-	justify-content: space-around;
+  	align-items: center;
 }
 
-.logo{
-	display: flex;
-	flex-grow: 0;
-	align-items: center;
-	justify-content: center;
-	
-}
-
-.logo h2 a{
-	text-decoration: none;
-	color:#E3E3DC;
-}
 
 .menu {
-	display: flex;
-	flex-grow: 0;
-	align-items: center;
-	justify-content: flex-start;
+	display: inline-block;
+	width: 28%;
+	text-align: center;
 }
 
 
@@ -41,10 +32,22 @@ header{
 	color:#E3E3DC;
 }
 
+.logo{
+	display: inline-block;
+	width: 42%;
+	text-align: center;
+}
+
+.logo h2 a{
+	text-decoration: none;
+	color:#E3E3DC;
+}
+
+
 .headerActions{
-	margin: 15px;
-	display: flex;
-	flex-grow: 0;
+	display: inline-block;
+	width: 28%;
+	text-align: right;
 	
 }
 
@@ -54,15 +57,12 @@ header{
 	margin-bottom: 15px;
 	cursor: pointer;
 	display: block;
-	border: 2px solid red;
 
 }
 
 .searchForm{
 	display: block;
-	border: 2px solid red;
-	position: absolute;
-	bottom: 0px;
+	
 }
 
 

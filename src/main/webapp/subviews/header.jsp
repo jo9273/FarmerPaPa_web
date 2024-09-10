@@ -5,7 +5,7 @@
 		<header>
 			<div class="headerContent">
 				
-				<nav class="menu">
+				<div class="menu">
 					<% 
 			            Customer member = (Customer)session.getAttribute("memberLogin");	
 			        %>
@@ -26,7 +26,7 @@
 					<% } %>
 					
 					<%-- <span class="welcomSpan"> <%= member != null ? member.getName() : "" %> 你好!</span> --%>
-				</nav>
+				</div>
 				
 				<div class="logo">
 					<h2><a href="./">FarmerPaPa </a>

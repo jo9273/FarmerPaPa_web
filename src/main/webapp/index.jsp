@@ -25,8 +25,8 @@
 			
 		<div class="indexContent">	
 			<article>
-				<div class="banner">
-					<img class="banner" alt="banner" src="images/banner01.jpg">
+				<div>
+					<img id="indexKV" alt="banner" src="images/pic-1.jpg">
 					
 				</div>
 				
