@@ -1,22 +1,39 @@
 @charset "UTF-8";
 
 header{
-	text-align: center;
 	margin: 0;
 	background-color: #476730;
 	width: 100%;
+	height: 80px;
 }
 
 .headerContent{
-	display: inline-block;
-	align-items: center;
+	display: flex;
+	flex-direction: row;
 	width: 100%;
+	justify-content: space-around;
+}
+
+.logo{
+	display: flex;
+	flex-grow: 0;
+	align-items: center;
+	justify-content: center;
+	
 }
 
 .logo h2 a{
 	text-decoration: none;
 	color:#E3E3DC;
 }
+
+.menu {
+	display: flex;
+	flex-grow: 0;
+	align-items: center;
+	justify-content: flex-start;
+}
+
 
 .menu a{
 	margin-right: 15px;
@@ -26,19 +43,26 @@ header{
 
 .headerActions{
 	margin: 15px;
-	display: inline-block;
+	display: flex;
+	flex-grow: 0;
+	
 }
 
 .cartButton{
 	color:#E3E3DC;
 	text-decoration: none;
-	display: flex;
 	margin-bottom: 15px;
 	cursor: pointer;
+	display: block;
+	border: 2px solid red;
+
 }
 
 .searchForm{
-	
+	display: block;
+	border: 2px solid red;
+	position: absolute;
+	bottom: 0px;
 }
 
 
