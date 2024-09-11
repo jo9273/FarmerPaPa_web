@@ -2,10 +2,11 @@
 
 
 .formContent{
-	flex: 1;
+	display: flex;
 	text-align: center;
 	margin: 15px auto;
 	align-content: center;
+	justify-content: center;
 }
 
 .theForm{

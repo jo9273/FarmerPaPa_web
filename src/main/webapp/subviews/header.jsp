@@ -11,7 +11,7 @@
 			        %>
 					
 					<a href="product_list.jsp">買果物</a>	<!-- ? 意思是產品列表預設為查詢全部產品或直接寫product_list.jsp -->
-					<a href="">最新情報</a>
+					<a href="news_list.jsp">最新情報</a>
 					<!-- 
 					<a href="">當季主打</a>
 					<a href="">禮盒專區</a>

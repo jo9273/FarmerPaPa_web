@@ -7,7 +7,6 @@ header{
 	width: 100%;
 	padding: 10px;
 	position: fixed; /* 固定在頁面頂部 */
-    top: 0;
 	z-index: 1000; /* 確保 header 位於頁面最上層 */
 }
 

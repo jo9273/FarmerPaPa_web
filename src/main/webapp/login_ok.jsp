@@ -15,18 +15,19 @@
         <% request.setCharacterEncoding("utf-8"); %>
 		
         <%@include file="./subviews/header.jsp" %>
-        
-        <div class="content">
-        	<article>
-		        <p>
-		            <% 
-		            	//Customer member = (Customer)session.getAttribute("memberLogin");
-		            	//out.println(member != null ? member.getName() : "name不見了");
-		            %>
-		            <%= member != null ? member.getName() : "" %> 你好! 10秒後自動轉址至<a href="./">首頁</a>
-		        </p>
-	        </article>
-        </div>
+        <div class="pageContent">
+	        <div class="content">
+	        	<article>
+			        <p>
+			            <% 
+			            	//Customer member = (Customer)session.getAttribute("memberLogin");
+			            	//out.println(member != null ? member.getName() : "name不見了");
+			            %>
+			            <%= member != null ? member.getName() : "" %> 你好! 10秒後自動轉址至<a href="./">首頁</a>
+			        </p>
+		        </article>
+	        </div>
+	    </div>
 		<%@include file="./subviews/footer.jsp" %>
     </body>
 </html>

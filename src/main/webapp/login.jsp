@@ -40,37 +40,40 @@
 	
 		<%@include file="./subviews/header.jsp" %>
 		
-		<div class="formContent">
-			<article>
-				<% 
-					List<String> errors = (List<String>)request.getAttribute("errors"); 
-				%>
-				<div id="theErrorsDiv">
-					<%= errors != null ? errors : "" %>
-				</div>
-				<div class="theForm">
-					<form action="login.do" method="post">
-						<p>
-							<label>帳號：</label>
-							<input type="email" name="email" required placeholder="請輸入email">
-						</p>
-						
-						<p>
-							<label>密碼：</label>
-							<input id="thePassword" type="password" name="password" required placeholder="請輸入密碼" minlength="2" maxlength="20">
-							<input id="theCheckbox" type="checkbox" onchange="displayPwd()"><label>顯示密碼</label>
-						</p>
-						
-						<p>
-							<label>驗證碼：</label>
-							<input type="text" name="captcha" required placeholder="請輸入驗證碼">
-							<img id="captchaImg" src="images/captcha.png" onclick="refreshCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
-						</p>
-						<!--  <input type="submit" value="送出"> -->
-						<button type="submit">送出</button>
-					</form>
-				</div>
-			</article>
+		<div class="pageContent">
+			<div class="formContent">
+				<article>
+					<h1>會員登入</h1>
+					<% 
+						List<String> errors = (List<String>)request.getAttribute("errors"); 
+					%>
+					<div id="theErrorsDiv">
+						<%= errors != null ? errors : "" %>
+					</div>
+					<div class="theForm">
+						<form action="login.do" method="post">
+							<p>
+								<label>帳號：</label>
+								<input type="email" name="email" required placeholder="請輸入email">
+							</p>
+							
+							<p>
+								<label>密碼：</label>
+								<input id="thePassword" type="password" name="password" required placeholder="請輸入密碼" minlength="2" maxlength="20">
+								<input id="theCheckbox" type="checkbox" onchange="displayPwd()"><label>顯示密碼</label>
+							</p>
+							
+							<p>
+								<label>驗證碼：</label>
+								<input type="text" name="captcha" required placeholder="請輸入驗證碼">
+								<img id="captchaImg" src="images/captcha.png" onclick="refreshCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
+							</p>
+							<!--  <input type="submit" value="送出"> -->
+							<button type="submit">送出</button>
+						</form>
+					</div>
+				</article>
+			</div>
 		</div>
 		<%@include file="./subviews/footer.jsp" %>
 	</body>

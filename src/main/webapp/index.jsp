@@ -8,6 +8,7 @@
 		<title>FarmerPaPa</title>
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/header.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/fpapa.css">
+		<link rel="stylesheet" type="text/css" href="/fpapa/style/index.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/footer.css">
 		<style>
 			
