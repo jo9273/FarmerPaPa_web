@@ -8,6 +8,11 @@
 }
 */
 
+.newsContent{
+	padding: 50px 100px;
+}
+
+
 .newsInfoList{
 	margin: 50px auto;
 	padding: 0px 50px;
