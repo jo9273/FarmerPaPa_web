@@ -35,11 +35,23 @@
 				</div>
 				
 				<div class=headerActions>
-					<a class="cartButton" href="">購物車</a>
+					<a class="cartButton" href="">
+						<img alt="購物車" src="images/cart_icon.png">
+					</a>
 					
 					<form class="searchForm" action="product_list.jsp" method="GET">
-						<input type="search" name="keyword" required placeholder="請輸入關鍵字">
-						<input type="submit" value="查詢">
+						<div class="searchContainer">
+							<input class="keyword" type="search" name="keyword" required placeholder="請輸入關鍵字">
+							
+							
+							<button type="submit" >
+								<img class="subSearch" src="images/search_icon.png" alt="Submit">
+							</button>
+						
+						
+							<!-- <input class="subSearch" type="image" src="images/search_icon.png" alt="Submit">
+						 	-->
+						</div>
 					</form>
 				</div>
 			

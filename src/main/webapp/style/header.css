@@ -56,12 +56,45 @@ header{
 	margin-bottom: 15px;
 	cursor: pointer;
 	display: block;
-
 }
+
+.cartButton img{
+	width: 30px;
+}
+
+
 
 .searchForm{
 	display: block;
-	
 }
 
+.searchContainer {
+    position: relative;
+    display: inline-block; /* 保持輸入框和圖標在同一行 */
+}
+
+.keyword{
+	padding: 10px;
+	border : none;
+	border-radius: 35px;
+	background-color :  #e3e3dc;
+	outline:none;
+	height: 30px;
+}
+
+.searchForm button{
+    position: absolute;
+    right: 10px; /* 緊貼輸入框的右側 */
+    top: 50%;
+    transform: translateY(-50%); /* 垂直居中 */
+    background: none; /* 移除背景 */
+    border: none; /* 移除邊框 */
+    padding: 0; /* 移除按鈕內邊距 */
+    cursor: pointer;
+}
+
+.subSearch{
+	width: 25px;
+
+}
 

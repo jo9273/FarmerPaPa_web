@@ -51,36 +51,38 @@
 				</div>
 			
 				<div class="newsInfoList">	<!-- news -->
-					<div id="newsItem">	<!-- news -->
-							<div class="newsImg">
-								<img src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2FproductInfo%2Fcover%403x-undefined-TRSgnrqZei17252655062501.jpg?alt=media">
-							</div>
-								
-							<div class="newsDetail">
-								<span>2024/09/11</span>
-								<br>
-								<ul>
-									<li id="newsTag">小知識</li>
-								</ul>								<p class="newsTitle">水蜜桃知識篇 - 日本果物共選場</p>
-								<p class="newsDescription">在台灣的我們之所以可以享用到美味的水蜜桃，有很大的原因是源自日本 _ 果物選果場 ( #共選場 )。</p>
-							</div>
-					</div>
-					
-					<div id="newsItem">	<!-- news -->
-							<div class="newsImg">
-								<img src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2FproductInfo%2Fcover%403x-undefined-TRSgnrqZei17252655062501.jpg?alt=media">
-							</div>
-								
-							<div class="newsDetail">
-								<span>2024/09/11</span>
-								<br>
-								<ul>
-									<li id="newsTag">小知識</li>
-								</ul>								<p class="newsTitle">水蜜桃知識篇 - 日本果物共選場</p>
-								<p class="newsDescription">在台灣的我們之所以可以享用到美味的水蜜桃，有很大的原因是源自日本 _ 果物選果場 ( #共選場 )。</p>
-							</div>
-					</div>
-					
+					<a class="newsLink" href="">
+						<div class="newsItem">	<!-- news -->
+								<div class="newsImg">
+									<img src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2FproductInfo%2Fcover%403x-undefined-TRSgnrqZei17252655062501.jpg?alt=media">
+								</div>
+									
+								<div class="newsDetail">
+									<span>2024/09/11</span>
+									<br>
+									<ul>
+										<li id="newsTag">小知識</li>
+									</ul>								<p class="newsTitle">水蜜桃知識篇 - 日本果物共選場</p>
+									<p class="newsDescription">在台灣的我們之所以可以享用到美味的水蜜桃，有很大的原因是源自日本 _ 果物選果場 ( #共選場 )。</p>
+								</div>
+						</div>
+					</a>
+					<a class="newsLink" href="">
+						<div class="newsItem">	<!-- news -->
+								<div class="newsImg">
+									<img src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2FproductInfo%2Fcover%403x-undefined-TRSgnrqZei17252655062501.jpg?alt=media">
+								</div>
+									
+								<div class="newsDetail">
+									<span>2024/09/11</span>
+									<br>
+									<ul>
+										<li id="newsTag">小知識</li>
+									</ul>								<p class="newsTitle">水蜜桃知識篇 - 日本果物共選場</p>
+									<p class="newsDescription">在台灣的我們之所以可以享用到美味的水蜜桃，有很大的原因是源自日本 _ 果物選果場 ( #共選場 )。</p>
+								</div>
+						</div>
+					</a>
 				</div>
 			</div>
 			

@@ -77,8 +77,10 @@
 						// 查無資料
 						if(list == null || list.size() == 0){
 					%>		
-							<h2>查無產品資料</h2>
-							<img src="images/no_data.png">
+							<div class="noData">
+								<h2>查無產品資料</h2>
+								<img src="images/no_data.png">
+							</div>
 							
 					<% 	}else{	%>
 							<!-- <%= list %>  -->

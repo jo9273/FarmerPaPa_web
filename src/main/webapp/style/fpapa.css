@@ -50,11 +50,12 @@ body{
 .filterSelectWrapper{
 	min-height: 1vw;
   	float: left;
+  	flex-grow: 1;
 }
 
 .filterTimeWrapper{
 	min-height: 1vw;
-  	float: left;
+	flex-grow: 1;
 }
 
 
@@ -64,6 +65,19 @@ body{
 
 .iconDropDown{
 	
+}
+
+.noData{
+	width: 100%;
+}
+
+.noData h3{
+	
+}
+
+.noData img{
+	width: 100px;
+	height: 100px;
 }
 
 
