@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+
+.detailContent{
+	width: 80%;
+	margin: 50px auto;
+}
+
+.detailContent img{
+    width: 500px;
+}

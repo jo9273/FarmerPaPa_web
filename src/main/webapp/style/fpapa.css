@@ -25,7 +25,33 @@ body{
 }
 
 .pageContent{
-	padding: 90px 0px;
+	padding: 100px 0px;
+}
+
+.breadCrumbs{
+	width: 80%;
+	margin: 0px auto;
+	
+}
+
+.breadCrumbs ul{
+	list-style: none;
+	color: inherit;
+	padding: 0px;
+}
+
+.breadCrumbs li{
+	display: inline-block;
+	font-size: 1vw;
+  	line-height: 1.5;
+  	letter-spacing: 1.2px;
+  	text-align: left;
+  	color: #333; 	
+}
+
+.breadCrumbs li a{
+	text-decoration: none;
+	color: #476730;
 }
 
 .topInfoWrapper{
@@ -69,6 +95,7 @@ body{
 
 .noData{
 	width: 100%;
+	text-align: center;
 }
 
 .noData h3{
