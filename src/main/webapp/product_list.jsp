@@ -32,6 +32,11 @@
 			<div class="productContent">	
 				<section>
 					<div class="category">
+					<h3>當季新品</h3>
+					<hr>
+					<a href="?latest=">秋季限定</a>
+					</div>
+					<div class="category">
 						<h3>送禮推薦</h3>
 						<hr>
 						<a href="?">台灣小農精選禮盒</a>
@@ -42,11 +47,6 @@
 						<hr>
 						<a href="?">台灣特色小農</a>
 						<a href="?">海外空運直送</a>
-					</div>
-					<div class="category">
-					<h3>當季新品</h3>
-					<hr>
-					<a href="?latest=">秋季限定</a>
 					</div>
 					<div class="category">
 						<h3>商品類別</h3>
@@ -61,15 +61,25 @@
 				
 				<article>
 					<%
-						// 1. 取得request的form data
+						// 1. 取得request的form data / QueryString
 						String keyword = request.getParameter("keyword");
+						String latest = request.getParameter("latest");
+						String category = request.getParameter("category");
+						
 						
 						// 2. 呼叫商業邏輯
 						ProductService pService = new ProductService();
 						List<Product> list = null;
 					
 						if(keyword != null && (keyword = keyword.trim()).length()>0){
-							list = pService.getProductByKeyword(keyword);
+							list = pService.getProductsByKeyword(keyword);
+							
+						}else if(latest != null && (latest = latest.trim()).length()>=0){
+							list = pService.getLatestProducts();
+							
+						}else if(category != null && (category = category.trim()).length()>0){
+							list = pService.getProductsByCategory(category);
+							
 						}else {
 							list = pService.getAllProducts();
 						}
@@ -90,8 +100,9 @@
 									Product p = list.get(i);
 							%>		
 									<div class="productItem">
-										<img src="<%= p.getPhotoUrl() %>">
-										<h4><%= p.getName() %></h4>
+										<a href="product_detail.jsp?productId=<%= p.getId() %>"><img src="<%= p.getPhotoUrl() %>"></a>    <!-- TODO:ajax+json -->
+										<a href="product_detail.jsp?productId=<%= p.getId() %>"><h4><%= p.getName() %></h4></a>			 <!-- 同步GET請求 -->
+										
 										<div>售價$ <%= p.getUnitPrice() %> | 優惠折扣: <%= p instanceof SpecialOffer ? ((SpecialOffer)p).getDiscountString(): "無折扣" %></div>
 									</div>
 									

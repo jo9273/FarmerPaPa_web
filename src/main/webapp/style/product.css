@@ -80,6 +80,11 @@
 	margin: 25px ;
 	}	/*border: lightgray 1px solid ;*/
 	
+
+.productItem a{
+	text-decoration: none;
+	color: inherit;
+}
 	
 .productItem img{
 	width: 250px;
