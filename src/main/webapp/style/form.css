@@ -3,23 +3,54 @@
 
 .formContent{
 	display: flex;
-	text-align: center;
-	margin: 15px auto;
+	flex-direction: column;
+	margin: 30px auto;
 	align-content: center;
 	justify-content: center;
-	padding: 92px;
-	
 }
 
+.formContent img{
+	width: 120px;
+	height: 30px;
+	margin: 0px 15px -10px 0px;
+}
+
+.formContent button{
+	background: #476730;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 120px;
+    border: 0px;
+    color: #E3E3DC;
+	width: 200px;
+	display: block; /* 讓按鈕變為塊級元素 */
+    margin: 50px auto 0px auto; /* 水平置中 */
+}
+/*
 .theForm{
 	text-align: left;
 }
+*/
 
-.theForm input{
+.form-detail{
+	display: flex;
+	flex-direction:row;
+    align-items: center; /* 使 label 和 input 垂直居中 */
+    margin-bottom: 20px; /* 每個欄位之間的間距 */
+}
+
+.form-detail label{
+	width: 30%; /* 分配 label 寬度，確保統一 */
+    text-align: right; /* 使 label 靠右對齊 */
+    padding-right: 10px; /* label 和 input 之間留點空間 */
+}
+
+.form-detail input{
 	width: 200px;
 	height: 30px;
 	border: 1px solid #476730;
 }
+
 
 #theRadio{
 	width: 20px;
@@ -33,21 +64,8 @@
 	vertical-align: bottom;
 }
 
-
-.theForm img{
-	width: 120px;
-	height: 30px;
-	margin: 0px 15px -10px 0px;
+#theErrorsDiv{
+	color:darkred;
+	background-color:lightgray
 }
 
-.theForm button{
-	background: #476730;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 120px;
-    border: 0px;
-    color: #E3E3DC;
-	width: 200px;
-	display: block; /* 讓按鈕變為塊級元素 */
-    margin: 0 auto; /* 水平置中 */
-}

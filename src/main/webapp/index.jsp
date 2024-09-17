@@ -6,14 +6,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
 		<title>FarmerPaPa</title>
-		<link rel="stylesheet" type="text/css" href="/fpapa/style/header.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/fpapa.css">
+		<link rel="stylesheet" type="text/css" href="/fpapa/style/header.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/index.css">
+		<link rel="stylesheet" type="text/css" href="/fpapa/style/form.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/footer.css">
-		<style>
-			
-		</style>
-
+		
 	</head>
 	<body>
 		<% request.setCharacterEncoding("utf-8"); %>
