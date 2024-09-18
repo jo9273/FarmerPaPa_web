@@ -72,39 +72,47 @@
 			
 			
 
-			<div class="detailContent">		<!-- product_detail -->
-				<img src="<%= p.getPhotoUrl()%>">
-				<h3><%= p.getName()%></h3>
-				
-				<% if (p instanceof SpecialOffer){ %>
-				<div>售價: <%= ((SpecialOffer)p).getListPrice() %> 元</div>
-				<% } %>
-				
-				<div>優惠折扣:<%= p instanceof SpecialOffer ? ((SpecialOffer)p).getDiscountString():"" %> <%= p.getUnitPrice() %> 元</div>
-				<div>分類: <%= p.getCategory() %></div>
-				<div>庫存: <%= p.getStock() %></div>
-				<div>上架日: <%= p.getReleaseDate() %></div>
-				<form>
-					<input type="hidden" name="productId" value="1">
-					<div>
-						<label>數量:</label>
-						<input type="number" name="quantity" required  min="1" max="3">
+			<div class="product-content">		<!-- product_detail -->
+				<div class="product-detail">
+					<div class="product-photo">
+						<img src="<%= p.getPhotoUrl()%>">
+					</div>
+					
+					<div class="product-info">
+						<h2><%= p.getName()%></h2>
 						
+						<% if (p instanceof SpecialOffer){ %>
+						<div>售價: <%= ((SpecialOffer)p).getListPrice() %> 元</div>
+						<% } %>
+						
+						<div>優惠折扣:<%= p instanceof SpecialOffer ? ((SpecialOffer)p).getDiscountString():"" %> <%= p.getUnitPrice() %> 元</div>
+						<div>分類: <%= p.getCategory() %></div>
+						<div>庫存: <%= p.getStock() %></div>
+						<div>上架日: <%= p.getReleaseDate() %></div>
+						<div>
+							<form>
+								<input type="hidden" name="productId" value="1">
+								<div>
+									<label>數量:</label>
+									<input type="number" name="quantity" required  min="1" max="3">
+									
+								</div>
+								<div>
+									<input type="submit" value="加入購物車">
+								</div>
+							</form>
+						</div>
 					</div>
-					<div>
-						<input type="submit" value="加入購物車">
-					</div>
-				</form>
-				
-				<div class="productDesc">
-					<p><%= p.getDescription() %></p>
 				</div>
-
-			</div>
-			
-			<%
-				}
-			%>
+						
+				<div class="product-desc">
+						<p><%= p.getDescription() %></p>
+				</div>
+	
+				
+				<%
+					}
+				%>
 			
 		</div>
 		

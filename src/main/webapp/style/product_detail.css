@@ -1,11 +1,30 @@
 @charset "UTF-8";
 
 
-.detailContent{
+.product-content{
 	width: 80%;
 	margin: 50px auto;
 }
 
-.detailContent img{
+
+.product-detail{
+	display: flex;
+	
+}
+
+.product-photo{
+	
+}
+
+.product-photo img{
     width: 500px;
+}
+
+
+.product-info{
+	margin-left: 50px;
+}
+
+.product-info div{
+	margin-bottom: 15px;
 }

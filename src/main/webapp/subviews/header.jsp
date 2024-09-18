@@ -57,7 +57,7 @@
 										<div class="form-detail">
 											<label>驗證碼：</label>
 											<input type="text" name="captcha" required placeholder="請輸入驗證碼">
-											<img id="captchaImg" src="images/captcha.png" onclick="refreshCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
+											<img id="LoginCaptcha" src="images/captcha.png" onclick="refreshLoginCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
 										</div>
 										<!--  <input type="submit" value="送出"> -->
 												
@@ -130,7 +130,7 @@
 										<div class="form-detail">
 											<label>驗證碼：</label>
 											<input type="text" name="captcha" required placeholder="請輸入驗證碼">
-											<img id="captchaImg" src="images/captcha.png" onclick="refreshCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
+											<img id="SignupCaptcha" src="images/captcha.png" onclick="refreshSignupCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
 										</div>
 											<!--  <input type="submit" value="送出"> -->
 											

@@ -5,50 +5,28 @@ function init() {
     $('#loginTrigger').on('click', showLoginModal);
 
     // 在登入模態框中，點擊 "註冊會員" 連結，切換到註冊模態框
-    $('#toSignup').on('click', function(event) {
-        event.preventDefault(); // 阻止預設的連結行為
-        switchToSignup();
-    });
+    $('#toSignup').on('click', handleToSignupClick);
 
     // 在註冊模態框中，點擊 "登入會員" 連結，切換到登入模態框
-    $('#toLogin').on('click', function(event) {
-        event.preventDefault(); // 阻止預設的連結行為
-        switchToLogin();
-    });
+    $('#toLogin').on('click', handleToLoginClick);
 
     // 綁定關閉登入模態框的按鈕點擊事件
-    $('#closeLogin').on('click', function() {
-        closeModal('#loginModal');
-    });
+    $('#closeLogin').on('click', handleCloseLoginClick);
 
     // 綁定關閉註冊模態框的按鈕點擊事件
-    $('#closeSignup').on('click', function() {
-        closeModal('#signupModal');
-    });
+    $('#closeSignup').on('click', handleCloseSignupClick);
 
     // 點擊登入模態框外部時，關閉模態框
-    $('#loginModal').on('click', function(event) {
-        if ($(event.target).is('#loginModal')) {
-            closeModal('#loginModal');
-        }
-    });
+    $('#loginModal').on('click', handleLoginModalClick);
 
     // 點擊註冊模態框外部時，關閉模態框
-    $('#signupModal').on('click', function(event) {
-        if ($(event.target).is('#signupModal')) {
-            closeModal('#signupModal');
-        }
-    });
+    $('#signupModal').on('click', handleSignupModalClick);
 
     // 綁定登入模態框的顯示/隱藏密碼功能
-    $('#toggleLoginPwd').on('click', function() {
-        togglePassword('#loginPassword', '#toggleLoginPwd');
-    });
+    $('#toggleLoginPwd').on('click', handleToggleLoginPwdClick);
 
     // 綁定註冊模態框的顯示/隱藏密碼功能
-    $('#toggleSignupPwd').on('click', function() {
-        togglePassword('#signupPassword', '#toggleSignupPwd');
-    });
+    $('#toggleSignupPwd').on('click', handleToggleSignupPwdClick);
 }
 
 // 顯示登入模態框
@@ -56,9 +34,50 @@ function showLoginModal() {
     $('#loginModal').fadeIn();
 }
 
-// 顯示註冊模態框
-function showSignupModal() {
-    $('#signupModal').fadeIn();
+// 處理點擊 "註冊會員" 連結的事件
+function handleToSignupClick(e) {
+    e.preventDefault(); // 阻止預設的連結行為
+    switchToSignup();
+}
+
+// 處理點擊 "登入會員" 連結的事件
+function handleToLoginClick(e) {
+    e.preventDefault(); // 阻止預設的連結行為
+    switchToLogin();
+}
+
+// 處理關閉登入模態框按鈕的事件
+function handleCloseLoginClick() {
+    closeModal('#loginModal');
+}
+
+// 處理關閉註冊模態框按鈕的事件
+function handleCloseSignupClick() {
+    closeModal('#signupModal');
+}
+
+// 處理點擊登入模態框外部的事件
+function handleLoginModalClick(e) {
+    if ($(e.target).is('#loginModal')) {
+        closeModal('#loginModal');
+    }
+}
+
+// 處理點擊註冊模態框外部的事件
+function handleSignupModalClick(e) {
+    if ($(e.target).is('#signupModal')) {
+        closeModal('#signupModal');
+    }
+}
+
+// 處理登入模態框的顯示/隱藏密碼功能
+function handleToggleLoginPwdClick() {
+    togglePassword('#loginPassword', '#toggleLoginPwd');
+}
+
+// 處理註冊模態框的顯示/隱藏密碼功能
+function handleToggleSignupPwdClick() {
+    togglePassword('#signupPassword', '#toggleSignupPwd');
 }
 
 // 切換到註冊模態框
@@ -113,9 +132,13 @@ function togglePassword(passwordFieldSelector, toggleIconSelector) {
 }
 
 
-
 // 刷新驗證碼圖片的函數
-function refreshCaptcha() {
-    var captchaImg = document.getElementById("captchaImg"); // 取得驗證碼圖片元素
+function refreshLoginCaptcha() {
+    var captchaImg = document.getElementById("LoginCaptcha"); // 取得驗證碼圖片元素
+    captchaImg.src = "images/captcha.png?refresh=" + new Date().getTime(); // 重新設定圖片來源，加入時間戳避免快取
+}
+
+function refreshSignupCaptcha() {
+    var captchaImg = document.getElementById("SignupCaptcha"); // 取得驗證碼圖片元素
     captchaImg.src = "images/captcha.png?refresh=" + new Date().getTime(); // 重新設定圖片來源，加入時間戳避免快取
 }
