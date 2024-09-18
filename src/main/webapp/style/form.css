@@ -9,11 +9,6 @@
 	justify-content: center;
 }
 
-.formContent img{
-	width: 120px;
-	height: 30px;
-	margin: 0px 15px -10px 0px;
-}
 
 .formContent button{
 	background: #476730;
@@ -24,13 +19,9 @@
     color: #E3E3DC;
 	width: 200px;
 	display: block; /* 讓按鈕變為塊級元素 */
-    margin: 50px auto 0px auto; /* 水平置中 */
+    margin: 25px auto 0px auto; /* 水平置中 */
 }
-/*
-.theForm{
-	text-align: left;
-}
-*/
+
 
 .form-detail{
 	display: flex;
@@ -40,9 +31,11 @@
 }
 
 .form-detail label{
+	float: left;
 	width: 30%; /* 分配 label 寬度，確保統一 */
     text-align: right; /* 使 label 靠右對齊 */
     padding-right: 10px; /* label 和 input 之間留點空間 */
+    
 }
 
 .form-detail input{
@@ -51,17 +44,67 @@
 	border: 1px solid #476730;
 }
 
+.form-detail span{
+	margin-right: 10px;
+}
+
+#toggleLoginPwd, #toggleSignupPwd{
+	width: 30px;
+}
+
+
+.form-detail #captchaImg{
+	width: 120px;
+	height: 30px;
+	margin: 0px 0px 0px 10px;
+}
+
+.check-subscribed{
+	display: flex;
+	justify-content: center;
+}
+
+
+.link-wrapper{
+	text-align: center;
+	margin-top: 20px;
+}
+
+.f-pwd{
+	display:inline-block;
+	padding: 0px 10px;
+}
+
+.signup{
+	display:inline-block;
+	padding: 0px 10px;
+}
+
+.f-pwd:hover{
+	color: #f04624;
+	text-decoration: underline;
+}
+
+.signup:hover{
+	color: #f04624;
+	text-decoration: underline;
+}
+
+.login-a:hover{
+	color: #f04624;
+	text-decoration: underline;
+}
 
 #theRadio{
 	width: 20px;
 	height: 20px;
-	vertical-align: bottom;
+	margin-right: 5px;
 }
 
 #theCheckbox{
 	width: 20px;
 	height: 20px;
-	vertical-align: bottom;
+	margin-right: 5px;
 }
 
 #theErrorsDiv{

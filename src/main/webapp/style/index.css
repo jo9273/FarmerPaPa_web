@@ -7,11 +7,33 @@
 	text-align: center;
 }
 
+.kv{
+	position: relative; 
+    width: 100%; /* 設置影片寬度自適應 */
+    max-width: 100%;
+    z-index: 0;  /* 位於 header 下層 */
+}
+
 #indexKV{
-	width: 100%;
-	height: 100%;
-	position: relative; /* 保持 banner 在 header 下方顯示 */
-    z-index: 0; /* 確保 banner 位於 header 下層 */
+	width: 100%; /* 讓影片寬度隨螢幕大小變化 */
+    height: auto; /* 高度自適應 */
+	position: relative;
+	top: -90px;
+}
+
+.kv h1{
+	position: absolute;
+    top: 50%; /* 讓文字居中 */
+    left: 50%;
+    transform: translate(-50%, -50%); /* 將文字移到畫面的正中央 */
+    color: #0b4227; /* 文字顏色 */
+    font-size: 5vw; /* 使用 vw 作為字體大小單位，讓字體隨螢幕縮放 */
+    font-weight: bold;
+    text-align: center; /* 讓文字居中對齊 */
+    padding: 10px 20px;
+    background-color: #FFFFFF80; /* 半透明背景讓文字更清晰 */
+    border-radius: 10px; /* 圓角效果 */
+	
 }
 
 

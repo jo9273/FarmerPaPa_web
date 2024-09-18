@@ -9,7 +9,6 @@
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/fpapa.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/header.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/index.css">
-		<link rel="stylesheet" type="text/css" href="/fpapa/style/form.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/footer.css">
 		
 	</head>
@@ -24,9 +23,13 @@
 			
 		<div class="indexContent">	
 			<article>
-				<div>
-					<img id="indexKV" alt="banner" src="images/pic-1.jpg">
+				<div class="kv">
+					<!--  <img id="indexKV" alt="banner" src="images/pic-1.jpg" > -->
+					<video id="indexKV" autoplay loop muted>
+    					<source src="images/index-1.mp4" type="video/mp4" >
+    				</video>    
 					
+					<h1>小農真心．果然新鮮</h1>
 				</div>
 				
 				<div class="newsList">

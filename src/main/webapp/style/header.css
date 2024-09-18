@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url('form.css');
 
 header{
 	margin: 0;
@@ -14,11 +15,12 @@ header{
 	margin: 0 auto;
 	display: flex;
   	align-items: center;
+  	justify-content: center;
 }
 
 
 .menu {
-	flex-grow: 1;
+	flex: 1;
 	display: inline-block;
 	text-align: left;
 }
@@ -31,7 +33,7 @@ header{
 }
 
 .logo{
-	flex-grow: 2;
+	flex: 2;
 	text-align: center;
 }
 
@@ -42,7 +44,7 @@ header{
 
 
 .headerActions{
-	flex-grow: 1;
+	flex: 1;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
@@ -68,7 +70,7 @@ header{
 }
 
 /* Lightbox 背景 */
-.login-Popup {
+.modal {
 	color: #0b4227;
     display: none; /* 初始狀態下隱藏 */
     position: fixed;
@@ -81,9 +83,9 @@ header{
 }
 
 /* Lightbox 內容 */
-.login-content {
+.modal-content{
     background-color: #FFFFFFFF;
-    margin: 15% auto;
+    margin: 5% auto;
     padding: 20px;
     width: 80%;
     max-width: 600px;
@@ -92,7 +94,7 @@ header{
     position: relative;
 }
 
-.login-content h1{
+.modal-content h1{
 	text-align: center;
 }
 
