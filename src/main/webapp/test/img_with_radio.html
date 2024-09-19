@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<title>img_with_radio</title>
+		<style>
+			/* HIDE RADIO */
+			.spec input[type=radio] { 
+			  position: absolute;
+			  opacity: 0;
+			  width: 1px;
+			  height: 1px;
+			}
+			
+			/* IMAGE STYLES */
+			.spec input[type=radio] + img {
+			  cursor: pointer;
+			}
+			
+			/* CHECKED STYLES */
+			.spec input[type=radio]:checked + img {
+			  outline: 2px solid #f00;
+			}
+			
+			.spec img{
+				width: 50px;
+			}
+		</style>
+	</head>
+	<body>
+	
+		<form>
+			<input type="hidden" name="productId" value="<%= p.getId()%>">
+			
+			<div class="spec">
+				<label>規格:</label>
+				<label>
+					<input type="radio" name="spec" value="600g" required>
+					<img alt="600g" src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2Fproduct%2Fcover%403x-%E3%80%90%E9%99%90%E9%87%8F%E9%A0%90%E8%B3%BC%E3%80%91%E5%B1%B1%E6%A2%A8%E7%94%B2%E6%96%90%E7%8F%8D%E7%8F%A0%E9%BA%9D%E9%A6%99%E6%A1%90%E6%9C%A8%E5%96%AE%E6%88%BF%E7%A6%AE%E7%9B%92%28%E7%B4%84600g%E9%87%8D%29-ldTfTa6B7w172233095177012.jpg?alt=media">
+				</label>
+				<label>
+					<input type="radio" name="spec" value="1200g" required>
+					<img alt="1200g" src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2Fproduct%2Fcover%403x-%E3%80%90%E9%99%90%E9%87%8F%E9%A0%90%E8%B3%BC%E3%80%91%E5%B1%B1%E6%A2%A8%E7%94%B2%E6%96%90%E7%8F%8D%E7%8F%A0%E9%BA%9D%E9%A6%99%E6%A1%90%E6%9C%A8%E9%9B%99%E6%88%BF%E7%A6%AE%E7%9B%92%28%E7%B4%841.2kg%E9%87%8D%29-b2dT6FgTs3172233117513526.jpg?alt=media">
+				</label>								
+			</div>
+			
+			<div>
+				<label>(測試)規格:</label>
+				<input type="radio" name="spec" value="600g" required><label>600g</label>
+				<input type="radio" name="spec" value="1200g" required><label>1200g</label>
+			</div>
+			
+			
+			<div>
+				<label>數量:</label>
+				<input type="number" name="quantity" required  min="1" max="3">
+										
+			</div>
+			
+			<div>
+				<input type="submit" value="加入購物車">
+			</div>
+		</form>
+	
+	</body>
+</html>

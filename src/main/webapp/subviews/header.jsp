@@ -3,7 +3,7 @@
 <%@page pageEncoding="UTF-8"%>
 
 <!-- header start -->
-		<script type="text/javascript" src="js/jquery-3.7.1.js"></script>
+		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="js/loginActions.js"></script>
 				
 		
