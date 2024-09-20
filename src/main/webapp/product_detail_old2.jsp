@@ -21,17 +21,12 @@
     		
     		$(document).ready(init);
 
-    		function init(){
+    		function init() {
     			$(".spec img").on("click", changeSpecDate);
-    			    			
-    			// 預選第一個
-    			//$("input[name=spec]:first").attr("checked", true);
-    			
-    			$(".iconImg:first").trigger("click");
     		}
     	
-    		function changeSpecDate(){
-				var specialOfferPrice = $(this).attr("data-special-offer-price");
+    		function changeSpecDate() {
+				
     			var photoUrl = $(this).attr("data-photo-src");
 				var stock = $(this).attr("data-stock");
 				var releaseDate = $(this).attr("data-release-data");
@@ -45,7 +40,6 @@
 				
 				//修改畫面中指定位置的資料
 				
-				$("#theSpecialOfferPrice").text(specialOfferPrice);
     			$("#thePhoto").attr("src", photoUrl);
     			$("#theStock").text(stock);
 				$("#theReleaseDate").text(releaseDate);
@@ -53,9 +47,8 @@
 				//$("#theSpecialOffer").text(specialOffer);
 				//$("#theSpecialOfferPrice").text(specialOfferPrice);
 				$("input[name=quantity]").attr("max", stock);
-			
+	
 			}
-    		    		    		
     		
     	</script>
         
@@ -149,7 +142,7 @@
 						<% if (p instanceof SpecialOffer){ %> 
 <%-- 						<div>售價: <span id="theUnitPrice"><%= ((SpecialOffer)p).getListPrice() %> </span>元</div> --%>
 												
-						<div>優惠售價: <span id="theSpecialOfferPrice"><%= p.getUnitPrice() %> </span>元</div>
+						<div>優惠售價: <%= p.getUnitPrice() %> 元</div>
 						<div>優惠折扣: <%= ((SpecialOffer)p).getDiscountString()%> </div>
 						
 						<% } else{%> 
@@ -174,12 +167,11 @@
 										%>
 											<label>
 												<input type="radio" name="spec" value="<%=spec.getSpecName() %>" required>
-												<img class="iconImg" title="<%=spec.getSpecName() %>" alt="<%=spec.getSpecName() %>" src="<%= spec.getIconUrl() %>"
+												<img title="<%=spec.getSpecName() %>" alt="<%=spec.getSpecName() %>" src="<%= spec.getIconUrl() %>"
 														data-photo-src="<%= spec.getPhotoUrl() %>" 
 														data-release-data="<%=spec.getReleaseDate() %>" 
 														data-stock="<%=spec.getStock() %>" 
-														data-unit-price="<%=spec.getUnitPrice() %>"
-														data-special-offer-price="<%=spec.getUnitPrice() %>">
+														data-unit-price="<%=spec.getUnitPrice() %>">
 														<!-- 
 														data-special-offer=""
 														data-special-offer-price="">
@@ -188,7 +180,6 @@
 										<% } %>							
 									</div>
 								<% } %>
-															
 								
 								<div>
 									<label>數量:</label>

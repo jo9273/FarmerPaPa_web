@@ -25,8 +25,9 @@
 				<div class=headerActions>
 					<div class="login-cart">
 						<div id="loginTrigger" class="login">
+							<% request.setCharacterEncoding("utf-8"); %>
 							<% 
-					            Customer member = (Customer)session.getAttribute("memberLogin");	
+					           Customer member = (Customer)session.getAttribute("memberLogin");	
 					        %>
 							<% if(member == null){ %>
 							<span>會員登入/註冊</span>

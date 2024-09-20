@@ -1,3 +1,4 @@
+<%@page import="jojo.farmerpapa.entity.ProductSpec"%>
 <%@page import="jojo.farmerpapa.entity.SpecialOffer"%>
 <%@page import="jojo.farmerpapa.service.ProductService"%>
 <%@page import="jojo.farmerpapa.entity.Product"%>
@@ -20,32 +21,54 @@
     		
     		$(document).ready(init);
 
-    		function init() {
+    		function init(){
     			$(".spec img").on("click", changeSpecDate);
+    			$("select[name=spec-size]").on("change", changeSpecSize);
+    			
+    			// 預選第一個
+    			//$("input[name=spec]:first").attr("checked", true);
+    			
+    			$(".iconImg:first").trigger("click");
     		}
     	
-    		function changeSpecDate() {
-				var photoUrl = $(this).attr("data-photo-src");
+    		function changeSpecDate(){
+				
+    			var photoUrl = $(this).attr("data-photo-src");
 				var stock = $(this).attr("data-stock");
 				var releaseDate = $(this).attr("data-release-data");
 				var unitPrice = $(this).attr("data-unit-price");
-    			var specialOffer = $(this).attr("data-special-offer");
-    			var specialOfferPrice = $(this).attr("data-special-offer-price");
+    			//var specialOffer = $(this).attr("data-special-offer");
+    			//var specialOfferPrice = $(this).attr("data-special-offer-price");
     			
     			//alert(stock);
     			//alert("change:" + $(this).attr("title"));
 				//console.log("change" + $(this).attr("title"), $(this).attr("data-stock"));
 				
 				//修改畫面中指定位置的資料
+				
     			$("#thePhoto").attr("src", photoUrl);
     			$("#theStock").text(stock);
 				$("#theReleaseDate").text(releaseDate);
 				$("#theUnitPrice").text(unitPrice);
-				$("#theSpecialOffer").text(specialOffer);
-				$("#theSpecialOfferPrice").text(specialOfferPrice);
+				//$("#theSpecialOffer").text(specialOffer);
+				//$("#theSpecialOfferPrice").text(specialOfferPrice);
 				$("input[name=quantity]").attr("max", stock);
-	
+			
 			}
+    		
+    		function changeSpecSize(){
+    			alert("changeSpecSize :" + $("select[name=spec-size] option:selected").attr("data-stock"));
+    			    			
+    			var stock = $("select[name=spec-size] option:selected").attr("data-stock");
+    			var listPrice = $("select[name=spec-size] option:selected").attr("data-list-price");
+    			var price = $("select[name=spec-size] option:selected").attr("data-price");
+    			
+    			console.log(stock, listPrice, price);
+    			
+    			//TOTO 修改畫面中指定的位置 select 庫存
+    			
+    		}
+    		
     		
     	</script>
         
@@ -135,44 +158,60 @@
 					<div class="product-info">
 						<h2><%= p.getName()%></h2>
 						
-						<% if (p instanceof SpecialOffer){ %>
-						<div>售價: <span id="theUnitPrice"><%= ((SpecialOffer)p).getListPrice() %> </span>元</div>
-						<% } %>
 						
-						<div>優惠折扣: <span id="theSpecialOffer"> <%= p instanceof SpecialOffer ? ((SpecialOffer)p).getDiscountString():"" %> </span> 
-							<span id="theSpecialOfferPrice"><%= p.getUnitPrice() %></span> 元
+						<% if (p instanceof SpecialOffer){ %> 
+<%-- 						<div>售價: <span id="theUnitPrice"><%= ((SpecialOffer)p).getListPrice() %> </span>元</div> --%>
+												
+						<div>優惠售價: <%= p.getUnitPrice() %> 元</div>
+						<div>優惠折扣: <%= ((SpecialOffer)p).getDiscountString()%> </div>
+						
+						<% } else{%> 
+						
+						<div>
+							售價: <span id="theUnitPrice"><%= p.getUnitPrice() %></span> 元
 						</div>
+						<%} %>	
+											
 						<div>分類: <%= p.getCategory() %></div>
 						<div>庫存: <span id="theStock"><%= p.getStock() %> </span></div>
 						<div>上架日:<span id="theReleaseDate"> <%= p.getReleaseDate() %></span></div>
 						<div>
 							<form>
 								<input type="hidden" name="productId" value="<%= p.getId()%>">
-								<div class="spec">
+								
+								<% if(p.getSpecList() != null && p.getSpecList().size()>0){%>
+									<div class="spec">
+										<label>規格:</label>
+										<% for(int i = 0 ; i < p.getSpecList().size() ; i++){ 
+												ProductSpec spec = p.getSpecList().get(i);
+										%>
+											<label>
+												<input type="radio" name="spec" value="<%=spec.getSpecName() %>" required>
+												<img class="iconImg" title="<%=spec.getSpecName() %>" alt="<%=spec.getSpecName() %>" src="<%= spec.getIconUrl() %>"
+														data-photo-src="<%= spec.getPhotoUrl() %>" 
+														data-release-data="<%=spec.getReleaseDate() %>" 
+														data-stock="<%=spec.getStock() %>" 
+														data-unit-price="<%=spec.getUnitPrice() %>">
+														<!-- 
+														data-special-offer=""
+														data-special-offer-price="">
+														 -->
+											</label>
+										<% } %>							
+									</div>
+								<% } %>
+								
+								<!-- 到時候要記得拿掉 -->
+								<div class="specDiv">
 									<label>規格:</label>
-									<label>
-										<input type="radio" name="spec" value="600g" required>
-										<img title="600g" alt="600g" src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2Fproduct%2Fcover%403x-%E3%80%90%E9%99%90%E9%87%8F%E9%A0%90%E8%B3%BC%E3%80%91%E5%B1%B1%E6%A2%A8%E7%94%B2%E6%96%90%E7%8F%8D%E7%8F%A0%E9%BA%9D%E9%A6%99%E6%A1%90%E6%9C%A8%E5%96%AE%E6%88%BF%E7%A6%AE%E7%9B%92%28%E7%B4%84600g%E9%87%8D%29-ldTfTa6B7w172233095177012.jpg?alt=media"
-												data-photo-src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2Fproduct%2Fcover%403x-%E3%80%90%E9%99%90%E9%87%8F%E9%A0%90%E8%B3%BC%E3%80%91%E5%B1%B1%E6%A2%A8%E7%94%B2%E6%96%90%E7%8F%8D%E7%8F%A0%E9%BA%9D%E9%A6%99%E6%A1%90%E6%9C%A8%E5%96%AE%E6%88%BF%E7%A6%AE%E7%9B%92%28%E7%B4%84600g%E9%87%8D%29-ldTfTa6B7w172233095177012.jpg?alt=media" 
-												data-release-data="2024-09-17" 
-												data-stock="5" 
-												data-unit-price="3299"
-												data-special-offer="89折"
-												data-special-offer-price="2899">
-										
-									</label>
-									<label>
-										<input type="radio" name="spec" value="1200g" required>
-										<img title="1200g" alt="1200g" src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2Fproduct%2Fcover%403x-%E3%80%90%E9%99%90%E9%87%8F%E9%A0%90%E8%B3%BC%E3%80%91%E5%B1%B1%E6%A2%A8%E7%94%B2%E6%96%90%E7%8F%8D%E7%8F%A0%E9%BA%9D%E9%A6%99%E6%A1%90%E6%9C%A8%E9%9B%99%E6%88%BF%E7%A6%AE%E7%9B%92%28%E7%B4%841.2kg%E9%87%8D%29-b2dT6FgTs3172233117513526.jpg?alt=media"
-												data-photo-src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2Fproduct%2Fcover%403x-%E3%80%90%E9%99%90%E9%87%8F%E9%A0%90%E8%B3%BC%E3%80%91%E5%B1%B1%E6%A2%A8%E7%94%B2%E6%96%90%E7%8F%8D%E7%8F%A0%E9%BA%9D%E9%A6%99%E6%A1%90%E6%9C%A8%E9%9B%99%E6%88%BF%E7%A6%AE%E7%9B%92%28%E7%B4%841.2kg%E9%87%8D%29-b2dT6FgTs3172233117513526.jpg?alt=media" 
-												data-release-data="2024-09-19" 
-												data-stock="9" 
-												data-unit-price="4299" 
-												data-special-offer="79折" 
-												data-special-offer-price="3899">
-																				
-									</label>								
+									<select name="spec-size" required="required">
+										<option data-stock="5" data-list-price="500" data-price="50">小</option>
+										<option data-stock="8" data-list-price="800" data-price="80">中</option>
+										<option data-stock="10" data-list-price="1000" data-price="100">大</option>
+									</select>
 								</div>
+								<!-- 到時候要記得拿掉 -->
+								
 								<div>
 									<label>數量:</label>
 									<input type="number" name="quantity" required  min="1" max="3">
@@ -191,9 +230,7 @@
 				</div>
 	
 				
-				<%
-					}
-				%>
+				<% } %>
 			
 		</div>
 		
