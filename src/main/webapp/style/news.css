@@ -9,13 +9,13 @@
 */
 
 .newsContent{
-	padding: 50px 80px;
+	width: 70%;
+  	margin: 0px auto;
 }
 
 
 .newsInfoList{
 	margin: 50px auto;
-	padding: 0px 50px;
 }
 
 .newsLink{
@@ -78,7 +78,7 @@
 }
 
 .newsTitle{
-	font-size: 2vw;
+	font-size: 1.8vw;
   	line-height: 1.5;
   	letter-spacing: 2px;
   	text-align: left;
@@ -94,3 +94,53 @@
 	color: #707070;
 	
 }
+
+.news-detail-title{
+	margin-top: 50px;
+	
+}
+
+.news-detail-title span{
+	font-size: 1vw;
+	color: #403e3d;
+	letter-spacing: 2px;  /*字之間的距離*/
+	line-height: 2;  /*行高*/
+}
+
+.news-detail-title ul{
+	margin: 1vw 0;
+	list-style: none;
+	padding: 0;
+}
+
+.news-detail-title ul li{
+	display: inline-block;
+	background-color: #0b4227;
+	padding: 0.3vw 1.5vw;
+	font-size: 1vw;	
+	line-height: 1.5;
+	letter-spacing: 2px;
+	text-align: center;
+	color: #fff;
+}
+
+.news-articles{
+	margin-top: 50px;
+	padding: 0px 0px 15px 0px;
+	border-bottom: 1px solid lightgray;
+}
+
+.news-articles h4{
+	font-size: 1.5vw;	
+}
+
+.squareImg{
+	width: 350px;
+}
+
+.news-articles p{
+	font-size: 1.2vw;
+    line-height: 2;
+	letter-spacing: 1.2px;
+}
+

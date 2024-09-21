@@ -57,25 +57,23 @@ body{
 .topInfoWrapper{
 	display: flex;
 	align-items: center;
-    justify-content: space-between;
-    padding: 50px;
+    width: 100%;
+   margin: 0px auto;
 }
 
 .topTitle{
-  	flex-grow: 1;	
+  	flex-grow: 3;	
 }
 
 .filterWrapper{
 	flex-grow: 1;
 	display: flex;
-	justify-content: space-around;
 	padding: 0px 50px;
 	
 }
 
 .filterSelectWrapper{
 	min-height: 1vw;
-  	float: left;
   	flex-grow: 1;
 }
 
@@ -88,6 +86,11 @@ body{
 .banner{
 	width: 100%;
 }
+
+.share-wrapper{
+	margin-top: 50px;
+}
+
 
 .iconDropDown{
 	

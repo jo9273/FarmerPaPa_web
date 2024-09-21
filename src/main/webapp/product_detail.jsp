@@ -37,7 +37,7 @@
 				var releaseDate = $(this).attr("data-release-data");
 				var unitPrice = $(this).attr("data-unit-price");
     			//var specialOffer = $(this).attr("data-special-offer");
-    			//var specialOfferPrice = $(this).attr("data-special-offer-price");
+    			
     			
     			//alert(stock);
     			//alert("change:" + $(this).attr("title"));
@@ -51,7 +51,7 @@
 				$("#theReleaseDate").text(releaseDate);
 				$("#theUnitPrice").text(unitPrice);
 				//$("#theSpecialOffer").text(specialOffer);
-				//$("#theSpecialOfferPrice").text(specialOfferPrice);
+				
 				$("input[name=quantity]").attr("max", stock);
 			
 			}
@@ -182,7 +182,7 @@
 														data-special-offer-price="<%=spec.getUnitPrice() %>">
 														<!-- 
 														data-special-offer=""
-														data-special-offer-price="">
+														
 														 -->
 											</label>
 										<% } %>							
