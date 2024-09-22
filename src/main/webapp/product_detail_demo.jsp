@@ -71,36 +71,8 @@
     			$("#can-buy-stock").text(stock);
     			$("input[name=quantity]").attr("max",  stock);
     			
-    		}
-    		
-    		
+    		}	
     	</script>
-        
-    	<style>
-			/* HIDE RADIO */
-			.spec input[type=radio] { 
-			  position: absolute;
-			  opacity: 0;
-			  width: 1px;
-			  height: 1px;
-			}
-			
-			/* IMAGE STYLES */
-			.spec input[type=radio] + img {
-			  cursor: pointer;
-			}
-			
-			/* CHECKED STYLES */
-			.spec input[type=radio]:checked + img {
-			  outline: 3px solid #d95834;
-			}
-			
-			.spec img{
-				width: 80px;
-				margin-right: 10px;
-				vertical-align: middle;
-			}
-    	</style>
 
 	</head>
 	<body>
@@ -149,36 +121,60 @@
 					</li>
 				</ul>
 			</div>
-			
-			
-			
+	
 
 			<div class="product-content">		<!-- product_detail -->
 				<div class="product-detail">
+				
 					<div class="product-photo">
 						<img id="thePhoto" src="<%= p.getPhotoUrl()%>">
 					</div>
 					
 					<div class="product-info">
 						<h2><%= p.getName()%></h2>
+						<div class="product-tags">
+							<ul>
+								<li><%= p.getCategory() %></li>
+							</ul>
+						</div>
 						
+						<div class="product-desc">
+							<p><%= p.getDescription() %></p>
+						</div>
+						
+						<div class="total-stock">
+							總庫存: <span id="theStock"><%= p.getStock() %> </span>
+						</div>
+						
+						<div class="can-buy-stock">
+							可購買庫存:  <span id="can-buy-stock"> </span>
+						</div>
 						
 						<% if (p instanceof SpecialOffer){ %> 
 <%-- 						<div>售價: <span id="theUnitPrice"><%= ((SpecialOffer)p).getListPrice() %> </span>元</div> --%>
+						
+						<div class="u-price-st">
+							售價: <span id="theUnitPrice"><%= p.getUnitPrice() %></span> 元
+						</div>
+						
+						<div class="discount-string">
+							優惠折扣: <%= ((SpecialOffer)p).getDiscountString()%>
+						</div>
 												
-						<div>優惠售價: <span id="theSpecialOfferPrice"><%= p.getUnitPrice() %> </span>元</div>
-						<div>優惠折扣: <%= ((SpecialOffer)p).getDiscountString()%> </div>
+						<div class="s-o-price">
+							優惠售價: <span id="theSpecialOfferPrice"><%= ((SpecialOffer)p).getUnitPrice()%> </span>元
+						</div>
+							
+						
 						
 						<% } else{%> 
 						
-						<div>
+						<div class="u-price" >
 							售價: <span id="theUnitPrice"><%= p.getUnitPrice() %></span> 元
 						</div>
 						<%} %>	
-											
-						<div>分類: <%= p.getCategory() %></div>
-						<div>總庫存: <span id="theStock"><%= p.getStock() %> </span></div>
-						<div>可購買庫存:  <span id="can-buy-stock"> </span></div>
+						
+						
 						<div>上架日:<span id="theReleaseDate"> <%= p.getReleaseDate() %></span></div>
 						<div>
 							<form>
@@ -228,6 +224,7 @@
 							</form>
 						</div>
 					</div>
+					
 				</div>
 						
 				<div class="product-desc">

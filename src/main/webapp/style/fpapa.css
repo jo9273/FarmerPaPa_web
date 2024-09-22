@@ -88,9 +88,27 @@ body{
 }
 
 .share-wrapper{
-	margin-top: 50px;
+	margin-top: 25px;
+	text-align: end;
 }
 
+.share-wrapper p{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.share-wrapper li{
+	list-style: none;
+	display: inline-block;
+}
+
+
+.socialIcon {
+    width: 30px;
+    height: 30px;
+    margin: 0 15px;
+    vertical-align: middle;
+}
 
 .iconDropDown{
 	

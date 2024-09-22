@@ -103,7 +103,7 @@
 										<a href="product_detail.jsp?productId=<%= p.getId() %>"><img src="<%= p.getPhotoUrl() %>"></a>    <!-- TODO:ajax+json -->
 										<a href="product_detail.jsp?productId=<%= p.getId() %>"><h4><%= p.getName() %></h4></a>			 <!-- 同步GET請求 -->
 										
-										<div>售價$ <%= p.getUnitPrice() %> | 優惠折扣: <%= p instanceof SpecialOffer ? ((SpecialOffer)p).getDiscountString(): "無折扣" %></div>
+										<div>售價$ <%= p.getUnitPrice() %> | 優惠折扣: <%= p instanceof SpecialOffer ? ((SpecialOffer)p).getDiscountString(): "" %></div>
 									</div>
 									
 							<%	} %>

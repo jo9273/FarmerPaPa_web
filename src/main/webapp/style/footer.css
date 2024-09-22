@@ -43,16 +43,16 @@ footer{
     margin-bottom: 20px;
 }
 
-.footerSocial .socialIcon {
-    width: 30px;
-    height: 30px;
-    margin: 0 15px;
-    vertical-align: middle;
+.footerSocial li{
+	list-style: none;
+	display: inline-block;
 }
+
 
 .footerLinks {
     margin-bottom: 15px;
 }
+
 
 .footerLinks a {
     margin: 0 10px;

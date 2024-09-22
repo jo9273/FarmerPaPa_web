@@ -49,7 +49,7 @@
 				</div>
 			
 				<div class="newsInfoList">	<!-- news -->
-					<a class="newsLink" href="news_detail_notYet.jsp">
+					<a class="newsLink" href="news_detail.jsp?newsId=">
 						<div class="newsItem">	<!-- news -->
 								<div class="newsImg">
 									<img src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2FproductInfo%2Fcover%403x-undefined-TRSgnrqZei17252655062501.jpg?alt=media">

@@ -9,9 +9,21 @@
 					<a href="" class="info">聯絡我們</a>
 				</div>
 				<div class="footerSocial">
-					<img class="socialIcon" src="images/fb.png" alt="facebook">
-					<img class="socialIcon" src="images/ig.png" alt="instagram">
-					<img class="socialIcon" src="images/line.png" alt="line">
+						<li>
+							<a target="_blank" href="">
+								<img class="socialIcon" src="images/fb.png" alt="facebook">
+							</a>
+						</li>
+						<li>
+							<a target="_blank" href="">
+								<img class="socialIcon" src="images/ig.png" alt="instagram">
+							</a>
+						</li>
+						<li>
+							<a target="_blank" href="">
+								<img class="socialIcon" src="images/line.png" alt="line">
+							</a>
+						</li>
 				</div>
 				<div class="footerLinks">
 					<a href="">隱私權及版權說明</a>

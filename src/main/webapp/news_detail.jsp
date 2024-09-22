@@ -67,9 +67,22 @@
 					<p>最後，經過分級和包裝的水蜜桃會被裝載到冷藏集貨地進行裝櫃作業，準備運往出口到國際市場，以確保水果的新鮮度。</p>
 				
 				</div>
+				
 				<div class="share-wrapper">
-					share to fb line 
+					<p>分享：</p>
+						<li>
+							<a target="_blank" href="">
+								<img class="socialIcon" alt="facebook" src="images/fb.png">
+							</a>
+						</li>
+						<li>
+							<a target="_blank" href="">
+								<img class="socialIcon" alt="line" src="images/line.png">
+							</a>
+						</li>
 				</div>
+				
+				
 				
 				
 			</div>
