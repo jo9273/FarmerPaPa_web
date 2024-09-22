@@ -31,6 +31,9 @@
     			$(".iconImg:first").trigger("click");
     			$("#delivery-date").val($("#delivery-date option:first").val()).trigger("change");
     			
+    			// 預設打開第一個頁籤
+    			$(".tab-button").on("click", tabClickHandler);
+    			openTabById('product-desc'); 
     		}
     	
     		function changeSpecDate(){
@@ -71,7 +74,27 @@
     			$("#can-buy-stock").text(stock);
     			$("input[name=quantity]").attr("max",  stock);
     			
-    		}	
+    		}
+    		
+    		function tabClickHandler(){
+    		    var targetTab = $(this).attr('data-tab');
+    		    
+    		    // 打開對應的頁籤
+    		    openTabById(targetTab);
+    		    
+    		    // 移除其他按鈕的活動狀態，並為當前按鈕添加活動狀態
+    		    $(".tab-button").removeClass('active-tab');
+    		    $(this).addClass('active-tab');
+    		}
+
+    		function openTabById(tabId){
+    		    // 隱藏所有頁籤內容
+    		    $(".tab-content").hide();
+    		    
+    		    // 顯示對應的頁籤內容
+    		    $("#" + tabId).show();
+    		}
+    		
     	</script>
 
 	</head>
@@ -137,6 +160,9 @@
 								<li><%= p.getCategory() %></li>
 							</ul>
 						</div>
+						<div class="release-date">
+							上架日:<span id="theReleaseDate"> <%= p.getReleaseDate() %></span>
+						</div>
 						
 						<div class="product-desc">
 							<p><%= p.getDescription() %></p>
@@ -162,7 +188,7 @@
 						</div>
 												
 						<div class="s-o-price">
-							優惠售價: <span id="theSpecialOfferPrice"><%= ((SpecialOffer)p).getUnitPrice()%> </span>元
+							優惠售價: <span id="theSpecialOfferPrice"><%= ((SpecialOffer)p).getUnitPrice() %> </span>元
 						</div>
 							
 						
@@ -175,7 +201,8 @@
 						<%} %>	
 						
 						
-						<div>上架日:<span id="theReleaseDate"> <%= p.getReleaseDate() %></span></div>
+						
+						
 						<div>
 							<form>
 								<input type="hidden" name="productId" value="<%= p.getId()%>">
@@ -226,11 +253,27 @@
 					</div>
 					
 				</div>
-						
-				<div class="product-desc">
-						<p><%= p.getDescription() %></p>
+				
+				
+				<div class="tabs">
+				  <button class="tab-button" data-tab="product-desc">產品描述</button>
+				  <button class="tab-button" data-tab="product-spec-desc">產品規格</button>
+				  <button class="tab-button" data-tab="product-notice">注意事項</button>
 				</div>
-	
+
+				<div id="product-desc" class="tab-content">
+				  <p><%= p.getDescription() %></p>
+				</div>
+				
+				<div id="product-spec-desc" class="tab-content" style="display:none;">
+				  <h3>產品規格</h3>
+				  <p>產品規格的內容。</p>
+				</div>
+
+				<div id="product-notice" class="tab-content" style="display:none;">
+				  <h3>注意事項</h3>
+				  <p>注意事項的內容</p>
+				</div>
 				
 				<% } %>
 			

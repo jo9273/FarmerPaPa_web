@@ -9,6 +9,8 @@
 
 .product-detail{
 	display: flex;
+	padding-bottom: 30px;
+	border-bottom: 1px solid lightgray;
 }
 
 .product-photo{
@@ -24,19 +26,23 @@
 	flex: 1.2;
 	padding: 0px 35px;
   	line-height: 1.5;
-  	letter-spacing: 1px;
+  	letter-spacing: 2px;
 }
 
 .product-info h2{
 	font-size: 1.8vw;
-  	letter-spacing: 2px;
   	text-align: left;
   	color: #f04624;
+  	margin-top: 0px;
 }
 
 .product-info div{
 	margin-top: 5px;
 	margin-bottom:  5px;
+}
+
+.product-tags{
+	display: inline-block;
 }
 
 .product-tags ul{
@@ -50,17 +56,19 @@
 	background-color: #0b4227;
 	padding: 0.3vw 1.5vw;
 	font-size: 1vw;	
-	line-height: 1.5;
-	letter-spacing: 2px;
 	text-align: center;
 	color: #fff;
+}
+
+.release-date{
+	font-size: 0.8vw;
+	display: inline-block;
+	float: right;
 }
 
 
 .product-desc {
 	font-size: 1.2vw;
-    line-height: 2;
-	letter-spacing: 1.2px;
 }
 
 .total-stock{
@@ -88,10 +96,47 @@
 	display:inline-block;
 	margin-left: 30px;
 	font-size: 1.5vw;
-  	line-height: 1.5;
-  	letter-spacing: 2px;
   	color: #f04624;
-  	
+}
+
+.u-price{
+	margin-left: 30px;
+	font-size: 1.5vw;
+  	color: #f04624;
+}
+
+
+
+
+.tabs {
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.tab-button {
+  background-color: #f1f1f1;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.tab-button:hover {
+  background-color: #ddd;
+}
+
+/* tab的樣式 */
+.active-tab {
+  background-color: #ccc;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
 }
 
 
