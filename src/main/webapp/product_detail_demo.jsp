@@ -22,7 +22,8 @@
     		$(document).ready(init);
 
     		function init(){
-    			$(".spec img").on("click", changeSpecDate);
+    			
+    			$(".spec img").on("click", changeSpecData);
     			$("select[name=delivery-date]").on("change", changeDeliveryDate);
     			
     			// 預選第一個
@@ -36,7 +37,8 @@
     			openTabById('product-desc'); 
     		}
     	
-    		function changeSpecDate(){
+    		function changeSpecData(){
+    			var specName = $(this).attr("title");  
     			var specialOfferPrice = $(this).attr("data-special-offer-price");
     			var photoUrl = $(this).attr("data-photo-src");
 				var stock = $(this).attr("data-stock");
@@ -46,7 +48,7 @@
     			
     			
     			//alert(stock);
-    			//alert("change:" + $(this).attr("title"));
+    			//alert("change:" + specName);
 				//console.log("change" + $(this).attr("title"), $(this).attr("data-stock"));
 				
 				//修改畫面中指定位置的資料
@@ -58,12 +60,13 @@
 				//$("#theSpecialOffer").text(specialOffer);
 				
 				$("input[name=quantity]").attr("max", stock);
-			
+				ajaxGetDeliveryDateStockOption(specName);	
 			}
     		
     		function changeDeliveryDate(){
-    			//alert("changeDeliveryDate :" + $("select[name=delivery-date] option:selected").attr("data-stock"));
-    			    			
+    			alert("changeDeliveryDate :" + $("select[name=delivery-date] option:selected").attr("data-stock"));
+    			
+    			  			
     			var stock = $("select[name=delivery-date] option:selected").attr("data-stock");
     			var listPrice = $("select[name=delivery-date] option:selected").attr("data-list-price");
     			var price = $("select[name=delivery-date] option:selected").attr("data-price");
@@ -74,7 +77,26 @@
     			$("#can-buy-stock").text(stock);
     			$("input[name=quantity]").attr("max",  stock);
     			
+    			
     		}
+    		
+    		function ajaxGetDeliveryDateStockOption(specName){
+				//Ajax請求 > get_delivery_date_stock.jsp
+				var productId = $("input[name=productId]").val();
+				
+    			$.ajax({
+    				url: "get_delivery_date_stock.jsp?specName=" + specName + "&productId=" + productId,
+    				method: "GET"
+    			}).done(ajaxGetDeliveryDateStockOptionDone); //call back
+			}
+    		
+    		function ajaxGetDeliveryDateStockOptionDone(result, status, xhr){
+				alert(result);
+				
+				//將選項套用在 $("select[name=delivery-date]")，顯示選單
+				$("select[name=delivery-date]").html(result);
+    		}
+    		
     		
     		function tabClickHandler(){
     		    var targetTab = $(this).attr('data-tab');
@@ -233,9 +255,11 @@
 								<div class="deliveryDate">
 									<label>預計出貨日:</label>
 									<select id="delivery-date" name="delivery-date" required="required">
-										<option data-stock="5" data-list-price="1000" data-price="1000">2024-09-30</option>
-										<option data-stock="8" data-list-price="800" data-price="80">2024-10-15</option>
-										<option data-stock="10" data-list-price="700" data-price="70">2024-10-25</option>
+										<!--  
+										<option data-stock="5">2024-09-30</option>
+										<option data-stock="8">2024-10-15</option>
+										<option data-stock="10">2024-10-25</option>
+										-->
 									</select>
 								</div>
 								<!-- 到時候要記得拿掉 -->
