@@ -24,13 +24,13 @@
     		function init(){
     			
     			$(".spec img").on("click", changeSpecData);
-    			$("select[name=delivery-date]").on("change", changeDeliveryDate);
+    			$("select[name=spec-grade]").on("change", changeSpecGrade);
     			
     			// 預選第一個
     			//$("input[name=spec]:first").attr("checked", true);
     			
     			$(".iconImg:first").trigger("click");
-    			$("#delivery-date").val($("#delivery-date option:first").val()).trigger("change");
+    			$("#spec-grade").val($("#spec-grade option:first").val()).trigger("change");
     			
     			// 預設打開第一個頁籤
     			$(".tab-button").on("click", tabClickHandler);
@@ -39,11 +39,11 @@
     	
     		function changeSpecData(){
     			var specName = $(this).attr("title");  
-    			var specialOfferPrice = $(this).attr("data-special-offer-price");
+    			var specialOfferPrice = $(this).attr("data-price");
     			var photoUrl = $(this).attr("data-photo-src");
 				var stock = $(this).attr("data-stock");
 				var releaseDate = $(this).attr("data-release-data");
-				var unitPrice = $(this).attr("data-unit-price");
+				//var unitPrice = $(this).attr("data-list-price");
     			//var specialOffer = $(this).attr("data-special-offer");
     			
     			
@@ -56,45 +56,48 @@
     			$("#thePhoto").attr("src", photoUrl);
     			$("#theStock").text(stock);
 				$("#theReleaseDate").text(releaseDate);
-				$("#theUnitPrice").text(unitPrice);
+				//$("#theUnitPrice").text(unitPrice);
 				//$("#theSpecialOffer").text(specialOffer);
 				
 				$("input[name=quantity]").attr("max", stock);
-				ajaxGetDeliveryDateStockOption(specName);	
+				ajaxGetSpecGradeOption(specName);	
 			}
     		
-    		function changeDeliveryDate(){
-    			alert("changeDeliveryDate :" + $("select[name=delivery-date] option:selected").attr("data-stock"));
+    		function changeSpecGrade(){
+    			//alert("changeSpecGrade :" + $("select[name=spec-grade] option:selected").attr("data-stock"));
     			
     			  			
-    			var stock = $("select[name=delivery-date] option:selected").attr("data-stock");
-    			var listPrice = $("select[name=delivery-date] option:selected").attr("data-list-price");
-    			var price = $("select[name=delivery-date] option:selected").attr("data-price");
+    			var stock = $("select[name=spec-grade] option:selected").attr("data-stock");
+    			var listPrice = $("select[name=spec-grade] option:selected").attr("data-list-price");
+    			var price = $("select[name=spec-grade] option:selected").attr("data-price");
     			
-    			console.log(stock, listPrice, price);
+    			//console.log(stock, listPrice, price);
+    			
     			
     			//TOTO 修改畫面中指定的位置 select 庫存
     			$("#can-buy-stock").text(stock);
     			$("input[name=quantity]").attr("max",  stock);
     			
+    			$("#theUnitPrice").text(listPrice);
+    			$("#theSpecialOffer").text(price);
     			
     		}
     		
-    		function ajaxGetDeliveryDateStockOption(specName){
-				//Ajax請求 > get_delivery_date_stock.jsp
+    		function ajaxGetSpecGradeOption(specName){
+				//Ajax請求 > get_delivery_date.jsp
 				var productId = $("input[name=productId]").val();
 				
     			$.ajax({
-    				url: "get_delivery_date_stock.jsp?specName=" + specName + "&productId=" + productId,
+    				url: "get_spec_grade.jsp?specName=" + specName + "&productId=" + productId,
     				method: "GET"
-    			}).done(ajaxGetDeliveryDateStockOptionDone); //call back
+    			}).done(ajaxGetSpecGradeOptionDone); //call back
 			}
     		
-    		function ajaxGetDeliveryDateStockOptionDone(result, status, xhr){
-				alert(result);
+    		function ajaxGetSpecGradeOptionDone(result, status, xhr){
+				//alert(result);
 				
-				//將選項套用在 $("select[name=delivery-date]")，顯示選單
-				$("select[name=delivery-date]").html(result);
+				//將選項套用在 $("select[name=spec-grade]")，顯示選單
+				$("select[name=spec-grade]").html(result);
     		}
     		
     		
@@ -240,21 +243,23 @@
 											<img class="iconImg" title="<%=spec.getSpecName() %>" alt="<%=spec.getSpecName() %>" src="<%= spec.getIconUrl() %>"
 													data-photo-src="<%= spec.getPhotoUrl() %>" 
 													data-release-data="<%=spec.getReleaseDate() %>" 
-													data-stock="<%=spec.getStock() %>" 
+													data-stock="<%=spec.getStock() %>" >
+													
+													<%-- 
 													data-unit-price="<%=spec.getUnitPrice() %>"
-													data-special-offer-price="<%=spec.getUnitPrice() %>">
-													<!-- 
+													data-special-offer-price="<%=spec.getUnitPrice() %>"
+													
 													data-special-offer=""
-													 -->	
+													 --%>	
 										</label>
 										<% } %>							
 									</div>
 								<% } %>
 								
-								<!-- 到時候要記得拿掉 -->
-								<div class="deliveryDate">
-									<label>預計出貨日:</label>
-									<select id="delivery-date" name="delivery-date" required="required">
+								<!-- 是否有預計出貨日 -->
+								<div class="specGrade">
+									<label>產品級別:</label>
+									<select id="spec-grade" name="spec-grade" required="required">
 										<!--  
 										<option data-stock="5">2024-09-30</option>
 										<option data-stock="8">2024-10-15</option>
@@ -262,7 +267,7 @@
 										-->
 									</select>
 								</div>
-								<!-- 到時候要記得拿掉 -->
+								
 								
 								<div>
 									<label>數量:</label>
