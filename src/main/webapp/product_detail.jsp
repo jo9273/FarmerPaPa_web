@@ -22,68 +22,105 @@
     		$(document).ready(init);
 
     		function init(){
-    			$(".spec img").on("click", changeSpecDate);
-    			    			
+    			
+    			$(".spec img").on("click", changeSpecData);
+    			$("select[name=spec-grade]").on("change", changeSpecGrade);
+    			
     			// 預選第一個
     			//$("input[name=spec]:first").attr("checked", true);
     			
     			$(".iconImg:first").trigger("click");
+    			$("#spec-grade").val($("#spec-grade option:first").val()).trigger("change");
+    			
+    			// 預設打開第一個頁籤
+    			$(".tab-button").on("click", tabClickHandler);
+    			openTabById('product-desc'); 
     		}
     	
-    		function changeSpecDate(){
-				var specialOfferPrice = $(this).attr("data-special-offer-price");
+    		function changeSpecData(){
+    			var specName = $(this).attr("title");  
+    			var specialOfferPrice = $(this).attr("data-price");
     			var photoUrl = $(this).attr("data-photo-src");
 				var stock = $(this).attr("data-stock");
 				var releaseDate = $(this).attr("data-release-data");
-				var unitPrice = $(this).attr("data-unit-price");
+				//var unitPrice = $(this).attr("data-list-price");
     			//var specialOffer = $(this).attr("data-special-offer");
     			
     			
     			//alert(stock);
-    			//alert("change:" + $(this).attr("title"));
+    			//alert("change:" + specName);
 				//console.log("change" + $(this).attr("title"), $(this).attr("data-stock"));
 				
 				//修改畫面中指定位置的資料
-				
 				$("#theSpecialOfferPrice").text(specialOfferPrice);
     			$("#thePhoto").attr("src", photoUrl);
     			$("#theStock").text(stock);
 				$("#theReleaseDate").text(releaseDate);
-				$("#theUnitPrice").text(unitPrice);
+				//$("#theUnitPrice").text(unitPrice);
 				//$("#theSpecialOffer").text(specialOffer);
 				
 				$("input[name=quantity]").attr("max", stock);
-			
+				ajaxGetSpecGradeOption(specName);	
 			}
-    		    		    		
+    		
+    		function changeSpecGrade(){
+    			//alert("changeSpecGrade :" + $("select[name=spec-grade] option:selected").attr("data-stock"));
+    			
+    			  			
+    			var stock = $("select[name=spec-grade] option:selected").attr("data-stock");
+    			var listPrice = $("select[name=spec-grade] option:selected").attr("data-list-price");
+    			var price = $("select[name=spec-grade] option:selected").attr("data-price");
+    			
+    			//console.log(stock, listPrice, price);
+    			
+    			
+    			//TOTO 修改畫面中指定的位置 select 庫存
+    			$("#can-buy-stock").text(stock);
+    			$("input[name=quantity]").attr("max",  stock);
+    			
+    			$("#theUnitPrice").text(listPrice);
+    			$("#theSpecialOffer").text(price);
+    			
+    		}
+    		
+    		function ajaxGetSpecGradeOption(specName){
+				//Ajax請求 > get_delivery_date.jsp
+				var productId = $("input[name=productId]").val();
+				
+    			$.ajax({
+    				url: "get_spec_grade.jsp?specName=" + specName + "&productId=" + productId,
+    				method: "GET"
+    			}).done(ajaxGetSpecGradeOptionDone); //call back
+			}
+    		
+    		function ajaxGetSpecGradeOptionDone(result, status, xhr){
+				//alert(result);
+				
+				//將選項套用在 $("select[name=spec-grade]")，顯示選單
+				$("select[name=spec-grade]").html(result);
+    		}
+    		
+    		
+    		function tabClickHandler(){
+    		    var targetTab = $(this).attr('data-tab');
+    		    
+    		    // 打開對應的頁籤
+    		    openTabById(targetTab);
+    		    
+    		    // 移除其他按鈕的活動狀態，並為當前按鈕添加活動狀態
+    		    $(".tab-button").removeClass('active-tab');
+    		    $(this).addClass('active-tab');
+    		}
+
+    		function openTabById(tabId){
+    		    // 隱藏所有頁籤內容
+    		    $(".tab-content").hide();
+    		    
+    		    // 顯示對應的頁籤內容
+    		    $("#" + tabId).show();
+    		}
     		
     	</script>
-        
-    	<style>
-			/* HIDE RADIO */
-			.spec input[type=radio] { 
-			  position: absolute;
-			  opacity: 0;
-			  width: 1px;
-			  height: 1px;
-			}
-			
-			/* IMAGE STYLES */
-			.spec input[type=radio] + img {
-			  cursor: pointer;
-			}
-			
-			/* CHECKED STYLES */
-			.spec input[type=radio]:checked + img {
-			  outline: 3px solid #d95834;
-			}
-			
-			.spec img{
-				width: 80px;
-				margin-right: 10px;
-				vertical-align: middle;
-			}
-    	</style>
 
 	</head>
 	<body>
@@ -132,36 +169,65 @@
 					</li>
 				</ul>
 			</div>
-			
-			
-			
+	
 
 			<div class="product-content">		<!-- product_detail -->
 				<div class="product-detail">
+				
 					<div class="product-photo">
 						<img id="thePhoto" src="<%= p.getPhotoUrl()%>">
 					</div>
 					
 					<div class="product-info">
 						<h2><%= p.getName()%></h2>
+						<div class="product-tags">
+							<ul>
+								<li><%= p.getCategory() %></li>
+							</ul>
+						</div>
+						<div class="release-date">
+							上架日:<span id="theReleaseDate"> <%= p.getReleaseDate() %></span>
+						</div>
 						
+						<div class="product-desc">
+							<p><%= p.getDescription() %></p>
+						</div>
+						
+						<div class="total-stock">
+							總庫存: <span id="theStock"><%= p.getStock() %> </span>
+						</div>
+						
+						<div class="can-buy-stock">
+							可購買庫存:  <span id="can-buy-stock"> </span>
+						</div>
 						
 						<% if (p instanceof SpecialOffer){ %> 
 <%-- 						<div>售價: <span id="theUnitPrice"><%= ((SpecialOffer)p).getListPrice() %> </span>元</div> --%>
+						
+						<div class="u-price-st">
+							售價: <span id="theUnitPrice"><%= p.getUnitPrice() %></span> 元
+						</div>
+						
+						<div class="discount-string">
+							優惠折扣: <%= ((SpecialOffer)p).getDiscountString()%>
+						</div>
 												
-						<div>優惠售價: <span id="theSpecialOfferPrice"><%= p.getUnitPrice() %> </span>元</div>
-						<div>優惠折扣: <%= ((SpecialOffer)p).getDiscountString()%> </div>
+						<div class="s-o-price">
+							優惠售價: <span id="theSpecialOfferPrice"><%= ((SpecialOffer)p).getUnitPrice() %> </span>元
+						</div>
+							
+						
 						
 						<% } else{%> 
 						
-						<div>
+						<div class="u-price" >
 							售價: <span id="theUnitPrice"><%= p.getUnitPrice() %></span> 元
 						</div>
 						<%} %>	
-											
-						<div>分類: <%= p.getCategory() %></div>
-						<div>庫存: <span id="theStock"><%= p.getStock() %> </span></div>
-						<div>上架日:<span id="theReleaseDate"> <%= p.getReleaseDate() %></span></div>
+						
+						
+						
+						
 						<div>
 							<form>
 								<input type="hidden" name="productId" value="<%= p.getId()%>">
@@ -172,23 +238,36 @@
 										<% for(int i = 0 ; i < p.getSpecList().size() ; i++){ 
 												ProductSpec spec = p.getSpecList().get(i);
 										%>
-											<label>
-												<input type="radio" name="spec" value="<%=spec.getSpecName() %>" required>
-												<img class="iconImg" title="<%=spec.getSpecName() %>" alt="<%=spec.getSpecName() %>" src="<%= spec.getIconUrl() %>"
-														data-photo-src="<%= spec.getPhotoUrl() %>" 
-														data-release-data="<%=spec.getReleaseDate() %>" 
-														data-stock="<%=spec.getStock() %>" 
-														data-unit-price="<%=spec.getUnitPrice() %>"
-														data-special-offer-price="<%=spec.getUnitPrice() %>">
-														<!-- 
-														data-special-offer=""
-														
-														 -->
-											</label>
+										<label>
+											<input type="radio" name="spec" value="<%=spec.getSpecName() %>" required>
+											<img class="iconImg" title="<%=spec.getSpecName() %>" alt="<%=spec.getSpecName() %>" src="<%= spec.getIconUrl() %>"
+													data-photo-src="<%= spec.getPhotoUrl() %>" 
+													data-release-data="<%=spec.getReleaseDate() %>" 
+													data-stock="<%=spec.getStock() %>" >
+													
+													<%-- 
+													data-unit-price="<%=spec.getUnitPrice() %>"
+													data-special-offer-price="<%=spec.getUnitPrice() %>"
+													
+													data-special-offer=""
+													 --%>	
+										</label>
 										<% } %>							
 									</div>
 								<% } %>
-															
+								
+								<!-- 是否有預計出貨日 -->
+								<div class="specGrade">
+									<label>產品級別:</label>
+									<select id="spec-grade" name="spec-grade" required="required">
+										<!--  
+										<option data-stock="5">2024-09-30</option>
+										<option data-stock="8">2024-10-15</option>
+										<option data-stock="10">2024-10-25</option>
+										-->
+									</select>
+								</div>
+								
 								
 								<div>
 									<label>數量:</label>
@@ -201,12 +280,29 @@
 							</form>
 						</div>
 					</div>
+					
 				</div>
-						
-				<div class="product-desc">
-						<p><%= p.getDescription() %></p>
+				
+				
+				<div class="tabs">
+				  <button class="tab-button" data-tab="product-desc">產品描述</button>
+				  <button class="tab-button" data-tab="product-spec-desc">產品規格</button>
+				  <button class="tab-button" data-tab="product-notice">注意事項</button>
 				</div>
-	
+
+				<div id="product-desc" class="tab-content">
+				  <p><%= p.getDescription() %></p>
+				</div>
+				
+				<div id="product-spec-desc" class="tab-content" style="display:none;">
+				  <h3>產品規格</h3>
+				  <p>產品規格的內容。</p>
+				</div>
+
+				<div id="product-notice" class="tab-content" style="display:none;">
+				  <h3>注意事項</h3>
+				  <p>注意事項的內容</p>
+				</div>
 				
 				<% } %>
 			

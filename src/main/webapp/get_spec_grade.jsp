@@ -24,7 +24,6 @@
 		for(int i = 0 ; i < list.size() ; i++){
 			ProductSpecGrade psg = list.get(i);
 %>
-		<!-- data-list-price, data-price 目前沒用-->
 		<option data-stock="<%= psg.getStock() %>"
 				data-list-price="<%= psg.getUnitPrice() %>"
 				data-price="<%= psg.getPrice() %>" >
@@ -35,7 +34,7 @@
 		<% } %>
 	<%} else{ %>
 	
-	<option value="">查無日期</option>
+	<option value="">查無資料</option>
 	
 	<%} %>
 

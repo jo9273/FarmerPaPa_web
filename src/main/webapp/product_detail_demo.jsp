@@ -256,18 +256,16 @@
 									</div>
 								<% } %>
 								
-								<!-- 是否有預計出貨日 -->
+								<!-- 是否有產品級別: -->
+								<% if(p.getSpecGradeCount()>0) {%>
+								
 								<div class="specGrade">
 									<label>產品級別:</label>
 									<select id="spec-grade" name="spec-grade" required="required">
-										<!--  
-										<option data-stock="5">2024-09-30</option>
-										<option data-stock="8">2024-10-15</option>
-										<option data-stock="10">2024-10-25</option>
-										-->
+										
 									</select>
 								</div>
-								
+								<% }%>
 								
 								<div>
 									<label>數量:</label>
@@ -304,7 +302,14 @@
 				  <p>注意事項的內容</p>
 				</div>
 				
-				<% } %>
+				<script>
+					<% if(p.getSpecList().size() == 0 && p.getSpecGradeCount()>0){%>
+							alert("應帶入規格資料");
+							ajaxGetSpecGradeOption("");
+					<% }%>
+				</script>
+				
+		<% } %>
 			
 		</div>
 		
