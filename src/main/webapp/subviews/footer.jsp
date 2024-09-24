@@ -11,17 +11,17 @@
 				<div class="footerSocial">
 						<li>
 							<a target="_blank" href="">
-								<img class="socialIcon" src="images/fb.png" alt="facebook">
+								<img class="socialIcon" src="/fpapa/images/fb.png" alt="facebook">
 							</a>
 						</li>
 						<li>
 							<a target="_blank" href="">
-								<img class="socialIcon" src="images/ig.png" alt="instagram">
+								<img class="socialIcon" src="/fpapa/images/ig.png" alt="instagram">
 							</a>
 						</li>
 						<li>
 							<a target="_blank" href="">
-								<img class="socialIcon" src="images/line.png" alt="line">
+								<img class="socialIcon" src="/fpapa/images/line.png" alt="line">
 							</a>
 						</li>
 				</div>

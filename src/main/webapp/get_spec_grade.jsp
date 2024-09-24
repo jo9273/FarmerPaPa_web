@@ -28,7 +28,7 @@
 				data-list-price="<%= psg.getUnitPrice() %>"
 				data-price="<%= psg.getPrice() %>" >
 				
-				<%= psg.getSpecGrade() %>
+				<%= psg.getSpecGrade() %> , 庫存: <%= psg.getStock() %> 
 		</option>
 	
 		<% } %>

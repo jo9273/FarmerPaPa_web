@@ -1,6 +1,8 @@
-$(document).ready(init);
+//$(document).ready(init);
+$(init);
 
 function init() {
+	
     // 綁定顯示登入模態框的按鈕點擊事件
     $('#loginTrigger').on('click', showLoginModal);
 
@@ -27,6 +29,7 @@ function init() {
 
     // 綁定註冊模態框的顯示/隱藏密碼功能
     $('#toggleSignupPwd').on('click', handleToggleSignupPwdClick);
+	
 }
 
 // 顯示登入模態框
@@ -122,12 +125,12 @@ function togglePassword(passwordFieldSelector, toggleIconSelector) {
         // 顯示密碼
         passwordField.attr('type', 'text');
         // 更換為顯示密碼的圖示
-        toggleIcon.attr('src', 'images/eye_fill_icon.png');
+        toggleIcon.attr('src', '/fpapa/images/eye_fill_icon.png');
     } else {
         // 隱藏密碼
         passwordField.attr('type', 'password');
         // 更換為隱藏密碼的圖示
-        toggleIcon.attr('src', 'images/eye_slash_fill_icon.png');
+        toggleIcon.attr('src', '/fpapa/images/eye_slash_fill_icon.png');
     }
 }
 
@@ -135,10 +138,10 @@ function togglePassword(passwordFieldSelector, toggleIconSelector) {
 // 刷新驗證碼圖片的函數
 function refreshLoginCaptcha() {
     var captchaImg = document.getElementById("LoginCaptcha"); // 取得驗證碼圖片元素
-    captchaImg.src = "images/captcha.png?refresh=" + new Date().getTime(); // 重新設定圖片來源，加入時間戳避免快取
+    captchaImg.src = "/fpapa/images/captcha.png?refresh=" + new Date().getTime(); // 重新設定圖片來源，加入時間戳避免快取
 }
 
 function refreshSignupCaptcha() {
     var captchaImg = document.getElementById("SignupCaptcha"); // 取得驗證碼圖片元素
-    captchaImg.src = "images/captcha.png?refresh=" + new Date().getTime(); // 重新設定圖片來源，加入時間戳避免快取
+    captchaImg.src = "/fpapa/images/captcha.png?refresh=" + new Date().getTime(); // 重新設定圖片來源，加入時間戳避免快取
 }

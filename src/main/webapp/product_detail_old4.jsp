@@ -75,11 +75,11 @@
     			
     			
     			//TOTO 修改畫面中指定的位置 select 庫存
-    			//$("#can-buy-stock").text(stock);
+    			$("#can-buy-stock").text(stock);
     			$("input[name=quantity]").attr("max",  stock);
     			
     			$("#theUnitPrice").text(listPrice);
-    			$("#theSpecialOfferPrice").text(price);
+    			$("#theSpecialOffer").text(price);
     			
     		}
     		
@@ -197,12 +197,15 @@
 							總庫存: <span id="theStock"><%= p.getStock() %> </span>
 						</div>
 						
+						<div class="can-buy-stock">
+							可購買庫存:  <span id="can-buy-stock"> </span>
+						</div>
 						
 						<% if (p instanceof SpecialOffer){ %> 
 <%-- 						<div>售價: <span id="theUnitPrice"><%= ((SpecialOffer)p).getListPrice() %> </span>元</div> --%>
 						
 						<div class="u-price-st">
-							售價: <span id="theUnitPrice"><%= ((SpecialOffer)p).getListPrice() %></span>元
+							售價: <span id="theUnitPrice"><%= p.getUnitPrice() %></span> 元
 						</div>
 						
 						<div class="discount-string">
@@ -210,7 +213,7 @@
 						</div>
 												
 						<div class="s-o-price">
-							優惠售價: <span id="theSpecialOfferPrice"><%= ((SpecialOffer)p).getUnitPrice() %></span>元
+							優惠售價: <span id="theSpecialOfferPrice"><%= ((SpecialOffer)p).getUnitPrice() %> </span>元
 						</div>
 							
 						
@@ -241,21 +244,30 @@
 													data-photo-src="<%= spec.getPhotoUrl() %>" 
 													data-release-data="<%=spec.getReleaseDate() %>" 
 													data-stock="<%=spec.getStock() %>" >
+													
+													<%-- 
+													data-unit-price="<%=spec.getUnitPrice() %>"
+													data-special-offer-price="<%=spec.getUnitPrice() %>"
+													
+													data-special-offer=""
+													 --%>	
 										</label>
 										<% } %>							
 									</div>
 								<% } %>
 								
-								<!-- 是否有產品級別: -->
-								<% if(p.getSpecGradeCount()>0) {%>
-								
+								<!-- 是否有預計出貨日 -->
 								<div class="specGrade">
 									<label>產品級別:</label>
 									<select id="spec-grade" name="spec-grade" required="required">
-										
+										<!--  
+										<option data-stock="5">2024-09-30</option>
+										<option data-stock="8">2024-10-15</option>
+										<option data-stock="10">2024-10-25</option>
+										-->
 									</select>
 								</div>
-								<% }%>
+								
 								
 								<div>
 									<label>數量:</label>
@@ -292,15 +304,7 @@
 				  <p>注意事項的內容</p>
 				</div>
 				
-				
-				<script>
-					<% if(p.getSpecList().size() == 0 && p.getSpecGradeCount()>0){%>
-							//alert("應帶入規格資料");
-							ajaxGetSpecGradeOption("");
-					<% }%>
-				</script>
-				
-		<% } %>
+				<% } %>
 			
 		</div>
 		

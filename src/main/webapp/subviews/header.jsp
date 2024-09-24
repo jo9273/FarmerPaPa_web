@@ -1,23 +1,44 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="jojo.farmerpapa.entity.Customer"%>
 <%@page import="java.util.List"%>
 <%@page pageEncoding="UTF-8"%>
 
 <!-- header start -->
 		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="js/loginActions.js"></script>
-				
+		<script type="text/javascript" src="/fpapa/js/loginActions.js"></script>
+		<script>
+			$(init);
+			
+			function init(){
+								
+				<% if(request.getMethod().equals("POST")){ %>
+				repopulateFormData();
+	
+			<%} %>
+			}
+			
+			function repopulateFormData(){
+				$("input[name=email]").val('<%=request.getParameter("email")%>');
+				$("input[name=phone]").val('<%=request.getParameter("phone")%>');
+				$("input[name=name]").val('<%=request.getParameter("name")%>');
+				$("input[name=birthday]").val('<%=request.getParameter("birthday")%>');
+				$("input[name=gender][value=<%=request.getParameter("gender")%>]").prop('checked', 'true');
+				$("textarea[name=address]").text('<%=request.getParameter("address")%>');
+				$("input[name=subscribed]").prop('checked', <%=request.getParameter("subscribed")!=null%>);
+			}
+		</script>
 		
 		<header>
 			<div class="headerContent">
 				
 				<div class="menu">
-					<a href="product_list.jsp">買果物</a>	<!-- ? 意思是產品列表預設為查詢全部產品或直接寫product_list.jsp -->
-					<a href="news_list.jsp">最新情報</a>
+					<a href="<%= request.getContextPath()%>/product_list.jsp">買果物</a>	<!-- ? 意思是產品列表預設為查詢全部產品或直接寫product_list.jsp -->
+					<a href="<%= request.getContextPath()%>/news_list.jsp">最新情報</a>
 					<a href="">常見問題</a>
 				</div>
 				
 				<div class="logo">
-					<h2><a href="./">FarmerPaPa </a>
+					<h2><a href="<%= request.getContextPath()%>">FarmerPaPa </a>
 						<%-- <sub><%= request.getParameter("subheader") == null ? "果物市集" : request.getParameter("subheader") %></sub> --%>
 					</h2> 
 				</div>
@@ -31,7 +52,7 @@
 					        %>
 							<% if(member == null){ %>
 							<span>會員登入/註冊</span>
-							<img alt="會員登入/註冊" src="images/user_circle_icon.png">
+							<img alt="會員登入/註冊" src="/fpapa/images/user_circle_icon.png">
 								<!--  <a href="/fpapa/register.jsp">會員註冊</a> -->
 						</div>
 								
@@ -51,14 +72,14 @@
 											<label>密碼：</label>
 											<input id="loginPassword" type="password" name="password" required placeholder="請輸入密碼" minlength="2" maxlength="20">
 												
-											<img id="toggleLoginPwd" src="images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
+											<img id="toggleLoginPwd" src="/fpapa/images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
 												
 										</div>
 												
 										<div class="form-detail">
 											<label>驗證碼：</label>
 											<input type="text" name="captcha" required placeholder="請輸入驗證碼">
-											<img id="LoginCaptcha" src="images/captcha.png" onclick="refreshLoginCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
+											<img id="LoginCaptcha" src="/fpapa/images/captcha.png" onclick="refreshLoginCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
 										</div>
 										<!--  <input type="submit" value="送出"> -->
 												
@@ -95,7 +116,7 @@
 											<label>密碼：</label>
 											<input id="signupPassword" type="password" name="password" required placeholder="請輸入密碼" minlength="2" maxlength="20">
 												
-											<img id="toggleSignupPwd" src="images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
+											<img id="toggleSignupPwd" src="/fpapa/images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
 										</div>
 											
 										<div class="form-detail">
@@ -110,16 +131,16 @@
 											
 										<div class="form-detail">
 											<label>生日：</label>
-			                				<input type="date" name="birthday" required max="2012-09-19">
+			                				<input type="date" name="birthday" required max="<%= LocalDate.now().plusYears(-Customer.MIN_AGE)%>">
 										</div>
 										
 										<div class="form-detail">
 											<label>性別：</label>
-							                <input id="theRadio" type="radio" name="gender" required value="M">
+							                <input id="theRadio" type="radio" name="gender" required value="<%= Customer.MALE%>">
 							                <span>男</span>
-							                <input id="theRadio" type="radio" name="gender" required value="F">
+							                <input id="theRadio" type="radio" name="gender" required value="<%= Customer.FEMALE%>">
 							                <span>女</span>
-							                <input id="theRadio" type="radio" name="gender" required value="O">
+							                <input id="theRadio" type="radio" name="gender" required value="<%= Customer.OTHERS%>">
 							                <span>不願透漏</span>
 										</div>
 										
@@ -131,7 +152,7 @@
 										<div class="form-detail">
 											<label>驗證碼：</label>
 											<input type="text" name="captcha" required placeholder="請輸入驗證碼">
-											<img id="SignupCaptcha" src="images/captcha.png" onclick="refreshSignupCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
+											<img id="SignupCaptcha" src="/fpapa/images/captcha.png" onclick="refreshSignupCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
 										</div>
 											<!--  <input type="submit" value="送出"> -->
 											
@@ -141,7 +162,7 @@
 										</div>
 												
 										<% 
-											List<String> signupErrors = (List<String>)request.getAttribute("errors"); 
+											List<String> signupErrors = (List<String>)request.getAttribute("signupErrors"); 
 										%>
 										<div id="theErrorsDiv">
 											<%= signupErrors != null ? errors : "" %>
@@ -159,8 +180,11 @@
 								
 								
 						<% 	}else{ %>
+						<div class="memberArea">  <!-- TODO -->
 							<a href="#">會員專區</a>
-							<a href="/fpapa/logout.do">登出</a>
+							<a href="<%= request.getContextPath()%>/logout.do">登出</a>
+							<img alt="會員專區/登出" src="/fpapa/images/user_circle_icon.png">
+						</div>
 						<% } %>
 							
 						<%-- <span class="welcomSpan"> <%= member != null ? member.getName() : "" %> 你好!</span> --%>
@@ -169,22 +193,22 @@
 					<a class="cart-a" href="">
 						<div class="cart">
 							<span>(0)</span>
-							<img alt="購物車" src="images/cart_icon.png">
+							<img alt="購物車" src="/fpapa/images/cart_icon.png">
 						</div>
 					</a>
 				</div>	
 					
 				<div class="searchContainer">
-					<form class="searchForm" action="product_list.jsp" method="GET">
+					<form class="searchForm" action="<%= request.getContextPath()%>/product_list.jsp" method="GET">
 							
 							<input class="keyword" type="search" name="keyword" required placeholder="請輸入關鍵字">
 																
 							<button type="submit" >
-								<img class="subSearch" src="images/search_icon.png" alt="Submit">
+								<img class="subSearch" src="/fpapa/images/search_icon.png" alt="Submit">
 							</button>
 							
 							
-							<!-- <input class="subSearch" type="image" src="images/search_icon.png" alt="Submit">
+							<!-- <input class="subSearch" type="image" src="/fpapa/images/search_icon.png" alt="Submit">
 						 	-->
 					</form>
 				</div>	
