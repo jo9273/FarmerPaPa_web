@@ -17,19 +17,19 @@
 	        $(init);
 			
 			function init(){
-								
-				<% if(request.getMethod().equals("POST")){ %>
-
-				//修改失敗要呼叫repopulateFormData
-				repopulateFormData();
 				
 				// 綁定OldPwd顯示/隱藏密碼功能
 			    $('#toggleOldPwd').on('click', ToggleOldPwdClick);
 
 			    // 綁定NewPwd顯示/隱藏密碼功能
 			    $('#toggleNewPwd').on('click', ToggleNewPwdClick);
-				
-				
+			    
+			    
+				<% if(request.getMethod().equals("POST")){ %>
+
+				//修改失敗要呼叫repopulateFormData
+				repopulateFormData();
+		
 			}
 			
 			function repopulateFormData(){

@@ -26,7 +26,7 @@
 				<div class="kv">
 					<!--  <img id="indexKV" alt="banner" src="images/pic-1.jpg" > -->
 					<video id="indexKV" autoplay loop muted>
-    					<source src="images/index-1.mp4" type="video/mp4" >
+    					<source src="/fpapa/images/index-1.mp4" type="video/mp4" >
     				</video>    
 					
 					<h1>小農真心．果然新鮮</h1>
