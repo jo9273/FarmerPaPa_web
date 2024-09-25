@@ -45,24 +45,41 @@
 				
 				<div class=headerActions>
 					<div class="login-cart">
-						<div id="loginTrigger" class="login">
+						<div class="login">
 							<% request.setCharacterEncoding("utf-8"); %>
 							<% 
 					           Customer member = (Customer)session.getAttribute("memberLogin");	
 					        %>
 							<% if(member == null){ %>
-							<span>會員登入/註冊</span>
-							<img alt="會員登入/註冊" src="/fpapa/images/user_circle_icon.png">
-								<!--  <a href="/fpapa/register.jsp">會員註冊</a> -->
+							
+							<span id="loginTrigger">
+								會員登入/註冊
+								<img alt="會員登入/註冊" src="/fpapa/images/user_circle_icon.png">
+									<!--  <a href="/fpapa/register.jsp">會員註冊</a> -->	
+							</span>
+							
+						<% 	}else{ %>
+						  	
+						  
+							<!--<span>會員專區/登出</span> -->
+							
+							<a href="#">會員專區</a>
+							<a href="<%= request.getContextPath()%>/logout.do">登出</a>
+							
+							<img alt="會員專區/登出" src="/fpapa/images/user_circle_icon.png">
+							
+						<% } %>
+							
+						<%-- <span class="welcomSpan"> <%= member != null ? member.getName() : "" %> 你好!</span> --%>					
 						</div>
-								
+			
 						<div id="loginModal" class="modal">
 							<div class="modal-content">
 								<span id="closeLogin" class="close">&times;</span>
 	        					<h1>會員登入</h1>
 										
 								<div class="formContent">
-									<form action="login.do" method="post">
+									<form action="<%= request.getContextPath()%>/login.do" method="post">
 										<div class="form-detail">
 											<label>帳號：</label>
 											<input type="email" name="email" required placeholder="請輸入email">
@@ -70,7 +87,7 @@
 												
 										<div class="form-detail">
 											<label>密碼：</label>
-											<input id="loginPassword" type="password" name="password" required placeholder="請輸入密碼" minlength="2" maxlength="20">
+											<input id="loginPassword" type="password" name="password" required placeholder="請輸入密碼" minlength="6" maxlength="20">
 												
 											<img id="toggleLoginPwd" src="/fpapa/images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
 												
@@ -106,7 +123,7 @@
 	        					<h1>會員註冊</h1>
 										
 								<div class="formContent">
-									<form action="register.do" method="post">
+									<form action="<%= request.getContextPath()%>/register.do" method="post">
 										<div class="form-detail">
 											<label>帳號：</label>
 											<input type="email" name="email" required placeholder="請輸入email">
@@ -114,7 +131,7 @@
 												
 										<div class="form-detail">
 											<label>密碼：</label>
-											<input id="signupPassword" type="password" name="password" required placeholder="請輸入密碼" minlength="2" maxlength="20">
+											<input id="signupPassword" type="password" name="password" required placeholder="請輸入密碼6~20字" minlength="6" maxlength="20">
 												
 											<img id="toggleSignupPwd" src="/fpapa/images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
 										</div>
@@ -177,26 +194,15 @@
 								</div>		
 							</div>
 						</div>
-								
-								
-						<% 	}else{ %>
-						<div class="memberArea">  <!-- TODO -->
-							<a href="#">會員專區</a>
-							<a href="<%= request.getContextPath()%>/logout.do">登出</a>
-							<img alt="會員專區/登出" src="/fpapa/images/user_circle_icon.png">
-						</div>
-						<% } %>
-							
-						<%-- <span class="welcomSpan"> <%= member != null ? member.getName() : "" %> 你好!</span> --%>
-						
 					
-					<a class="cart-a" href="">
-						<div class="cart">
-							<span>(0)</span>
-							<img alt="購物車" src="/fpapa/images/cart_icon.png">
-						</div>
-					</a>
-				</div>	
+	
+						<a class="cart-a" href="">
+							<div class="cart">
+								<span>(0)</span>
+								<img alt="購物車" src="/fpapa/images/cart_icon.png">
+							</div>
+						</a>
+					</div>	
 					
 				<div class="searchContainer">
 					<form class="searchForm" action="<%= request.getContextPath()%>/product_list.jsp" method="GET">

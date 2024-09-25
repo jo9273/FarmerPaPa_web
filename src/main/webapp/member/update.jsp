@@ -19,14 +19,22 @@
 			function init(){
 								
 				<% if(request.getMethod().equals("POST")){ %>
+
 				//修改失敗要呼叫repopulateFormData
 				repopulateFormData();
-				}
-			
+				
+				// 綁定OldPwd顯示/隱藏密碼功能
+			    $('#toggleOldPwd').on('click', ToggleOldPwdClick);
+
+			    // 綁定NewPwd顯示/隱藏密碼功能
+			    $('#toggleNewPwd').on('click', ToggleNewPwdClick);
+				
+				
 			}
 			
 			function repopulateFormData(){
 				$("input[name=email]").val('<%=request.getParameter("email")%>');
+				$("input[name=password]").val('<%=request.getParameter("password")%>');
 				$("input[name=phone]").val('<%=request.getParameter("phone")%>');
 				$("input[name=name]").val('<%=request.getParameter("name")%>');
 				$("input[name=birthday]").val('<%=request.getParameter("birthday")%>');
@@ -37,7 +45,8 @@
 			<%}else{ %>
 
 				//進入修改時帶入會員資料
-				$("input[name=email]").val('${sessionScope.memberLogin.getId()}');
+				$("input[name=email]").val('${sessionScope.memberLogin.getEmail()}');
+				$("input[name=password]").val('${sessionScope.memberLogin.getPassword()}');
 				$("input[name=phone]").val('${sessionScope.memberLogin.getPhone()}');
 				$("input[name=name]").val('${sessionScope.memberLogin.getName()}');
 				$("input[name=birthday]").val('${sessionScope.memberLogin.getBirthday()}');
@@ -47,21 +56,17 @@
 					
 			<%} %>
 			}
-        
-            function refreshCaptcha(){
-                //alert("refreshCaptcha");
-                var captchaImg = document.getElementById("captchaImg");
-                captchaImg.src = "images/captcha.png?refresh=" + new Date();
-            }
+			
+			// 處理舊密碼顯示/隱藏密碼功能
+			function ToggleOldPwdClick() {
+			    togglePassword('#oldPassword', '#toggleOldPwd');
+			}
 
-            function displayPwd(){
-                //alert(theCheckbox.checked);
-                if(theCheckbox.checked){
-                    thePassword.type = "text";
-				}else{
-					thePassword.type = "password";
-				}
-            }
+			// 處理新密碼的顯示/隱藏密碼功能
+			function ToggleNewPwdClick() {
+			    togglePassword('#newPassword', '#toggleNewPwd');
+			}
+
 
         </script>
         
@@ -77,78 +82,84 @@
 		<%@include file="../subviews/header.jsp" %>
 		
 		<% 
-			List<String> signupErrors = (List<String>)request.getAttribute("signupErrors"); 
+			List<String> updateErrors = (List<String>)request.getAttribute("updateErrors"); 
 		%>
 		<div id="theErrorsDiv">
 			<%
-				out.println(signupErrors != null ? signupErrors : "");
+				out.println(updateErrors != null ? updateErrors : "");
 			%>
 		
 		</div>
 		<div class="pageContent">
 			<div class="formContent">	
-				<article>
-					<h1>會員註冊</h1>
-					<div class="theForm">
-						<form action="register.do" method="post">
-							<p>
+					<h1>修改會員資料</h1>
+					
+					<div class="formContent">
+						<form action="<%= request.getContextPath()%>/member/update.do" method="post">
+							<div class="form-detail">
 								<label>帳號：</label>
 								<input type="email" name="email" disabled readonly placeholder="請輸入email">
-							</p>
+							</div>
 							
-							<p>
-								<label>原密碼：</label>
-								<input id="thePassword" type="password" name="password" required placeholder="請輸入密碼6~20字" minlength="6" maxlength="20">
-								<input id="theCheckbox" type="checkbox" onchange="displayPwd()"><label>顯示密碼</label>
-							</p>
 							
 							<fieldset>
 								<legend><input type="checkbox" name="changePwd">要修改密碼</legend>
-								<label>新密碼：</label>
-								<input id="newPwd" type="password" name="newPwd" disabled placeholder="請輸入新密碼6~20字" minlength="6" maxlength="20">
-								<input id="newPwdCheckbox" type="checkbox" onchange="displayPwd()"><label>顯示密碼</label>
+								
+								<div class="form-detail">
+									<label>舊密碼：</label>
+									<input id="oldPassword" type="password" name="password"  placeholder="請輸入密碼6~20字" minlength="6" maxlength="20">
+									<img id="toggleOldPwd" src="/fpapa/images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
+								</div>
+								<div class="form-detail">
+									<label>新密碼：</label>
+									<input id="newPassword" type="password" name="newPassword" placeholder="請輸入新密碼6~20字" minlength="6" maxlength="20">
+									<img id="toggleNewPwd" src="/fpapa/images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
+								</div>
 							</fieldset>
-				            <p>
+							
+				            <div class="form-detail">
 								<label>手機號碼：</label>
 								<input type="tel" name="phone" required placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}">
-							</p>
+							</div>
 				
-				            <p>
-				                <label>姓名</label>
+				            <div class="form-detail">
+				                <label>姓名：</label>
 				                <input type="text" name="name" required placeholder="請輸入姓名2~20字" minlength="2" maxlength="20">
-				            </p>
+				            </div>
 				
-				            <p>
-				                <label>生日</label>
-				                <input type="date" name="birthday" required max="2012-09-19">
-				            </p>
+				            <div class="form-detail">
+				                <label>生日：</label>
+				                <input type="date" name="birthday" disabled max="<%= LocalDate.now().plusYears(-Customer.MIN_AGE)%>">
+				            </div>
 				
-				            <p>
-				                <label>性別</label>
-				                <input id="theRadio" type="radio" name="gender" required value="M"><label>男</label>
-				                <input id="theRadio" type="radio" name="gender" required value="F"><label>女</label>
-				                <input id="theRadio" type="radio" name="gender" required value="O"><label>不願透漏</label>
-				               
-				            
-				            </p>
-				
-				            <p>
-				                <label>地址</label>
+				            <div class="form-detail">
+				                <label>性別：</label>
+				                <input id="theRadio" type="radio" name="gender" required value="<%= Customer.MALE%>">
+							    <span>男</span>
+							    <input id="theRadio" type="radio" name="gender" required value="<%= Customer.FEMALE%>">
+							    <span>女</span>
+							    <input id="theRadio" type="radio" name="gender" required value="<%= Customer.OTHERS%>">
+							    <span>不願透漏</span>
+							</div>	
+							
+				            <div class="form-detail">
+				                <label>地址：</label>
 				                <textarea name="address" placeholder="請輸入地址(選填)" rows="2" cols="30"></textarea>
-				            </p>
+				            </div>
 				
-				            <p>
-				                <input id="theCheckbox" type="checkbox" name="subscribed"><label>我願意訂閱電子報</label>
-				            </p>
+				            <div class="check-subscribed">
+				                <input id="theCheckbox" type="checkbox" name="subscribed">
+								<span>我願意訂閱電子報</span>
+				            </div>
 				
 							<!-- <input type="submit" value="送出">  -->
 							<button type="submit">送出</button>
 						
 						</form>
 					</div>
-				</article>
 			</div>
-		</div>	
+		</div>
+			
 		<%@include file="../subviews/footer.jsp" %>
 	</body>
 </html>

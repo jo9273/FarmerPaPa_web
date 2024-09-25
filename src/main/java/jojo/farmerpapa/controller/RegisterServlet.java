@@ -119,7 +119,7 @@ public class RegisterServlet extends HttpServlet {
 						
 		}
 		
-		//3.2 內部轉交(forward)登入失敗 login.jsp
+		//3.2 內部轉交(forward)註冊失敗 login.jsp
 		
 		// 將物件傳給jsp
 		request.setAttribute("errors", signupErrors);

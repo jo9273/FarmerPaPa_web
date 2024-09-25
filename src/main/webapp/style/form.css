@@ -9,6 +9,10 @@
 	justify-content: center;
 }
 
+.formContent h1{
+	text-align: center;
+}
+
 
 .formContent button{
 	background: #476730;
@@ -21,6 +25,13 @@
 	display: block; /* 讓按鈕變為塊級元素 */
     margin: 25px auto 0px auto; /* 水平置中 */
 }
+
+.formContent fieldset{
+	width: 400px;
+	margin: 15px 0px;
+	padding: 15px 0px;
+}
+
 
 
 .form-detail{
@@ -48,7 +59,8 @@
 	margin-right: 10px;
 }
 
-#toggleLoginPwd, #toggleSignupPwd{
+
+#toggleLoginPwd, #toggleSignupPwd, #toggleOldPwd, #toggleNewPwd{
 	width: 30px;
 }
 

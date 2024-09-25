@@ -56,6 +56,7 @@ header{
 	margin-bottom: 10px;
 }
 
+
 .login{
 	color:#E3E3DC;
 	text-decoration: none;
@@ -65,9 +66,23 @@ header{
 	align-items: center;
 }
 
+
 .login img{
 	width: 30px;
 }
+
+
+.login a{
+	text-decoration: none;
+	color:#E3E3DC;
+	margin-left: 10px;
+}
+
+#loginTrigger{
+	display: flex;
+  	align-items: center;
+}
+
 
 /* Lightbox 背景 */
 .modal {
