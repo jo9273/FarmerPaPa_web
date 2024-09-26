@@ -42,6 +42,9 @@ public class UpdateCustomerServlet extends HttpServlet {
 		// 取得client request 的 session
 		HttpSession session = request.getSession();
 		
+		
+		Customer member = (Customer)session.getAttribute("member");
+		
 		// 1. 讀取request的form data:
 		
 		String password = request.getParameter("password");
@@ -76,7 +79,7 @@ public class UpdateCustomerServlet extends HttpServlet {
 				
 				// 3.1 內部轉交(forward)修改成功 uptade.jsp
 				// 將物件傳給jsp
-				request.setAttribute("update", c);
+				request.setAttribute("member", c);
 					
 				// 派遣器把控制權轉交給前端畫面(相對路徑)
 				

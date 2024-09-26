@@ -30,7 +30,7 @@
     			//$("input[name=spec]:first").attr("checked", true);
     			
     			$(".iconImg:first").trigger("click");
-    			$("#spec-grade").val($("#spec-grade option:first").val()).trigger("change");
+    			//$("#spec-grade").val($("#spec-grade option:first").val()).trigger("change");
     			
     			// 預設打開第一個頁籤
     			$(".tab-button").on("click", tabClickHandler);
@@ -226,7 +226,7 @@
 						
 						
 						<div>
-							<form>
+							<form action="member/cart.jsp">
 								<input type="hidden" name="productId" value="<%= p.getId()%>">
 								
 								<% if(p.getSpecList() != null && p.getSpecList().size()>0){%>
@@ -252,6 +252,7 @@
 								<div class="specGrade">
 									<label>產品級別:</label>
 									<select id="spec-grade" name="spec-grade" required="required">
+									<option value="">請先選擇規格</option>
 										
 									</select>
 								</div>

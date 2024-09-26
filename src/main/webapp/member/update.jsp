@@ -7,10 +7,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>FarmerPaPa 修改會員</title>
 		
-		<link rel="stylesheet" type="text/css" href="../style/header.css">
-		<link rel="stylesheet" type="text/css" href="../style/fpapa.css">
-		<link rel="stylesheet" type="text/css" href="../style/form.css">
-		<link rel="stylesheet" type="text/css" href="../style/footer.css">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/header.css">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/fpapa.css">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/form.css">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/footer.css">
 		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
         
         <script>
