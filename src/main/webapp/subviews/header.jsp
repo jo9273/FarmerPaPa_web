@@ -101,10 +101,10 @@
 										<!--  <input type="submit" value="送出"> -->
 												
 										<% 
-											List<String> errors = (List<String>)request.getAttribute("errors"); 
+											List<String> loginErrors = (List<String>)request.getAttribute("loginErrors"); 
 										%>
 										<div id="theErrorsDiv">
-											<%= errors != null ? errors : "" %>
+											<%= loginErrors != null ? loginErrors : "" %>
 										</div>
 												
 										<button type="submit">送出</button>
@@ -182,7 +182,7 @@
 											List<String> signupErrors = (List<String>)request.getAttribute("signupErrors"); 
 										%>
 										<div id="theErrorsDiv">
-											<%= signupErrors != null ? errors : "" %>
+											<%= signupErrors != null ? signupErrors : "" %>
 										</div>
 												
 										<button type="submit">送出</button>

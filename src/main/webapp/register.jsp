@@ -41,13 +41,13 @@
 		
 		<%@include file="./subviews/header.jsp" %>
 		
-		<% 
+		<%-- 
 			List<String> errors = (List<String>)request.getAttribute("errors"); 
-		%>
+		--%>
 		<div id="theErrorsDiv">
-			<%
+			<%--
 				out.println(errors != null ? errors : "");
-			%>
+			--%>
 		
 		</div>
 		<div class="pageContent">
