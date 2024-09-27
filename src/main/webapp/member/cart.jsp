@@ -90,55 +90,71 @@
 			
 			<% }else{ %>
 			
-			<table class="cartDetails">
-				<caption>購物明細</caption>
-				<thead>
-					<tr class="table-header">
-						<td>產品編號</td>
-						<td>產品名稱/規格/等級</td>
-						<td>售價/折扣/優惠售價</td>
-						<td>數量</td>
-						<td>小計</td>
-						<td>刪除</td>
-					</tr>
-				</thead>
-				<tbody>
-				
-					<%
-						Set<CartItem> itemSet = cart.getCartItemsSet();
-						for(CartItem item:itemSet){	
-					%>
+			<form action="<%= request.getContextPath()%>/member/update_cart.do" method="POST">
+				<table class="cartDetails">
+					<caption>購物明細</caption>
+					<thead>
+						<tr class="table-header">
+							<td>產品編號</td>
+							<td>產品名稱/規格/等級</td>
+							<td>售價/折扣/優惠售價</td>
+							<td>數量</td>
+							<td>小計</td>
+							<td>刪除</td>
+						</tr>
+					</thead>
+					<tbody>
 					
-					<tr class="table-detail">
-						<td><%= item.getProductId() %></td>
-						<td class="order-products">
-							<img src="<%= item.getPhotoUrl() %>">
-							<span>產品名稱:<%= item.getProductName() %></span>
-							<span>規格:<%= item.getSpecName() %></span>
-							<span>等級:<%= item.getSpecGrade() %></span>
-						</td>
-						<td class="order-price">
-							<span>售價:<%= item.getListPrice() %></span>
-							<span>折扣:<%= item.getDiscountString() %></span>
-							<span>優惠售價: <%= item.getPrice() %>元</span>
-						</td>
-						<td><%= cart.getQuantity(item) %></td>
-						<td><%= cart.getAmount(item) %></td>
-						<td>不刪除</td>
-					</tr>
-					
-					<% } %>
-					
-				</tbody>
-				<tfoot>
-					<tr class="table-count">
-						<td>品項數量:<%= cart.size() %>項</td>
-						<td>品項件數:<%= cart.getTotalQuantity() %>件</td>
-						<td>商品總金額:<%= cart.getTotalAmount() %>元</td>
-					</tr>
-				</tfoot>
-			</table>
-			
+						<%
+							Set<CartItem> itemSet = cart.getCartItemsSet();
+							for(CartItem item:itemSet){	
+						%>
+						
+						<tr class="table-detail">
+							<td><%= item.getProductId() %></td>
+							<td class="order-products">
+								<img src="<%= item.getPhotoUrl() %>">
+								<span>產品名稱:<%= item.getProductName() %></span>
+								<span>規格:<%= item.getSpecName() %></span>
+								<span>等級:<%= item.getSpecGrade() %></span>
+								<span>庫存:<%= item.getStock() %> </span>
+							</td>
+							<td class="order-price">
+								<span>售價:<%= item.getListPrice() %></span>
+								<span>折扣:<%= item.getDiscountString() %></span>
+								<span>優惠售價: <%= item.getPrice() %>元</span>
+							</td>
+							
+							<td>
+								<input type="number" name="quantity<%=item.hashCode()%>" 
+									max="<%= item.getStock()%>" 
+									value="<%= cart.getQuantity(item) %>" required>
+							</td>
+							
+							<td><%= cart.getAmount(item) %></td>
+							<td><input type="checkbox" name="delete<%=item.hashCode()%>"></td>
+						</tr>
+						
+						<% } %>
+						
+					</tbody>
+					<tfoot>
+						<tr class="table-count">
+							<td>品項數量:<%= cart.size() %>項</td>
+							<td>品項件數:<%= cart.getTotalQuantity() %>件</td>
+							<td>商品總金額:<%= cart.getTotalAmount() %>元</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<input type="submit" value="修改購物車">
+							</td>
+							<td colspan="2">
+								<input type="button" value="我要結帳" onclick="location.href='check_out.jsp';">
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
 			<% } %>
 		
 		
