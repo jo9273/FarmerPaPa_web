@@ -226,7 +226,7 @@
 						
 						
 						<div>
-							<form action="member/cart.jsp">
+							<form action="add_to_cart.do" method="POST">
 								<input type="hidden" name="productId" value="<%= p.getId()%>">
 								
 								<% if(p.getSpecList() != null && p.getSpecList().size()>0){%>

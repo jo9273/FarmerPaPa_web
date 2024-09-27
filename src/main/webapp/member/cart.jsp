@@ -1,3 +1,6 @@
+<%@page import="java.util.Set"%>
+<%@page import="jojo.farmerpapa.entity.ShoppingCart"%>
+<%@page import="jojo.farmerpapa.entity.CartItem"%>
 <%@page import="java.util.List"%>
 <%@page pageEncoding="UTF-8"%>
 
@@ -75,6 +78,18 @@
 		<%@include file="../subviews/header.jsp" %>
 		<div class="pageContent">
 			
+			<%-- <p> ${sessionScope.cart} </p> --%>
+			
+			<%
+				//"cart" 名稱要對應到servlet的setAttribute "cart"
+				ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");  
+				if(cart == null || cart.isEmpty()){
+			%>
+			
+			<h2>購物車是空的</h2>
+			
+			<% }else{ %>
+			
 			<table class="cartDetails">
 				<caption>購物明細</caption>
 				<thead>
@@ -88,33 +103,43 @@
 					</tr>
 				</thead>
 				<tbody>
+				
+					<%
+						Set<CartItem> itemSet = cart.getCartItemsSet();
+						for(CartItem item:itemSet){	
+					%>
+					
 					<tr class="table-detail">
-						<td>1</td>
+						<td><%= item.getProductId() %></td>
 						<td class="order-products">
-							<img src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2Fproduct%2Fcover%403x-%E3%80%90%E9%99%90%E9%87%8F%E9%A0%90%E8%B3%BC%E3%80%91%E5%B1%B1%E6%A2%A8%E7%94%B2%E6%96%90%E7%8F%8D%E7%8F%A0%E9%BA%9D%E9%A6%99%E6%A1%90%E6%9C%A8%E5%96%AE%E6%88%BF%E7%A6%AE%E7%9B%92%28%E7%B4%84600g%E9%87%8D%29-ldTfTa6B7w172233095177012.jpg?alt=media">
-							<span>產品名稱:【限量預購】山梨甲斐珍珠麝香桐木禮盒</span>
-							<span>規格:單房禮盒</span>
-							<span>等級:特秀</span>
+							<img src="<%= item.getPhotoUrl() %>">
+							<span>產品名稱:<%= item.getProductName() %></span>
+							<span>規格:<%= item.getSpecName() %></span>
+							<span>等級:<%= item.getSpecGrade() %></span>
 						</td>
 						<td class="order-price">
-							<span>售價:4299元</span>
-							<span>折扣:79折</span>
-							<span>優惠售價: 3396.21元</span>
+							<span>售價:<%= item.getListPrice() %></span>
+							<span>折扣:<%= item.getDiscountString() %></span>
+							<span>優惠售價: <%= item.getPrice() %>元</span>
 						</td>
-						<td>3</td>
-						<td>10188.63</td>
+						<td><%= cart.getQuantity(item) %></td>
+						<td><%= cart.getAmount(item) %></td>
 						<td>不刪除</td>
 					</tr>
+					
+					<% } %>
+					
 				</tbody>
 				<tfoot>
 					<tr class="table-count">
-						<td>購買數量:3件</td>
-						<td>商品總金額:10,189元</td>
+						<td>品項數量:<%= cart.size() %>項</td>
+						<td>品項件數:<%= cart.getTotalQuantity() %>件</td>
+						<td>商品總金額:<%= cart.getTotalAmount() %>元</td>
 					</tr>
 				</tfoot>
 			</table>
 			
-			
+			<% } %>
 		
 		
 		</div>
