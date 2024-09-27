@@ -16,8 +16,9 @@ footer{
 	
 }
 
-.footerInfo {
+.footerInfo a{
     margin-bottom: 20px;
+    line-height: 10px;
 }
 
 .info {

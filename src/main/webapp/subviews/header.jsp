@@ -196,7 +196,7 @@
 						</div>
 					
 	
-						<a class="cart-a" href="">
+						<a class="cart-a" href="<%= request.getContextPath()%>/member/cart.jsp">
 							<div class="cart">
 								<span>(0)</span>
 								<img alt="購物車" src="/fpapa/images/cart_icon.png">
