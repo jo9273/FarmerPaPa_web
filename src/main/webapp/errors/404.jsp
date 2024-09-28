@@ -12,18 +12,19 @@
     	<script></script>
     		        
     	<style>
-    		.notFound{
-    			width: 100%;
-    			text-align: center;
-    			
+    		.notFound-content{
+    			width: 80%;
+				margin: 50px auto;
     		}
-    		
-    		.notFound h2{
-    			
+    	
+    		.notFound{
+    			text-align: center;
+				margin: auto;
+				width: 400px;
     		}
     		
     		.notFound img{
-    			width: 360px;
+    			width: 100%;
     		}
     	</style>
 
@@ -36,14 +37,16 @@
 		</jsp:include>
 		
 		<div class="pageContent">
-			<div class="notFound">
-	<%-- <p>找不到檔案: <%= request.getAttribute("javax.servlet.error.request_uri") %> --%>
-				<h2>找不到網頁</h2>
-				<img src="/fpapa/images/404_icon.png">
-				
+			<div class="notFound-content">
+			
+				<div class="notFound">
+		<%-- <p>找不到檔案: <%= request.getAttribute("javax.servlet.error.request_uri") %> --%>
+					<h2>找不到網頁</h2>
+					<img src="../images/404.png">
+					
+				</div>
 			</div>
-		</div>
 		<%@include file="/subviews/footer.jsp" %>
-	
+		</div>
 	</body>
 </html>

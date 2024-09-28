@@ -1,0 +1,201 @@
+@charset "UTF-8";
+
+
+.cart-content{
+	width: 90%;
+	margin: 50px auto;
+}
+
+.cart-content h2{
+	text-align: center;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    list-style: none;    /* 移除 ul 的預設樣式 */
+    padding: 0;
+    margin: 20px 0;
+}
+
+/* 單個步驟樣式 */
+.steps .step,
+.steps .step-active {
+    text-align: center;
+    flex: 1;
+}
+
+/* 步驟數字的樣式 */
+.steps .step-index {
+    display: inline-block;
+    width: 30px;                      
+    height: 30px;                    
+    line-height: 30px;                
+    border-radius: 50%;                      
+    font-size: 1.2rem;
+    margin: 0 auto;
+}
+
+/* 當下進行步驟的樣式 */
+.steps .step-active .step-index {
+    background-color: #f04624;
+    color: #E3E3DC;
+}
+
+/* 非當下步驟的樣式 */
+.steps .step .step-index {
+    background-color: transparent;
+    border: 2px solid #f04624;
+    color: #f04624;
+}
+
+.steps .step-title {
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+
+/* 當螢幕較小時，將步驟垂直排列 
+@media (max-width: 768px) {
+    .steps {
+        flex-direction: column;
+    }
+
+    .steps .step,
+    .steps .step-active {
+        margin-bottom: 20px;
+    }
+}
+*/
+
+.cart-empty{
+	text-align: center;
+	margin: auto;
+	width: 400px;
+}
+
+.cart-empty img{
+	width: 100%;
+}
+
+.cart-empty a{
+	text-decoration: none;
+	background: #476730;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 120px;
+    color: #E3E3DC;
+	width: 200px;
+	display: block;
+    margin: 25px auto 0px auto;
+}
+
+.cartDetails {
+	border-collapse: collapse;
+	width: 85%;
+	margin: 50px auto;
+}
+
+.cartDetails td, .cartDetails th {
+	padding: 8px;
+}
+
+.cartDetails tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.cartDetails tr:hover {
+	background-color: #ddd;
+}
+
+.cartDetails caption {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: #0b4227;
+	color: #E3E3DC;
+}
+
+.table-header {
+	font-weight: bold;
+	text-align: center;
+	background-color: #e6dd9c;
+}
+
+.table-detail {
+	text-align: center;
+}
+
+
+
+.order-products, .order-price {
+	text-align: left;
+}
+
+.order-products span, .order-price span {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.order-products{
+	display:flex;
+	align-items: center;
+}
+
+.product-photo img {
+	width: 150px;
+	margin-right: 15px;
+}
+
+.product-info{
+}
+
+.product-id{
+	font-size: 12px;
+}
+
+.product-name{
+	color: #f04624;
+	font-size: 1.2vw;
+}
+
+.u-price-st{
+	font-size: 12px;
+	text-decoration: line-through;
+	text-decoration-color: #f04624; 
+	text-decoration-thickness: 2px;	
+}
+
+.qty{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* 控制按鈕和數量之間的間距 */
+    margin-bottom: 15px;
+}
+
+.qty-value {
+    font-size: 18px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.qty-minus, .qty-plus{
+	display: inline-flex;
+	background-color: #FFF0;
+	text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+.qty-minus img, .qty-plus img{
+	width: 22px;
+}
+
+.product-stock{
+	font-size: 12px;
+}
+
+
+

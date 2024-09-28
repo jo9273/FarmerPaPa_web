@@ -1,3 +1,4 @@
+<%@page import="jojo.farmerpapa.entity.SpecialOffer"%>
 <%@page import="java.util.Set"%>
 <%@page import="jojo.farmerpapa.entity.ShoppingCart"%>
 <%@page import="jojo.farmerpapa.entity.CartItem"%>
@@ -12,152 +13,206 @@
 				
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/header.css">
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/fpapa.css">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/cart.css">
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/footer.css">
 		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
     	
-    	<script></script>
-        
-    	<style>
-    	
-    		.cartDetails {
-    			border-collapse: collapse;
-    			width: 85%;margin: auto;
-			}
-			
-			
-			.cartDetails td, .cartDetails th {
-			 	border: 1px solid #ddd;
-			  	padding: 8px;
-			}
-			
-			.cartDetails tr:nth-child(even){
-				background-color: #f2f2f2;}
-			
-			.cartDetails tr:hover {
-				background-color: #ddd;}
-			
-			.cartDetails caption {
-			  	padding-top: 12px;
-			  	padding-bottom: 12px;		  
-			  	background-color: #04AA6D;
-			  	color: white;
-			}
-			
-			.table-header{
-				font-weight: bold;
-				text-align: center;
-				
-			}
-    		
-    		.table-detail{
-    			text-align: center;
-    		}
-    		
-    		.order-products, .order-price{
-    			text-align: left; 
-    		}
-    		
-    		.order-products img{
-    			width: 150px;
-    			float: left;
-    			margin-right: 15px;
-    		}
-    		
-    		.order-products span, .order-price span{
-    			display: block;
-    			margin-bottom: 5px;
-    		}
-    		
-    		    		
-    	
-    	</style>
+    	<script>
+	    	$(document).ready(init);
+	    	
+	    	function init() {
+	    		
+	    		 // 初始化頁面時檢查每個數量
+	    	    $(".qty-value").each(function() {
+	    	        var $qtyElement = $(this); // 獲取當前的數量元素
+	    	        var currentQty = parseInt($qtyElement.text()); // 當前的數量
+	    	        var $minusButton = $qtyElement.siblings(".qty-minus"); // 獲取減號按鈕
+	    	       
+	    	        // 如果當前數量為 1，禁用減號按鈕
+	    	        if (currentQty === 1) {
+	    	        	$minusButton.prop("disabled", true);
+	    	        }
+	    	    });
+	    		 
 
+	            $(".qty-minus").on("click", minusQtyHandler);
+	    	    $(".qty-plus").on("click", plusQtyHandler);
+	    	}
+	
+	    	function minusQtyHandler(e) {
+	    		e.preventDefault();
+	    	    var $qtyElement = $(this).siblings(".qty-value"); // 獲取數量顯示元素
+	    	    var currentQty = parseInt($qtyElement.text()); // 當下的數量
+	    	    var $inputElement = $(this).siblings("input[type=hidden]");
+	
+	    	    if (currentQty > 1) {
+	    	    	$qtyElement.text(currentQty - 1); // 減少數量
+	    	    	$inputElement.val(currentQty - 1); // 更新隱藏 input 的值
+
+	    	        if (currentQty - 1 === 1) {
+	    	            $(this).prop("disabled", true); // 當數量為 1，禁用減號按鈕
+	    	        }
+	    	    }
+	    	}
+	
+	    	function plusQtyHandler(e) {
+	    		e.preventDefault();
+	    	    var $qtyElement = $(this).siblings(".qty-value"); // 獲取數量顯示元素
+	    	    var currentQty = parseInt($qtyElement.text()); // 當前數量
+	    	    var maxQty = parseInt($qtyElement.data("max")); // 最大庫存數量
+	    	    var $inputElement = $(this).siblings("input[type=hidden]"); // 獲取隱藏的 input
+
+	    	    
+	    	    if (currentQty < maxQty) {
+	    	    	$qtyElement.text(currentQty + 1); // 如果數量小於最大庫存，增加數量
+	    	        $inputElement.val(currentQty + 1); // 更新隱藏 input 的值
+
+	    	    	// 當數量大於 1，啟用減號按鈕
+	    	        $(this).siblings(".qty-minus").prop("disabled", false);
+	    	    }
+	    	}
+
+    	
+    	</script>
+        
 	</head>
 	<body>
 	
 		<%@include file="../subviews/header.jsp" %>
 		<div class="pageContent">
+			<div class="cart-content">
+				<%-- <p> ${sessionScope.cart} </p> --%>
+				
+				<%
+					//"cart" 名稱要對應到servlet的setAttribute "cart"
+					ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");  
+					if(cart == null || cart.isEmpty()){
+				%>
 			
-			<%-- <p> ${sessionScope.cart} </p> --%>
-			
-			<%
-				//"cart" 名稱要對應到servlet的setAttribute "cart"
-				ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");  
-				if(cart == null || cart.isEmpty()){
-			%>
-			
-			<h2>購物車是空的</h2>
-			
-			<% }else{ %>
-			
-			<form action="<%= request.getContextPath()%>/member/update_cart.do" method="POST">
-				<table class="cartDetails">
-					<caption>購物明細</caption>
-					<thead>
-						<tr class="table-header">
-							<td>產品編號</td>
-							<td>產品名稱/規格/等級</td>
-							<td>售價/折扣/優惠售價</td>
-							<td>數量</td>
-							<td>小計</td>
-							<td>刪除</td>
-						</tr>
-					</thead>
-					<tbody>
+				<div class="cart-empty">
+					<h2>購物車空空的</h2>
+					<img alt="empty" src="../images/cart-empty.png">
+					<a class="empty-a" href="<%= request.getContextPath()%>/product_list.jsp">前往購物</a>
+				
+				</div>
+				<% }else{ %>
+				
+				<h2>購物車</h2>
+				
+				<ul class="steps">
+					<li class="step-active">
+						<span class="step-index">1</span>
+						<p class="step-title">確認購物車</p>
+					</li>
 					
-						<%
-							Set<CartItem> itemSet = cart.getCartItemsSet();
-							for(CartItem item:itemSet){	
-						%>
+					<li class="step">
+						<span class="step-index">2</span>
+						<p class="step-title">填寫收件資料</p>
+					</li>
+					
+					<li class="step">
+						<span class="step-index">3</span>
+						<p class="step-title">確認付款方式</p>
+					</li>
+					
+					<li class="step">
+						<span class="step-index">4</span>
+						<p class="step-title">購買完成</p>
+					</li>
+					
+					
+				</ul>
+
+				<form action="<%= request.getContextPath()%>/member/update_cart.do" method="POST">
+					<table class="cartDetails">
+						<caption>購物明細</caption>
+						<thead>
+							<tr class="table-header">
+								<td>產品</td>
+								<td>單價</td>
+								<td>數量</td>
+								<td>小計</td>
+								<td>刪除</td>
+							</tr>
+						</thead>
+						<tbody>
 						
-						<tr class="table-detail">
-							<td><%= item.getProductId() %></td>
-							<td class="order-products">
-								<img src="<%= item.getPhotoUrl() %>">
-								<span>產品名稱:<%= item.getProductName() %></span>
-								<span>規格:<%= item.getSpecName() %></span>
-								<span>等級:<%= item.getSpecGrade() %></span>
-								<span>庫存:<%= item.getStock() %> </span>
-							</td>
-							<td class="order-price">
-								<span>售價:<%= item.getListPrice() %></span>
-								<span>折扣:<%= item.getDiscountString() %></span>
-								<span>優惠售價: <%= item.getPrice() %>元</span>
-							</td>
+							<%
+								Set<CartItem> itemSet = cart.getCartItemsSet();
+								for(CartItem item:itemSet){	
+							%>
 							
-							<td>
-								<input type="number" name="quantity<%=item.hashCode()%>" 
-									max="<%= item.getStock()%>" 
-									value="<%= cart.getQuantity(item) %>" required>
-							</td>
+							<tr class="table-detail">
+								<td class="order-products">
+									<div class="product-photo">
+										<img src="<%= item.getPhotoUrl() %>">
+									</div>
+									<div class="product-info">
+										<span class="product-id">產品編號：<%= item.getProductId() %></span>									
+										<span class="product-name"><%= item.getProductName() %></span>
+										<%= !item.getSpecName().isEmpty() ? "<span>規格：" + item.getSpecName() + "</span>" : "" %>	
+										<%= !item.getSpecGrade().isEmpty()? "<span>等級：" + item.getSpecGrade() + "</span>" : "" %>
+									</div>
+								</td>
+								<td class="order-price">
+									<% if(item.getTheProduct() instanceof SpecialOffer){ %>
+										<span class="u-price-st">售價：<%= item.getListPrice() %>元</span>
+										<span>折扣：<%= item.getDiscountString() %></span>
+										<span>優惠售價： <%= item.getPrice() %>元</span>
+									<%}else{ %>
+										<span>優惠售價: <%= item.getPrice() %>元</span>
+									<%} %>
+								</td>
+								
+								<td>
+									<div class="qty">
+										<button class="qty-minus" type="button">
+											<img alt="minus" src="../images/minus.png">
+										</button>
+										<span class="qty-value" data-max="<%= item.getStock()%>">
+											<%= cart.getQuantity(item) %>
+										</span>
+										<!-- 用來提交的隱藏數量輸入框，當數量改變時，value 會被同步更新 -->
+										<input type="hidden" name="quantity<%=item.hashCode()%>" 
+											max="<%= item.getStock()%>" 
+											value="<%= cart.getQuantity(item) %>" required>
+										
+										<button class="qty-plus" type="button">
+											<img alt="plus" src="../images/plus.png">
+										</button>	
+									</div>
+									<div class="product-stock">
+										<span class="stock">剩餘庫存：<%= item.getStock() %> </span>
+									</div>
+								</td>
+								
+								<td><%= cart.getAmount(item) %></td>
+								<td><input type="checkbox" name="delete<%=item.hashCode()%>"></td>
+							</tr>
 							
-							<td><%= cart.getAmount(item) %></td>
-							<td><input type="checkbox" name="delete<%=item.hashCode()%>"></td>
-						</tr>
-						
-						<% } %>
-						
-					</tbody>
-					<tfoot>
-						<tr class="table-count">
-							<td>品項數量:<%= cart.size() %>項</td>
-							<td>品項件數:<%= cart.getTotalQuantity() %>件</td>
-							<td>商品總金額:<%= cart.getTotalAmount() %>元</td>
-						</tr>
-						<tr>
-							<td colspan="4">
-								<input type="submit" value="修改購物車">
-							</td>
-							<td colspan="2">
-								<input type="button" value="我要結帳" onclick="location.href='check_out.jsp';">
-							</td>
-						</tr>
-					</tfoot>
-				</table>
-			</form>
-			<% } %>
-		
-		
+							<% } %>
+							
+						</tbody>
+						<tfoot>
+							<tr class="table-count">
+								<td>品項數量:<%= cart.size() %>項</td>
+								<td>品項件數:<%= cart.getTotalQuantity() %>件</td>
+								<td>商品總金額:<%= cart.getTotalAmount() %>元</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<input type="submit" value="修改購物車">
+								</td>
+								<td colspan="2">
+									<input type="button" value="我要結帳" onclick="location.href='check_out.jsp';">
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</form>
+				<% } %>
+			
+			</div>
 		</div>
 		<%@include file="../subviews/footer.jsp" %>
 	</body>
