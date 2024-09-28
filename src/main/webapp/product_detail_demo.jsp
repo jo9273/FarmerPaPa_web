@@ -65,7 +65,6 @@
     		
     		function changeSpecGrade(){
     			//alert("changeSpecGrade :" + $("select[name=spec-grade] option:selected").attr("data-stock"));
-    			
     			  			
     			var stock = $("select[name=spec-grade] option:selected").attr("data-stock");
     			var listPrice = $("select[name=spec-grade] option:selected").attr("data-list-price");

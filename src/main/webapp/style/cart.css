@@ -127,7 +127,6 @@
 }
 
 
-
 .order-products, .order-price {
 	text-align: left;
 }
@@ -197,5 +196,31 @@
 	font-size: 12px;
 }
 
+.table-count{
+	text-align: right;
+}
+
+.cartAction{
+  	width: 85%;
+  	margin: 0px auto;
+  	text-align: end;
+}
+
+.update-btn, .gotoshop-btn, .checkout-btn {
+	display: inline-flex; 
+    margin: 10px;
+	background: #476730;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 120px;
+    border: 0px;
+    color: #E3E3DC;
+	width: 200px;
+	
+}
+
+.checkout-btn{
+	background: #f04624;
+}
 
 

@@ -21,22 +21,22 @@
 	    	$(document).ready(init);
 	    	
 	    	function init() {
-	    		
 	    		 // 初始化頁面時檢查每個數量
 	    	    $(".qty-value").each(function() {
-	    	        var $qtyElement = $(this); // 獲取當前的數量元素
-	    	        var currentQty = parseInt($qtyElement.text()); // 當前的數量
-	    	        var $minusButton = $qtyElement.siblings(".qty-minus"); // 獲取減號按鈕
+	    	        var $qtyElement = $(this); // 獲取當下的數量元素
+	    	        var currentQty = parseInt($qtyElement.text()); // 當下的數量
+	    	        var $minusButton = $qtyElement.siblings(".qty-minus"); // get minus button
 	    	       
-	    	        // 如果當前數量為 1，禁用減號按鈕
+	    	        // 如果當下數量為1，minus button disabled
 	    	        if (currentQty === 1) {
 	    	        	$minusButton.prop("disabled", true);
 	    	        }
 	    	    });
 	    		 
-
+				//綁定 minus, plus button
 	            $(".qty-minus").on("click", minusQtyHandler);
 	    	    $(".qty-plus").on("click", plusQtyHandler);
+	    	    
 	    	}
 	
 	    	function minusQtyHandler(e) {
@@ -186,8 +186,11 @@
 									</div>
 								</td>
 								
-								<td><%= cart.getAmount(item) %></td>
-								<td><input type="checkbox" name="delete<%=item.hashCode()%>"></td>
+								<td><%= cart.getAmount(item) %>元</td>
+																
+								<td>
+									<input type="checkbox" name="delete<%=item.hashCode()%>">
+								</td>	
 							</tr>
 							
 							<% } %>
@@ -195,20 +198,19 @@
 						</tbody>
 						<tfoot>
 							<tr class="table-count">
-								<td>品項數量:<%= cart.size() %>項</td>
-								<td>品項件數:<%= cart.getTotalQuantity() %>件</td>
-								<td>商品總金額:<%= cart.getTotalAmount() %>元</td>
+								<td colspan="3">品項數量：<%= cart.size() %>項</td>
+								<td colspan="4">品項件數：<%= cart.getTotalQuantity() %>件</td>
 							</tr>
-							<tr>
-								<td colspan="4">
-									<input type="submit" value="修改購物車">
-								</td>
-								<td colspan="2">
-									<input type="button" value="我要結帳" onclick="location.href='check_out.jsp';">
-								</td>
+							<tr class="table-count">
+								<td colspan="5">產品總金額：<%= cart.getTotalAmount() %>元</td>
 							</tr>
-						</tfoot>
+						</tfoot>	
 					</table>
+					<div class="cartAction">	
+						<input class="update-btn" type="submit" value="修改購物車">
+						<input class="gotoshop-btn" type="button" value="再逛一下" onclick="location.href='../product_list.jsp';">		
+						<input class="checkout-btn" type="button" value="我要結帳" onclick="location.href='check_out.jsp';">
+					</div>				
 				</form>
 				<% } %>
 			
