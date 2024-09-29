@@ -1,18 +1,21 @@
 @charset "UTF-8";
 
+.updateContent{
+	width: 90%;
+	margin: 50px auto;
+}
+
+.updateContent h2{
+	text-align: center;
+}
 
 .formContent{
 	display: flex;
 	flex-direction: column;
-	margin: 30px auto;
+	margin: 50px auto;
 	align-content: center;
 	justify-content: center;
 }
-
-.formContent h1{
-	text-align: center;
-}
-
 
 .formContent button{
 	background: #476730;
@@ -26,14 +29,6 @@
     margin: 25px auto 0px auto; /* 水平置中 */
 }
 
-.formContent fieldset{
-	width: 400px;
-	margin: 15px 0px;
-	padding: 15px 0px;
-}
-
-
-
 .form-detail{
 	width: 85%;
 	height: 50px;
@@ -42,6 +37,16 @@
     align-items: center; /* 使 label 和 input 垂直居中 */
     margin: 15px auto;
     gap: 15px;
+}
+
+.form-detail sup{
+	color:#f04624
+}
+
+.form-detail input{
+	width: 200px;
+	height: 30px;
+	border: 1px solid #476730;
 }
 
 .row-title{
@@ -66,53 +71,9 @@
 }
 
 
-.form-detail input{
-	width: 200px;
-	height: 30px;
-	border: 1px solid #476730;
-}
-
-.hint{
-	font-size: 14px;
-	background-color:#e6dd9c;
-	padding: 5px;
-	margin: 5px auto;
-}
-
-#toggleLoginPwd{
+#toggleLoginPwd, #toggleSignupPwd, #toggleOldPwd, #toggleNewPwd{
 	width: 30px;
-  	position: absolute;
-  	top: 47%;
-  	transform: translateY(-55%);
-  	right: 34%;
 }
-
-#toggleSignupPwd{
-	width: 30px;
-  	position: absolute;
-  	top: 25.5%;
-  	transform: translateY(-55%);
-  	right: 34%;
-}
-
-#toggleOldPwd{
-	width: 30px;
-  	position: absolute;
-  	top: 89%;
-  	transform: translateY(-55%);
-  	right: 42.2%;
-}
-
-#toggleNewPwd{
-	width: 30px;
-  	position: absolute;
-  	top: 103.5%;
-  	transform: translateY(-54%);
-  	right: 42.2%;
-}
-
-
-
 
 #LoginCaptcha, #SignupCaptcha{
 	width: 120px;
@@ -120,39 +81,15 @@
 	margin: auto 5px;
 }
 
-
-
-
-
-
-/* .form-detail label{
-	float: left;
-	width: 30%; 分配 label 寬度，確保統一
-    text-align: right; 使 label 靠右對齊
-    padding-right: 10px; label 和 input 之間留點空間
-    
-}
-
-.form-detail input{
-	width: 200px;
-	height: 30px;
-	border: 1px solid #476730;
-}
-
-.form-detail span{
-	margin-right: 10px;
-} */
-
-
-
-
-
-
 /*
-.check-subscribed{
-	text-align: center;
+.hint{
+	font-size: 14px;
+	background-color:#e6dd9c;
+	padding: 5px;
+	margin: 5px auto;
 }
 */
+
 
 .link-wrapper{
 	text-align: center;
@@ -190,7 +127,7 @@
 	margin-right: 5px;
 }
 
-#theCheckbox{
+#theCheckbox, #update-pwd-checkbox{
 	width: 20px;
 	height: 20px;
 	margin-right: 5px;
@@ -200,5 +137,8 @@
 	color:darkred;
 	background-color:lightgray
 }
+
+
+
 
 

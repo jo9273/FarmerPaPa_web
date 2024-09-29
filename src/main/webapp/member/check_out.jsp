@@ -53,38 +53,34 @@
 						<h2 class="section-title">訂購人資料</h2>
 						<div class="form-detail">
 							<div class="row-title">
-								<label>訂購人姓名：</label>
+								<label><sup>*</sup>訂購人姓名：</label>
 							</div>
 							<div class="row-content">
 					        	<input type="text" name="name" required placeholder="請輸入姓名2~20字" minlength="2" maxlength="20">
-					        	<span class="hint">必填</span>
 							</div>
 						</div>
 						<div class="form-detail">
 							<div class="row-title">
-								<label>訂購人手機號碼：</label>
+								<label><sup>*</sup>訂購人手機號碼：</label>
 							</div>
 							<div class="row-content">	
 								<input type="tel" name="phone" required placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}">
-								<span class="hint">必填</span>
 							</div>
 						</div>
 						<div class="form-detail">
 							<div class="row-title">
-								<label>訂購人Email：</label>
+								<label><sup>*</sup>訂購人Email：</label>
 							</div>
 							<div class="row-content">	
 								<input type="email" name="email" required placeholder="請輸入email">
-								<span class="hint">必填</span>
 							</div>
 						</div>
 						<div class="form-detail">
 							<div class="row-title">
-								<label>訂購人地址：</label>
+								<label><sup>*</sup>訂購人地址：</label>
 							</div>
 							<div class="row-content">	
 					            <textarea name="address" required placeholder="請輸入地址" rows="2" cols="30"></textarea>
-								<span class="hint">必填</span>
 							</div>
 						</div>
 					</section>
@@ -100,29 +96,26 @@
 						</div>
 						<div class="form-detail">
 							<div class="row-title">
-								<label>收件人姓名：</label>
+								<label><sup>*</sup>收件人姓名：</label>
 							</div>
 							<div class="row-content">	
 					       		<input type="text" name="name" required placeholder="請輸入姓名2~20字" minlength="2" maxlength="20">
-								<span class="hint">必填</span>
 							</div>
 						</div>
 						<div class="form-detail">
 							<div class="row-title">
-								<label>收件人手機號碼：</label>
+								<label><sup>*</sup>收件人手機號碼：</label>
 							</div>
 							<div class="row-content">	
 								<input type="tel" name="phone" required placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}">
-								<span class="hint">必填</span>
 							</div>
 						</div>
 						<div class="form-detail">
 							<div class="row-title">
-								<label>收件人地址：</label>
+								<label><sup>*</sup>收件人地址：</label>
 							</div>
 							<div class="row-content">	
 				           		<textarea name="address" required placeholder="請輸入地址" rows="2" cols="30"></textarea>
-								<span class="hint">必填</span>
 							</div>
 						</div>
 						<div class="form-detail">
