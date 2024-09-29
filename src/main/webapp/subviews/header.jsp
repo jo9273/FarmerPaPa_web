@@ -81,22 +81,33 @@
 								<div class="formContent">
 									<form action="<%= request.getContextPath()%>/login.do" method="post">
 										<div class="form-detail">
-											<label>帳號：</label>
-											<input type="email" name="email" required placeholder="請輸入email">
+											<div class="sign-row-title">
+												<label>帳號：</label>
+											</div>
+											<div class="row-content">
+												<input type="email" name="email" required placeholder="請輸入email">					
+											</div>
 										</div>
 												
 										<div class="form-detail">
-											<label>密碼：</label>
-											<input id="loginPassword" type="password" name="password" required placeholder="請輸入密碼" minlength="6" maxlength="20">
-												
-											<img id="toggleLoginPwd" src="/fpapa/images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
-												
+											<div class="sign-row-title">
+												<label>密碼：</label>
+											</div>
+											<div class="row-content">
+												<input id="loginPassword" type="password" name="password" required placeholder="請輸入密碼" minlength="6" maxlength="20">
+													
+												<img id="toggleLoginPwd" src="/fpapa/images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
+											</div>				
 										</div>
 												
 										<div class="form-detail">
-											<label>驗證碼：</label>
-											<input type="text" name="captcha" required placeholder="請輸入驗證碼">
-											<img id="LoginCaptcha" src="/fpapa/images/captcha.png" onclick="refreshLoginCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
+											<div class="sign-row-title">
+												<label>驗證碼：</label>
+											</div>
+											<div class="row-content">
+												<input type="text" name="captcha" required placeholder="請輸入驗證碼">
+												<img id="LoginCaptcha" class="captchaImg" src="/fpapa/images/captcha.png" onclick="refreshLoginCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
+											</div>
 										</div>
 										<!--  <input type="submit" value="送出"> -->
 												
@@ -125,57 +136,98 @@
 								<div class="formContent">
 									<form action="<%= request.getContextPath()%>/register.do" method="post">
 										<div class="form-detail">
-											<label>帳號：</label>
-											<input type="email" name="email" required placeholder="請輸入email">
+											<div class="sign-row-title">
+												<label>帳號：</label>
+											</div>
+											<div class="row-content">
+												<input type="email" name="email" required placeholder="請輸入email">
+												<span class="hint">必填</span>
+											</div>
 										</div>
 												
 										<div class="form-detail">
-											<label>密碼：</label>
-											<input id="signupPassword" type="password" name="password" required placeholder="請輸入密碼6~20字" minlength="6" maxlength="20">
-												
-											<img id="toggleSignupPwd" src="/fpapa/images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
+											<div class="sign-row-title">
+												<label>密碼：</label>
+											</div>
+											<div class="row-content">
+												<input id="signupPassword" type="password" name="password" required placeholder="請輸入密碼6~20字" minlength="6" maxlength="20">
+													
+												<img id="toggleSignupPwd" src="/fpapa/images/eye_slash_fill_icon.png" alt="顯示/隱藏密碼" style="cursor: pointer;">
+												<span class="hint">必填</span>
+											</div>
 										</div>
 											
 										<div class="form-detail">
-											<label>手機號碼：</label>
-											<input type="tel" name="phone" required placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}">
+											<div class="sign-row-title">
+												<label>手機號碼：</label>
+											</div>
+											<div class="row-content">
+												<input type="tel" name="phone" required placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}">
+												<span class="hint">必填</span>
+											</div>
 										</div>
 											
 										<div class="form-detail">
-											<label>姓名：</label>
-				               				<input type="text" name="name" required placeholder="請輸入姓名2~20字" minlength="2" maxlength="20">
+											<div class="sign-row-title">
+												<label>姓名：</label>
+											</div>
+											<div class="row-content">
+				               					<input type="text" name="name" required placeholder="請輸入姓名2~20字" minlength="2" maxlength="20">
+												<span class="hint">必填</span>
+											</div>
 										</div>
 											
 										<div class="form-detail">
-											<label>生日：</label>
-			                				<input type="date" name="birthday" required max="<%= LocalDate.now().plusYears(-Customer.MIN_AGE)%>">
+											<div class="sign-row-title">
+												<label>生日：</label>
+											</div>
+											<div class="row-content">
+			                					<input type="date" name="birthday" required max="<%= LocalDate.now().plusYears(-Customer.MIN_AGE)%>">
+												<span class="hint">必填</span>
+											</div>
 										</div>
 										
 										<div class="form-detail">
-											<label>性別：</label>
-							                <input id="theRadio" type="radio" name="gender" required value="<%= Customer.MALE%>">
-							                <span>男</span>
-							                <input id="theRadio" type="radio" name="gender" required value="<%= Customer.FEMALE%>">
-							                <span>女</span>
-							                <input id="theRadio" type="radio" name="gender" required value="<%= Customer.OTHERS%>">
-							                <span>不願透漏</span>
+											<div class="sign-row-title">
+												<label>性別：</label>
+											</div>
+											<div class="row-content">
+								                <input id="theRadio" type="radio" name="gender" required value="<%= Customer.MALE%>">
+								                <span>男</span>
+								                <input id="theRadio" type="radio" name="gender" required value="<%= Customer.FEMALE%>">
+								                <span>女</span>
+								                <input id="theRadio" type="radio" name="gender" required value="<%= Customer.OTHERS%>">
+								                <span>不願透漏</span>
+								            </div>
 										</div>
 										
 										<div class="form-detail">
-											<label>地址：</label>
-			                				<textarea name="address" placeholder="請輸入地址(選填)" rows="2" cols="30"></textarea>
+											<div class="sign-row-title">
+												<label>地址：</label>
+											</div>
+											<div class="row-content">
+			                					<textarea name="address" placeholder="請輸入地址(選填)" rows="2" cols="30"></textarea>
+											</div>
 										</div>
 																			
 										<div class="form-detail">
-											<label>驗證碼：</label>
-											<input type="text" name="captcha" required placeholder="請輸入驗證碼">
-											<img id="SignupCaptcha" src="/fpapa/images/captcha.png" onclick="refreshSignupCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
+											<div class="sign-row-title">
+												<label>驗證碼：</label>
+											</div>
+											<div class="row-content">
+												<input type="text" name="captcha" required placeholder="請輸入驗證碼">
+												<img id="SignupCaptcha" class="captchaImg" src="/fpapa/images/captcha.png" onclick="refreshSignupCaptcha()" alt="驗證碼" title="點擊即可更新驗證碼">
+											</div>
 										</div>
 											<!--  <input type="submit" value="送出"> -->
 											
-										<div class="check-subscribed">
-											<input id="theCheckbox" type="checkbox" name="subscribed">
-											<span>我願意訂閱電子報</span>
+										<div class="form-detail">
+											<div class="sign-row-title">
+												<input id="theCheckbox" type="checkbox" name="subscribed">
+											</div>
+											<div class="row-content">	
+												<span>我願意訂閱電子報</span>
+											</div>
 										</div>
 												
 										<% 
@@ -198,7 +250,7 @@
 	
 						<a class="cart-a" href="<%= request.getContextPath()%>/member/cart.jsp">
 							<div class="cart">
-								<span>(${sessionScope.cart.getTotalQuantity()})</span>
+								<span>(${sessionScope.cart.getTotalQuantity()!= null ? sessionScope.cart.totalQuantity : "0"})</span>								
 								<img alt="購物車" src="/fpapa/images/cart_icon.png">
 							</div>
 						</a>

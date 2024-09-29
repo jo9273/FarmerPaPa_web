@@ -35,17 +35,101 @@
 
 
 .form-detail{
+	width: 85%;
+	height: 50px;
 	display: flex;
 	flex-direction:row;
     align-items: center; /* 使 label 和 input 垂直居中 */
-    margin-bottom: 20px; /* 每個欄位之間的間距 */
+    margin: 15px auto;
+    gap: 15px;
 }
 
-.form-detail label{
+.row-title{
+	flex: 1.5;
+	align-self: center;
+  	text-align: right;
+}
+
+.sign-row-title{
+	flex: 0.8;
+	align-self: center;
+  	text-align: right;
+}
+
+.row-content{
+	flex: 2;
+	align-self: center;
+	display: flex;            /* 使用 Flexbox */
+    align-items: center;       /* 垂直置中 */
+    justify-content: start;   /* 水平置中 */
+    gap: 10px;                 /* 在輸入框和驗證碼之間添加一些間距 */
+}
+
+
+.form-detail input{
+	width: 200px;
+	height: 30px;
+	border: 1px solid #476730;
+}
+
+.hint{
+	font-size: 14px;
+	background-color:#e6dd9c;
+	padding: 5px;
+	margin: 5px auto;
+}
+
+#toggleLoginPwd{
+	width: 30px;
+  	position: absolute;
+  	top: 47%;
+  	transform: translateY(-55%);
+  	right: 34%;
+}
+
+#toggleSignupPwd{
+	width: 30px;
+  	position: absolute;
+  	top: 25.5%;
+  	transform: translateY(-55%);
+  	right: 34%;
+}
+
+#toggleOldPwd{
+	width: 30px;
+  	position: absolute;
+  	top: 89%;
+  	transform: translateY(-55%);
+  	right: 42.2%;
+}
+
+#toggleNewPwd{
+	width: 30px;
+  	position: absolute;
+  	top: 103.5%;
+  	transform: translateY(-54%);
+  	right: 42.2%;
+}
+
+
+
+
+#LoginCaptcha, #SignupCaptcha{
+	width: 120px;
+	height: 30px;
+	margin: auto 5px;
+}
+
+
+
+
+
+
+/* .form-detail label{
 	float: left;
-	width: 30%; /* 分配 label 寬度，確保統一 */
-    text-align: right; /* 使 label 靠右對齊 */
-    padding-right: 10px; /* label 和 input 之間留點空間 */
+	width: 30%; 分配 label 寬度，確保統一
+    text-align: right; 使 label 靠右對齊
+    padding-right: 10px; label 和 input 之間留點空間
     
 }
 
@@ -57,25 +141,18 @@
 
 .form-detail span{
 	margin-right: 10px;
-}
+} */
 
 
-#toggleLoginPwd, #toggleSignupPwd, #toggleOldPwd, #toggleNewPwd{
-	width: 30px;
-}
 
 
-#LoginCaptcha, #SignupCaptcha{
-	width: 120px;
-	height: 30px;
-	margin: 0px 0px 0px 10px;
-}
 
+
+/*
 .check-subscribed{
-	display: flex;
-	justify-content: center;
+	text-align: center;
 }
-
+*/
 
 .link-wrapper{
 	text-align: center;
@@ -123,4 +200,5 @@
 	color:darkred;
 	background-color:lightgray
 }
+
 

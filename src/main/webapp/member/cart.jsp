@@ -119,10 +119,8 @@
 						<span class="step-index">4</span>
 						<p class="step-title">購買完成</p>
 					</li>
-					
-					
 				</ul>
-
+				
 				<form action="<%= request.getContextPath()%>/member/update_cart.do" method="POST">
 					<table class="cartDetails">
 						<caption>購物明細</caption>
