@@ -38,7 +38,7 @@
 	<body>
 		<% request.setCharacterEncoding("utf-8"); %>
 	
-		<%--<%@include file="./subviews/header.jsp" %>  --%>
+		<%@include file="./subviews/header.jsp" %>
 		
 		<div class="pageContent">
 			<div class="formContent">

@@ -18,10 +18,10 @@
 			}
 			
 			function repopulateFormData(){
-				$("input[name=email]").val('<%=request.getParameter("email")%>');
-				$("input[name=phone]").val('<%=request.getParameter("phone")%>');
-				$("input[name=name]").val('<%=request.getParameter("name")%>');
-				$("input[name=birthday]").val('<%=request.getParameter("birthday")%>');
+				$("input[name=email]").val('${param.email}');	//EL寫法
+				$("input[name=phone]").val('${param.phone}');
+				$("input[name=name]").val('${param.name}');
+				$("input[name=birthday]").val('${param.birthday}');
 				$("input[name=gender][value=<%=request.getParameter("gender")%>]").prop('checked', 'true');
 				$("textarea[name=address]").text('<%=request.getParameter("address")%>');
 				$("input[name=subscribed]").prop('checked', <%=request.getParameter("subscribed")!=null%>);
@@ -112,7 +112,7 @@
 										<!--  <input type="submit" value="送出"> -->
 												
 										<% 
-											List<String> loginErrors = (List<String>)request.getAttribute("loginErrors"); 
+											List<String> loginErrors = (List<String>)request.getAttribute("errors"); 
 										%>
 										<div id="theErrorsDiv">
 											<%= loginErrors != null ? loginErrors : "" %>
@@ -226,10 +226,11 @@
 										</div>
 												
 										<% 
-											List<String> signupErrors = (List<String>)request.getAttribute("signupErrors"); 
+											//List<String> signupErrors = (List<String>)request.getAttribute("errors"); 
 										%>
 										<div id="theErrorsDiv">
-											<%= signupErrors != null ? signupErrors : "" %>
+											<%--<%= signupErrors != null ? signupErrors : "" %>  --%>
+											${requestScope.signupErrors}
 										</div>
 												
 										<button type="submit">送出</button>
@@ -245,7 +246,7 @@
 	
 						<a class="cart-a" href="<%= request.getContextPath()%>/member/cart.jsp">
 							<div class="cart">
-								<span>(${sessionScope.cart.getTotalQuantity()!= null ? sessionScope.cart.totalQuantity : "0"})</span>								
+								<span>(${sessionScope.cart.getTotalQuantity()+0})</span>  <%--EL寫法:null會顯示空字串,且沒有字串相加, 所以null就會顯示0 --%>							
 								<img alt="購物車" src="/fpapa/images/basket.png">
 							</div>
 						</a>
@@ -254,13 +255,13 @@
 				<div class="searchContainer">
 					<form class="searchForm" action="<%= request.getContextPath()%>/product_list.jsp" method="GET">
 							
-							<input class="keyword" type="search" name="keyword" required placeholder="請輸入關鍵字">
+							<input class="keyword" type="search" name="keyword" required placeholder="請輸入關鍵字" 
+													value="${param.keyword}">
 																
 							<button type="submit" >
 								<img class="subSearch" src="/fpapa/images/search_icon.png" alt="Submit">
 							</button>
-							
-							
+
 							<!-- <input class="subSearch" type="image" src="/fpapa/images/search_icon.png" alt="Submit">
 						 	-->
 					</form>

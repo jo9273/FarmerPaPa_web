@@ -122,7 +122,7 @@ public class RegisterServlet extends HttpServlet {
 		//3.2 內部轉交(forward)註冊失敗 login.jsp
 		
 		// 將物件傳給jsp
-		request.setAttribute("errors", signupErrors);
+		request.setAttribute("signupErrors", signupErrors);
 				
 		// 派遣器把控制權轉交給前端畫面(相對路徑)
 		RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");

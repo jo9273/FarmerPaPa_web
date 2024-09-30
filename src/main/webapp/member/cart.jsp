@@ -107,19 +107,17 @@
 					
 					<li class="step">
 						<span class="step-index">2</span>
-						<p class="step-title">填寫收件資料</p>
+						<p class="step-title">確認收件與付款資料</p>
 					</li>
 					
 					<li class="step">
 						<span class="step-index">3</span>
-						<p class="step-title">確認付款方式</p>
-					</li>
-					
-					<li class="step">
-						<span class="step-index">4</span>
 						<p class="step-title">購買完成</p>
 					</li>
 				</ul>
+				
+				<%-- if(cart.getMember()==null) cart.setMember(member); --%>
+				 ${sessionScope.cart.setMember(sessionScope.member)} 
 				
 				<form action="<%= request.getContextPath()%>/member/update_cart.do" method="POST">
 					<table class="cartDetails">

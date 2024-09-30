@@ -127,7 +127,8 @@
 	margin-right: 5px;
 }
 
-#theCheckbox, #update-pwd-checkbox{
+#theCheckbox, #update-pwd-checkbox, #the-buyer-checkbox, #shipping-ds, 
+#shipping-cvs, #shipping-store, #payment-card, #payment-atm, #payment-cvs{
 	width: 20px;
 	height: 20px;
 	margin-right: 5px;

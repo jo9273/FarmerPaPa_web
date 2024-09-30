@@ -71,6 +71,10 @@ public class LoginServlet extends HttpServlet {
 		// 資安和記憶體考量,做完驗證碼就要清掉, 不論對錯
 		session.removeAttribute("captchaString");
 		
+		//String prevURI = (String)session.getAttribute("previous_uri");
+		//session.removeAttribute("previous_uri");
+		
+		
 		
 		// 2. 檢查無誤才呼叫商業邏輯:CustomerService.login
 		if(loginErrors.isEmpty()) {
@@ -82,6 +86,11 @@ public class LoginServlet extends HttpServlet {
 				// 將物件傳給jsp
 				// 將 c 存在session中, jsp也要改session.getAttribute
 				session.setAttribute("memberLogin", c);
+				
+				//if(prevURI!=null) 
+					//request.setAttribute("previous_uri", prevURI);
+				
+				
 				
 				// 在單一功能就session-timeout (測試用)
 				// 單位為秒(可以用*60秒, 做為分鐘算)

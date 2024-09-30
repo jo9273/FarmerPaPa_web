@@ -19,7 +19,7 @@
 			<jsp:param value="果物市集" name="subheader"/>
 		</jsp:include>  --%>
 		
-		<%@include file="./subviews/header.jsp" %>
+		<%@include file="./subviews/header.jsp" %>  <%--這個寫法有隱含變數的效果 --%>
 			
 		<div class="indexContent">	
 			<article>
