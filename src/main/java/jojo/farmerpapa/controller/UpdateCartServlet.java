@@ -47,7 +47,7 @@ public class UpdateCartServlet extends HttpServlet {
 				//2.呼叫商業邏輯
 				if(delete == null) {
 					//修改數量
-					if(quantity != null && quantity.matches("\\d+")) {
+					if(quantity != null && quantity.matches("\\d+")) {   // \\d+正規表達式,匹配一個或多個連續數字 
 						int qty = Integer.parseInt(quantity);
 						cart.update(item, qty);
 					}
