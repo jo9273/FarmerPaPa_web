@@ -59,8 +59,13 @@ public class UpdateCartServlet extends HttpServlet {
 		}
 		
 		//3.外部轉交to cart.jsp
-		response.sendRedirect("cart.jsp");
-		
+		String checkout = request.getParameter("submit");
+		if("checkout".equals(checkout)) {
+			response.sendRedirect("check_out.jsp");
+		}else {
+			response.sendRedirect("cart.jsp");
+		}
+
 	}
 
 }

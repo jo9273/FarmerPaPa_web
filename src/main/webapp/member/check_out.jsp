@@ -1,4 +1,8 @@
 <%@page import="jojo.farmerpapa.entity.ShippingType"%>
+<%@page import="jojo.farmerpapa.entity.ShoppingCart"%>
+<%@page import="jojo.farmerpapa.entity.SpecialOffer"%>
+<%@page import="jojo.farmerpapa.entity.CartItem"%>
+<%@page import="java.util.Set"%>
 <%@page import="java.util.List"%>
 <%@page pageEncoding="UTF-8"%>
 
@@ -54,6 +58,22 @@
 		<%@include file="../subviews/header.jsp" %>
 		<div class="pageContent">
 			<div class="cart-content">
+				
+				<%
+					//"cart" 名稱要對應到servlet的setAttribute "cart"
+					ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");  
+					if(cart == null || cart.isEmpty()){
+				%>
+			
+				<div class="cart-empty">
+					<h2>購物車空空的</h2>
+					<img alt="empty" src="../images/cart-empty.png">
+					<a class="empty-a" href="<%= request.getContextPath()%>/product_list.jsp">前往購物</a>
+				
+				</div>
+				<% }else{ %>
+			
+			
 				<h2>購物車</h2>
 				
 				<ul class="steps">
@@ -72,6 +92,78 @@
 						<p class="step-title">購買完成</p>
 					</li>
 				</ul>
+				
+				<details>
+					<summary class="summary">
+						共<%= cart.getTotalQuantity() %>件, 總金額: <span id="totalAmountWithFee"><%= cart.getTotalAmount() %></span>元 (點選即可看到明細)
+					</summary>
+					<table class="cartDetails">
+						<caption>購物明細</caption>
+						<thead>
+							<tr class="table-header">
+								<td>產品</td>
+								<td>單價</td>
+								<td>數量</td>
+								<td>小計</td>
+								
+							</tr>
+						</thead>
+						<tbody>
+						
+							<%
+								Set<CartItem> itemSet = cart.getCartItemsSet();
+								for(CartItem item:itemSet){	
+							%>
+							
+							<tr class="table-detail">
+								<td class="order-products">
+									<div class="product-photo">
+										<img src="<%= item.getPhotoUrl() %>">
+									</div>
+									<div class="product-info">
+										<span class="product-id">產品編號：<%= item.getProductId() %></span>									
+										<span class="product-name"><%= item.getProductName() %></span>
+										<%= !item.getSpecName().isEmpty() ? "<span>規格：" + item.getSpecName() + "</span>" : "" %>	
+										<%= !item.getSpecGrade().isEmpty()? "<span>等級：" + item.getSpecGrade() + "</span>" : "" %>
+									</div>
+								</td>
+								<td class="order-price">
+									<% if(item.getTheProduct() instanceof SpecialOffer){ %>
+										<span class="u-price-st">售價：<%= item.getListPrice() %>元</span>
+										<span>折扣：<%= item.getDiscountString() %></span>
+										<span>優惠售價： <%= item.getPrice() %>元</span>
+									<%}else{ %>
+										<span>優惠售價: <%= item.getPrice() %>元</span>
+									<%} %>
+								</td>
+								
+								<td>
+									<div class="qty">
+										<span class="qty-value" data-max="<%= item.getStock()%>">
+											<%= cart.getQuantity(item) %>
+										</span>
+									</div>
+								</td>
+								<td>
+									<%= cart.getAmount(item) %>元
+								</td>
+							</tr>
+							
+							<% } %>
+							
+						</tbody>
+						<tfoot>
+							<tr class="table-count">
+								<td colspan="3">品項數量：<%= cart.size() %>項</td>
+								<td colspan="4">品項件數：<%= cart.getTotalQuantity() %>件</td>
+							</tr>
+							<tr class="table-count">
+								<td colspan="5">產品總金額：<%= cart.getTotalAmount() %>元</td>
+							</tr>
+						</tfoot>	
+					</table>
+				</details>
+				
 				
 				<form action="" method="">
 					<section>
@@ -123,7 +215,7 @@
 								<label><sup>*</sup>配送方式：</label>
 							</div>
 							<div class="row-content">
-								<input id="shipping-ds" type="radio" name="shipping-type" value="<%=ShippingType.HOME%>" checked>
+								<input id="shipping-home" type="radio" name="shipping-type" value="<%=ShippingType.HOME%>" checked>
 								<span><%=ShippingType.HOME.getDescription()%>, 運費:<%=ShippingType.HOME.getFee() %>元</span>
 								
 								<input id="shipping-cvs" type="radio" name="shipping-type" value="<%=ShippingType.CVS%>">
@@ -216,6 +308,7 @@
 					</div>	
 
 				</form>
+				<% } %>
 			</div>
 		</div>
 		<%@include file="../subviews/footer.jsp" %>

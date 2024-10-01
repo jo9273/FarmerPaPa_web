@@ -205,7 +205,7 @@
 					<div class="cartAction">	
 						<input class="update-btn" type="submit" value="修改購物車">
 						<input class="gotoshop-btn" type="button" value="再逛一下" onclick="location.href='../product_list.jsp';">		
-						<input class="checkout-btn" type="button" value="我要結帳" onclick="location.href='check_out.jsp';">
+						<button class="checkout-btn" type="submit" name="submit" value="checkout">我要結帳</button>
 					</div>				
 				</form>
 				<% } %>
