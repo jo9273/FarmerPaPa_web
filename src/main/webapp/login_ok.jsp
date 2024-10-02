@@ -20,7 +20,7 @@
 	        	<article>
 			        <p>
 			            <% 
-			            	//Customer member = (Customer)session.getAttribute("memberLogin");
+			            	//Customer member = (Customer)session.getAttribute("member");
 			            	//out.println(member != null ? member.getName() : "name不見了");
 			            %>
 			            <%= member != null ? member.getName() : "" %> 你好! 10秒後自動轉址至

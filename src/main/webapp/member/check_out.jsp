@@ -18,7 +18,7 @@
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/form.css">
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/footer.css">
 		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
-    	
+    	<script type="text/javascript" src="/fpapa/js/loginCheck.js"></script>
     	<script>
     	 	$(init);
 			
@@ -36,9 +36,9 @@
 			}
 			
 			function getMemberInfo(){
-				$('#recipt-name').val('${sessionScope.memberLogin.getName()}');
-				$('#recipt-phone').val('${sessionScope.memberLogin.getPhone()}');
-				$('#recipt-address').text('${sessionScope.memberLogin.getAddress()}');
+				$('#recipt-name').val('${sessionScope.member.getName()}');
+				$('#recipt-phone').val('${sessionScope.member.getPhone()}');
+				$('#recipt-address').text('${sessionScope.member.getAddress()}');
 			}
 			
 			function clearMemberInfo(){
@@ -175,7 +175,7 @@
 							<div class="row-content">
 					        	<input type="text" name="name" required 
 					        			placeholder="請輸入姓名2~20字" disabled minlength="2" maxlength="20"
-					        			value="${sessionScope.memberLogin.getName()}">
+					        			value="${sessionScope.member.getName()}">
 							</div>
 						</div>
 						<div class="form-detail">
@@ -185,7 +185,7 @@
 							<div class="row-content">	
 								<input type="tel" name="phone" disabled required 
 										placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}"
-										value="${sessionScope.memberLogin.getPhone()}">
+										value="${sessionScope.member.getPhone()}">
 							</div>
 						</div>
 						<div class="form-detail">
@@ -195,7 +195,7 @@
 							<div class="row-content">	
 								<input type="email" name="email" disabled required 
 										placeholder="請輸入email"
-										value="${sessionScope.memberLogin.getEmail()}">
+										value="${sessionScope.member.getEmail()}">
 							</div>
 						</div>
 						<div class="form-detail">
@@ -203,7 +203,7 @@
 								<label><sup>*</sup>訂購人地址：</label>
 							</div>
 							<div class="row-content">	
-					            <textarea name="address" disabled placeholder="尚未設定地址" rows="2" cols="30">${sessionScope.memberLogin.getAddress()}</textarea>
+					            <textarea name="address" disabled placeholder="尚未設定地址" rows="2" cols="30">${sessionScope.member.getAddress()}</textarea>
 							</div>
 						</div>
 					</section>
@@ -304,7 +304,7 @@
 					
 					<div class="cartAction">	
 						<input class="gotoshop-btn" type="button" value="再逛一下" onclick="location.href='../product_list.jsp';">		
-						<input class="checkout-btn" type="button" value="確認結帳" onclick="location.href='check_out.jsp';">
+						<input id="login-check" class="checkout-btn" type="button" value="確認結帳" onclick="location.href='check_out.jsp';">
 					</div>	
 
 				</form>

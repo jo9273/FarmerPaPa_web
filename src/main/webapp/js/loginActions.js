@@ -30,6 +30,113 @@ function init() {
     // 綁定註冊模態框的顯示/隱藏密碼功能
     $('#toggleSignupPwd').on('click', handleToggleSignupPwdClick);
 	
+	
+	// 綁定登入表單的提交事件，使用 AJAX 進行提交
+	var $loginForm = $("#loginForm");
+	var $loginEmail = $("#loginEmail");
+	var $loginPassword = $("#loginPassword");
+	var $loginCaptcha = $("#loginCaptcha");
+	var $loginModal = $("#loginModal");
+	var $theErrorsDiv = $("#theErrorsDiv");
+
+	$loginForm.submit(function(e) {
+		e.preventDefault();  // 阻止表單的默認提交動作
+
+		// 進行 AJAX 請求
+		$.ajax({
+			type: "POST",
+			url: "/fpapa/login.do",  // 指向 Servlet
+			data: {
+				email: $loginEmail.val(),
+				password: $loginPassword.val(),
+				captcha: $loginCaptcha.val()
+			},
+			success: function(response) {
+				// 判斷是否登入成功
+				if (response.success) {
+					alert("登入成功！");
+					$loginModal.hide();
+					$loginForm[0].reset(); // 清空表單
+					window.location.reload();  // 刷新當前頁面
+				} else {
+					// 顯示錯誤訊息
+					$theErrorsDiv.html("<p>" + response.errorMessage + "</p>");
+					alert(response.errorMessage);
+
+					// 清空表單的輸入框內容
+					$loginEmail.val('');
+					$loginPassword.val('');
+					$loginCaptcha.val('');
+
+					// 更新驗證碼
+					refreshLoginCaptcha();
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				// 當 AJAX 請求失敗時，執行此函數
+				alert("系統錯誤，請稍後再試");
+				console.log("AJAX 請求失敗，狀態: " + textStatus);
+				console.log("錯誤: " + errorThrown);
+				console.log("伺服器返回: " + jqXHR.responseText);
+			}
+		});
+	});
+
+
+	// 綁定註冊表單的提交事件，使用 AJAX 進行提交
+	var $signupForm = $("#signupForm");
+	var $signupEmail = $("#signupEmail");
+	var $signupPassword = $("#signupPassword");
+	var $signupCaptcha = $("#signupCaptcha");
+	var $signupModal = $("#signupModal");
+	var $theErrorsDiv = $("#theErrorsDiv");
+
+	$signupForm.submit(function(e) {
+		e.preventDefault();  // 阻止表單的默認提交動作
+
+		// 進行 AJAX 請求
+		$.ajax({
+			type: "POST",
+			url: "/fpapa/register.do",  // 指向 Servlet
+			data: {
+				email: $signupEmail.val(),
+				password: $signupPassword.val(),
+				phone: $("input[name='phone']").val(),
+				name: $("input[name='name']").val(),
+				birthday: $("input[name='birthday']").val(),
+				gender: $("input[name='gender']:checked").val(),
+				address: $("textarea[name='address']").val(),
+				subscribed: $("input[name='subscribed']").is(":checked") ? "on" : "",
+				captcha: $signupCaptcha.val()
+			},
+			success: function(response) {
+				if (response.success) {
+					alert("註冊成功！");
+					$signupModal.hide();  // 隱藏註冊的 lightbox
+					window.location.reload();  // 刷新當前頁面
+				} else {
+					$theErrorsDiv.html("<p>" + response.errorMessage + "</p>");
+					alert(response.errorMessage);
+
+					// 清空表單
+					$signupEmail.val('');
+					$signupPassword.val('');
+					$signupCaptcha.val('');
+
+					// 刷新驗證碼
+					refreshSignupCaptcha();
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("系統錯誤，請稍後再試");
+				console.log("AJAX 請求失敗，狀態: " + textStatus);
+				console.log("錯誤: " + errorThrown);
+				console.log("伺服器返回: " + jqXHR.responseText);
+			}
+		});
+	});
+
+
 }
 
 // 顯示登入模態框

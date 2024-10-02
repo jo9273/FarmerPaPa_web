@@ -42,7 +42,7 @@
 				<div class="notFound">
 		<%-- <p>找不到檔案: <%= request.getAttribute("javax.servlet.error.request_uri") %> --%>
 					<h2>找不到網頁</h2>
-					<img src="../images/404.png">
+					<img src="/fpapa/images/404.png">
 					
 				</div>
 			</div>

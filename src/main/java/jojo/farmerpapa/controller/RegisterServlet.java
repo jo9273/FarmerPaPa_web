@@ -75,6 +75,10 @@ public class RegisterServlet extends HttpServlet {
 		// 資安和記憶體考量,做完驗證碼就要清掉, 不論對錯
 		session.removeAttribute("captchaString");
 		
+		// 準備回應的 JSON 字符串
+        StringBuilder jsonResponse = new StringBuilder();
+        jsonResponse.append("{");
+		
 		
 		// 2. 檢查無誤才呼叫商業邏輯:CustomerService.register
 		if(signupErrors.isEmpty()) {
@@ -96,14 +100,20 @@ public class RegisterServlet extends HttpServlet {
 				
 				// 3.1 內部轉交(forward)註冊成功 register_ok.jsp
 				// 將物件傳給jsp
-				request.setAttribute("member", c);
+				//request.setAttribute("member", c);
 				
+				// 註冊成功
+                session.setAttribute("member", c);
+                
+                jsonResponse.append("\"success\":true,");
+                jsonResponse.append("\"message\":\"註冊成功！\"");
+                
 				// 派遣器把控制權轉交給前端畫面(相對路徑)
-				RequestDispatcher dispatcher = request.getRequestDispatcher("register_ok.jsp");
-				dispatcher.forward(request, response);
+				//RequestDispatcher dispatcher = request.getRequestDispatcher("register_ok.jsp");
+				//dispatcher.forward(request, response);
 				
 				// ***return不可移除, 不然執行有問題時，後續處理的程式碼無法執行到
-				return;
+				//return;
 				
 				} catch (DataInvalidException e) {
 					signupErrors.add(e.getMessage());
@@ -115,18 +125,31 @@ public class RegisterServlet extends HttpServlet {
 				}catch (Exception e) {		// 幾乎是RuntimeException , 非預期的錯誤用父類別Exception拋出錯誤訊息
 					this.log("會員註冊時，系統發生錯誤", e);  //for admin
 					signupErrors.add("系統發生錯誤" + e + ", 請聯絡Admin");		//for user
-				}
-						
+				}			
 		}
+		
+		
+		if (!signupErrors.isEmpty()) {
+            jsonResponse.append("\"success\":false,");
+            jsonResponse.append("\"errorMessage\":\"" + String.join(", ", signupErrors) + "\"");
+        }
+
+        jsonResponse.append("}");
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        out.print(jsonResponse.toString());
+        out.flush();
 		
 		//3.2 內部轉交(forward)註冊失敗 login.jsp
 		
 		// 將物件傳給jsp
-		request.setAttribute("signupErrors", signupErrors);
+		//request.setAttribute("signupErrors", signupErrors);
 				
 		// 派遣器把控制權轉交給前端畫面(相對路徑)
-		RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-		dispatcher.forward(request, response);
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+		//dispatcher.forward(request, response);
 		
 	}
 

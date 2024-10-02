@@ -3,7 +3,9 @@ package jojo.farmerpapa.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -71,6 +73,11 @@ public class LoginServlet extends HttpServlet {
 		// 資安和記憶體考量,做完驗證碼就要清掉, 不論對錯
 		session.removeAttribute("captchaString");
 		
+		 // 準備 JSON 格式的回應
+        StringBuilder jsonResponse = new StringBuilder();
+        jsonResponse.append("{");
+		
+        //原處理方式，將uri存在session，成功就轉導這個uri
 		//String prevURI = (String)session.getAttribute("previous_uri");
 		//session.removeAttribute("previous_uri");
 		
@@ -80,13 +87,18 @@ public class LoginServlet extends HttpServlet {
 		if(loginErrors.isEmpty()) {
 			CustomerService service = new CustomerService();
 			try {
-				Customer c = service.login(email, password);
+				Customer loggedInCustomer = service.login(email, password);
 				
 				// 3.1 內部轉交(forward)登入成功 login_ok.jsp
 				// 將物件傳給jsp
 				// 將 c 存在session中, jsp也要改session.getAttribute
-				session.setAttribute("memberLogin", c);
+				session.setAttribute("member", loggedInCustomer);
 				
+				// 構建成功的 JSON 回應
+                jsonResponse.append("\"success\":true,");
+                jsonResponse.append("\"message\":\"登入成功！\"");
+
+
 				//if(prevURI!=null) 
 					//request.setAttribute("previous_uri", prevURI);
 				
@@ -97,11 +109,11 @@ public class LoginServlet extends HttpServlet {
 				//session.setMaxInactiveInterval(10*60);
 				
 				// 派遣器把控制權轉交給前端畫面(相對路徑)
-				RequestDispatcher dispatcher = request.getRequestDispatcher("login_ok.jsp");
-				dispatcher.forward(request, response);
+				//RequestDispatcher dispatcher = request.getRequestDispatcher("login_ok.jsp");
+				//dispatcher.forward(request, response);
 				
-				// ***return不可移除, 不然執行有問題時，後續處理的程式碼無法執行到
-				return;
+				// ***return不可移除, 不然執行有問題時，後續處理的程式碼無法執行到(因為改為json回傳所以先註解)
+				//return;
 				
 			} catch (LoginFailedException e) {
 				loginErrors.add(e.getMessage());
@@ -113,17 +125,41 @@ public class LoginServlet extends HttpServlet {
 			} catch (Exception e) {		// 幾乎是RuntimeException , 非預期的錯誤用父類別Exception拋出錯誤訊息
 				this.log("會員登入時，系統發生錯誤", e);  //for admin
 				loginErrors.add("系統發生錯誤" + e + ", 請聯絡Admin");		//for user
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 設定 500 錯誤狀態碼
+
 			}
 		}
 		
+		
+		// 如果有錯誤，則構建錯誤的 JSON 回應
+        if (!loginErrors.isEmpty()) {
+            jsonResponse.append("\"success\":false,");
+            jsonResponse.append("\"errorMessage\":\"" + String.join(", ", loginErrors) + "\"");
+        }
+
+        jsonResponse.append("}");
+
+        // 設置回應的格式為JSON
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        // 將 JSON 結果寫入回應
+        PrintWriter out = response.getWriter();
+        out.print(jsonResponse.toString());
+        
+        //使用 out.flush() 就可以保證這些數據立即被發送到前端，而不是繼續保留在緩衝區中。
+        //flush() 不會關閉流，它只會將緩衝區中的數據強制寫出。
+        out.flush();
+		
+        
 		//3.2 內部轉交(forward)登入失敗 login.jsp
 		
 		// 將物件傳給jsp
-		request.setAttribute("errors", loginErrors);
+		//request.setAttribute("errors", loginErrors);
 		
 		// 派遣器把控制權轉交給前端畫面(相對路徑)
-		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-		dispatcher.forward(request, response);
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+		//dispatcher.forward(request, response);
 		
 	}
 

@@ -4,7 +4,7 @@
 <!-- nav start -->
 		<nav>
 			<% 
-	            Customer member = (Customer)session.getAttribute("memberLogin");	
+	            Customer member = (Customer)session.getAttribute("member");	
 	        %>
 			
 			<a href="product_list.jsp">買果物 | </a>	<!-- ? 意思是產品列表預設為查詢全部產品或直接寫product_list.jsp -->

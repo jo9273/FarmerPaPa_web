@@ -1,4 +1,5 @@
 <%@page import="java.util.List"%>
+<%@page import="java.time.LocalDate"%>
 <%@page pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -49,14 +50,14 @@
 			<%}else{ %>
 
 				//進入修改時帶入會員資料
-				$("input[name=email]").val('${sessionScope.memberLogin.getEmail()}');
-				$("input[name=password]").val('${sessionScope.memberLogin.getPassword()}');
-				$("input[name=phone]").val('${sessionScope.memberLogin.getPhone()}');
-				$("input[name=name]").val('${sessionScope.memberLogin.getName()}');
-				$("input[name=birthday]").val('${sessionScope.memberLogin.getBirthday()}');
-				$("input[name=gender][value=${sessionScope.memberLogin.getGender()}]").prop('checked', 'true');
-				$("textarea[name=address]").text('${sessionScope.memberLogin.getAddress()}');
-				$("input[name=subscribed]").prop('checked', ${sessionScope.memberLogin.isSubscribed()});
+				$("input[name=email]").val('${sessionScope.member.getEmail()}');
+				$("input[name=password]").val('${sessionScope.member.getPassword()}');
+				$("input[name=phone]").val('${sessionScope.member.getPhone()}');
+				$("input[name=name]").val('${sessionScope.member.getName()}');
+				$("input[name=birthday]").val('${sessionScope.member.getBirthday()}');
+				$("input[name=gender][value=${sessionScope.member.getGender()}]").prop('checked', 'true');
+				$("textarea[name=address]").text('${sessionScope.member.getAddress()}');
+				$("input[name=subscribed]").prop('checked', ${sessionScope.member.isSubscribed()});
 					
 			<%} %>
 			}
