@@ -127,19 +127,21 @@
 	margin-right: 5px;
 }
 
-#theCheckbox, #update-pwd-checkbox, #the-buyer-checkbox, #shipping-home, 
-#shipping-cvs, #shipping-store, #payment-card, #payment-atm, #payment-cvs{
+#theCheckbox, #update-pwd-checkbox, #the-buyer-checkbox{
 	width: 20px;
 	height: 20px;
 	margin-right: 5px;
 }
 
 #theErrorsDiv{
-	color:darkred;
-	background-color:lightgray
+	color: #f04624;
+	background-color:#e6dd9c;
+	text-align: center;
 }
 
-
+#update-disabled{
+	background: lightgray;
+}
 
 
 

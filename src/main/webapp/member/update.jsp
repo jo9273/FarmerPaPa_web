@@ -36,22 +36,20 @@
 				repopulateFormData();
 		
 			}
-			
+				
+			//失敗後，帶入剛才輸入的form data
 			function repopulateFormData(){
-				$("input[name=email]").val('<%=request.getParameter("email")%>');
-				$("input[name=password]").val('<%=request.getParameter("password")%>');
+				$("input[name=email]").val('<%= request.getParameter("email")%>');
 				$("input[name=phone]").val('<%=request.getParameter("phone")%>');
 				$("input[name=name]").val('<%=request.getParameter("name")%>');
-				$("input[name=birthday]").val('<%=request.getParameter("birthday")%>');
+				$("input[name=birthday]").val('<%= request.getParameter("birthday")%>');
 				$("input[name=gender][value=<%=request.getParameter("gender")%>]").prop('checked', 'true');
 				$("textarea[name=address]").text('<%=request.getParameter("address")%>');
 				$("input[name=subscribed]").prop('checked', <%=request.getParameter("subscribed")!=null%>);
 		
 			<%}else{ %>
-
-				//進入修改時帶入會員資料
+				//進入修改時帶入已登入的會員資料
 				$("input[name=email]").val('${sessionScope.member.getEmail()}');
-				$("input[name=password]").val('${sessionScope.member.getPassword()}');
 				$("input[name=phone]").val('${sessionScope.member.getPhone()}');
 				$("input[name=name]").val('${sessionScope.member.getName()}');
 				$("input[name=birthday]").val('${sessionScope.member.getBirthday()}');
@@ -82,6 +80,9 @@
 			        // 取消勾選時隱藏舊密碼和新密碼輸入框
 			        $('#oldPassword').closest('.form-detail').hide();
 			        $('#newPassword').closest('.form-detail').hide();
+			        
+			        $('#oldPassword').val('');
+			        $('#newPassword').val('');
 			    }
 			}
 
@@ -99,15 +100,6 @@
 		
 		<%@include file="../subviews/header.jsp" %>
 		
-		<% 
-			List<String> updateErrors = (List<String>)request.getAttribute("updateErrors"); 
-		%>
-		<div id="theErrorsDiv">
-			<%
-				out.println(updateErrors != null ? updateErrors : "");
-			%>
-		
-		</div>
 		<div class="pageContent">
 			<div class="updateContent">	
 					<h2>修改會員資料</h2>
@@ -119,7 +111,7 @@
 									<label>帳號：</label>
 								</div>
 								<div class="row-content">
-									<input type="email" name="email" disabled readonly placeholder="請輸入email">
+									<input id="update-disabled" type="email" name="email"  readonly placeholder="請輸入email">
 								</div>
 							</div>
 							
@@ -172,7 +164,7 @@
 				                	<label><sup>*</sup>生日：</label>
 				                </div>
 				                <div class="row-content">
-				                	<input type="date" name="birthday" disabled max="<%= LocalDate.now().plusYears(-Customer.MIN_AGE)%>">
+				                	<input id="update-disabled" type="date" name="birthday" readonly max="<%= LocalDate.now().plusYears(-Customer.MIN_AGE)%>">
 				            	</div>
 				            </div>
 				
@@ -207,8 +199,18 @@
 									<span>我願意訂閱電子報</span>
 								</div>
 				            </div>
-				
-							<!-- <input type="submit" value="送出">  -->
+
+							<%
+							List<String> updateErrors = (List<String>) request.getAttribute("updateErrors");
+							%>
+							<div id="theErrorsDiv">
+								<%
+								out.println(updateErrors != null ? updateErrors : "");
+								%>
+		
+							</div>
+
+					<!-- <input type="submit" value="送出">  -->
 							<button type="submit">送出</button>
 						
 						</form>

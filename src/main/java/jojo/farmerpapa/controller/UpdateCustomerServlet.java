@@ -1,6 +1,7 @@
 package jojo.farmerpapa.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jojo.farmerpapa.entity.Customer;
+import jojo.farmerpapa.entity.VIP;
 import jojo.farmerpapa.exception.DataInvalidException;
 import jojo.farmerpapa.exception.FarmerpapaException;
 import jojo.farmerpapa.service.CustomerService;
@@ -45,48 +47,93 @@ public class UpdateCustomerServlet extends HttpServlet {
 		
 		Customer member = (Customer)session.getAttribute("member");
 		
-		// 1. 讀取request的form data:
+		// 檢查必要欄位是否輸入
+		if(member == null) {
+			updateErrors.add("會員資料有誤，請重新登入");
+			response.sendRedirect("../");
+			
+			return;
+		}
 		
+		// 1.讀取request的form data:
+		// 由於 email 和 birthday 不能被修改，從原會員資料中取得
+		//String email = member.getEmail();
+		//LocalDate birthday = member.getBirthday(); 
+		
+		String email = member.getEmail();
+		String changePwd = request.getParameter("changePwd");
 		String password = request.getParameter("password");
+		String newPassword = request.getParameter("newPassword");	
 		String phone = request.getParameter("phone");
 		String name = request.getParameter("name");
+		LocalDate birthday = member.getBirthday();
 		String gender = request.getParameter("gender");
 		String address = request.getParameter("address");
 		String subscribed = request.getParameter("subscribed");
 		
-		// 檢查必要欄位是否輸入
 		
-		if(password == null || password.length() == 0) updateErrors.add("必須輸入密碼");
-		if(phone == null || (phone = phone.trim()).length() == 0) updateErrors.add("必須輸入手機號碼");
-		if(name == null || (name = name.trim()).length() == 0) updateErrors.add("必須輸入姓名");
-		if(gender == null || gender.length() != 1) updateErrors.add("必須選擇性別");
 		
+		if(!member.getEmail().equals(email))
+			updateErrors.add("Email為帳號，不可修改");
+			
+		//if(!member.getBirthday().equals(birthday))
+		//	updateErrors.add("生日不可修改");
+		
+		if(phone == null || (phone = phone.trim()).length() == 0) 
+			updateErrors.add("必須輸入手機號碼");
+		
+		if(name == null || (name = name.trim()).length() == 0) 
+			updateErrors.add("必須輸入姓名");
+		
+		if(gender == null || gender.length() != 1) 
+			updateErrors.add("必須選擇性別");
+	
+			
+		if(changePwd != null) {
+			if(!member.getPassword().equals(password)){
+				updateErrors.add("舊密碼不正確!");
+				
+			}
+			if(newPassword == null || newPassword.length() == 0){
+					updateErrors.add("必須填寫新密碼");
+				}else {
+					password = newPassword;
+				}
+					
+			}else {
+				password = member.getPassword();
+			}
+			
+				
 		
 		// 2. 檢查無誤才呼叫商業邏輯:CustomerService.register
 		if(updateErrors.isEmpty()) {
-			Customer c = new Customer();
+			Customer c = null;
 			
 			try {
+				c = member.getClass().newInstance();
+			} catch (InstantiationException|IllegalAccessException e) {
+				c = new Customer(); 
+			}
+			
+			try {
+				c.setEmail(email);
 				c.setPassword(password);
 				c.setPhone(phone);
 				c.setName(name);
+				c.setBirthday(birthday);
 				c.setGender(gender.charAt(0));
 				c.setAddress(address);
 				c.setSubscribed(subscribed != null);
-						
+				
 				CustomerService service = new CustomerService();
 				service.updateCustomer(c);
 				
+				session.setAttribute("member", c);//取代session中的舊會員資料
+				
 				// 3.1 內部轉交(forward)修改成功 uptade.jsp
 				// 將物件傳給jsp
-				request.setAttribute("member", c);
-					
-				// 派遣器把控制權轉交給前端畫面(相對路徑)
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
-				dispatcher.forward(request, response);
-						
-				// ***return不可移除, 不然執行有問題時，後續處理的程式碼無法執行到
+				response.sendRedirect("../");
 				return;
 						
 			} catch (DataInvalidException e) {
@@ -111,8 +158,6 @@ public class UpdateCustomerServlet extends HttpServlet {
 		// 派遣器把控制權轉交給前端畫面(相對路徑)
 		RequestDispatcher dispatcher = request.getRequestDispatcher("update.jsp");
 		dispatcher.forward(request, response);
-		
-		
 		
 	}
 

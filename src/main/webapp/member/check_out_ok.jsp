@@ -12,7 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/cart.css">
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/footer.css">
 		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
-    	
+    	<script type="text/javascript" src="/fpapa/js/loginCheck.js"></script>
     	<script></script>
         
     	<style></style>
@@ -46,6 +46,11 @@
 					<h2>購買完成, 訂單已成立</h2>
 					<img alt="empty" src="../images/order-confirmed.png">
 					<a class="empty-a" href="../">回首頁</a>
+				</div>
+				
+				<div>
+					<input id="login-check" type="button" value="歷史訂單" onclick='location.href="orders_history.jsp";'>
+					<input id="login-check" type="button" value="檢視訂單" onclick='location.href="order.jsp?orderId=1";'>
 				</div>
 		
 			</div>
