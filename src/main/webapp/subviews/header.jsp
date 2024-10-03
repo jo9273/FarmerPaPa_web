@@ -52,18 +52,27 @@
 					        %>
 							<% if(member == null){ %>
 							
+							
 							<span id="loginTrigger">
 								會員登入/註冊
 								<img alt="會員登入/註冊" src="/fpapa/images/user-profile.png">
 									<!--  <a href="/fpapa/register.jsp">會員註冊</a> -->	
-							</span>
+							</span>							
 							
 						<% 	}else{ %>
 						  	
 						  
 							<!--<span>會員專區/登出</span> -->
+							<div class="dropdown">
+								<span>會員專區</span>
+								<div class="for-member">
+									<h4>會員專區</h4>
+									<hr>
+									<a id="login-check" href="<%= request.getContextPath()%>/member/update.jsp">修改會員資料</a>
+									<a id="login-check" href="<%= request.getContextPath()%>/member/orders_history.jsp">查詢訂單</a>
+								</div>
+							</div>
 							
-							<a href="#">會員專區</a>
 							<a href="<%= request.getContextPath()%>/logout.do">登出</a>
 							
 							<img alt="會員專區/登出" src="/fpapa/images/user_circle_icon.png">

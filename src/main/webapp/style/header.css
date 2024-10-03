@@ -84,7 +84,6 @@ header{
   	align-items: center;
 }
 
-
 /* Lightbox 背景 */
 .modal {
 	color: #0b4227;
@@ -122,6 +121,42 @@ header{
     right: 20px;
     font-size: 35px;
     cursor: pointer;
+}
+
+
+
+.dropdown{
+	position: relative;
+  	display: inline-block;
+}
+.dropdown:hover .for-member{
+	display: block;
+}
+
+.for-member{
+	display: none;
+  	position: absolute;
+  	background-color: #0b4227ee;
+  	text-align: center;
+  	min-width: 160px;
+  	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  	z-index: 2000;
+}
+
+.for-member hr{
+	width: 70%;
+	color:#e6dd9c
+}
+
+.for-member a{
+  	padding: 12px 16px;
+  	text-decoration: none;
+  	display: block;
+  	margin: 0px;
+}
+
+.for-member a:hover{
+	color: #f04624;
 }
 
 .cart-a{
