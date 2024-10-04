@@ -8,6 +8,7 @@ header{
 	padding: 10px;
 	position: fixed; /* 固定在頁面頂部 */
 	z-index: 1000; /* 確保 header 位於頁面最上層 */
+	box-sizing: border-box;
 }
 
 .headerContent{
@@ -20,7 +21,7 @@ header{
 
 
 .menu {
-	flex: 1;
+	flex: 1.5;
 	display: inline-block;
 	text-align: left;
 }
@@ -31,9 +32,9 @@ header{
 	text-decoration: none;
 	color:#E3E3DC;
 }
-
+ 
 .logo{
-	flex: 2;
+	flex: 1;
 	text-align: center;
 }
 
@@ -44,7 +45,7 @@ header{
 
 
 .headerActions{
-	flex: 1;
+	flex: 1.5;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
@@ -141,6 +142,11 @@ header{
   	min-width: 160px;
   	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   	z-index: 2000;
+  	border-radius: 5px;
+}
+
+.for-member h4{
+	margin: 10px auto;
 }
 
 .for-member hr{

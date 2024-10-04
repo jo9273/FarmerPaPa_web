@@ -9,6 +9,69 @@
 	
 }
 
+#banner-outer{
+	position: relative;
+	width: 753px;
+	overflow: hidden;
+	margin: auto;
+}
+
+#banners{
+	position: relative;
+	width: 6024px;
+	display: flex;
+	left:-753px;
+}
+
+
+.banner{
+	width: 753px;
+}
+
+
+#prev, #next {
+	position: absolute;
+	width: 30px;
+	height: 100%;
+	color: #f04624;
+	cursor: pointer;
+	font-size: 3em;
+	top: 35%;
+	opacity: 0.5;
+}
+
+#prev {
+	left: 0px;
+}
+
+#next {
+	right: 0px;
+}
+
+#prev:hover, #next:hover {
+	opacity: 0.9;
+}
+
+#dots {
+	width: 250px;
+	/*(16+5x2)x5=130px*/
+	margin: auto;
+	display: flex;
+}
+
+.dot {
+	width: 16px;
+	height: 16px;
+	background-color: gray;
+	border-radius: 50%;
+	margin: 5px;
+}
+
+.dot:first-child {
+	background-color: white;
+}
+
+
 .productContent section{
 	flex-grow: 1;
 	width: 15%;

@@ -68,12 +68,11 @@
 								<div class="for-member">
 									<h4>會員專區</h4>
 									<hr>
-									<a id="login-check" href="<%= request.getContextPath()%>/member/update.jsp">修改會員資料</a>
-									<a id="login-check" href="<%= request.getContextPath()%>/member/orders_history.jsp">查詢訂單</a>
+									<a href="<%= request.getContextPath()%>/member/update.jsp">修改會員資料</a>
+									<a href="<%= request.getContextPath()%>/member/orders_history.jsp">查詢訂單</a>
+									<a href="<%= request.getContextPath()%>/logout.do">登出</a>
 								</div>
 							</div>
-							
-							<a href="<%= request.getContextPath()%>/logout.do">登出</a>
 							
 							<img alt="會員專區/登出" src="/fpapa/images/user_circle_icon.png">
 							
