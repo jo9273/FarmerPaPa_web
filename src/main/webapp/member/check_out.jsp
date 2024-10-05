@@ -1,6 +1,7 @@
 <%@page import="jojo.farmerpapa.entity.ShippingType"%>
 <%@page import="jojo.farmerpapa.entity.ShoppingCart"%>
 <%@page import="jojo.farmerpapa.entity.PaymentType"%>
+<%@page import="jojo.farmerpapa.entity.Order"%>
 <%@page import="jojo.farmerpapa.entity.SpecialOffer"%>
 <%@page import="jojo.farmerpapa.entity.CartItem"%>
 <%@page import="java.util.Set"%>
@@ -382,7 +383,7 @@
 					<section>
 						<details>
 							<summary class="summary">
-								共<%= cart.getTotalQuantity() %>件, 總金額: <span id="totalAmountWithFee"><%= cart.getTotalAmount() %></span>元 (點選即可看到明細)
+								共<%= cart.getTotalQuantity() %>件, 總金額(含運費及手續費): <span id="totalAmountWithFee"><%= cart.getTotalAmount() %></span>元 (點選即可看到明細)
 							</summary>
 							<table class="cartDetails">
 								<caption>購物明細</caption>
@@ -446,6 +447,11 @@
 									</tr>
 									<tr class="table-count">
 										<td colspan="5">產品總金額：<span id="totalAmount"><%= cart.getTotalAmount() %></span>元</td>
+									</tr>
+									<tr class="table-count">
+										<td colspan="5">運費：
+											<span id="shippingFee"></span>元
+										</td>
 									</tr>
 								</tfoot>	
 							</table>

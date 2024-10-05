@@ -23,24 +23,21 @@
 			var bnIndex = 1;
 			var bnArray = ["banner_1.jpg","banner_2.jpg","banner_1.jpg","banner_2.jpg","banner_1.jpg","banner_2.jpg"];
 			var bnCount = bnArray.length;
-			var interval = 3000; // 3 秒
+			var interval = 3000;  //3 秒
             var timer;
-            var isAnimating = false; // 添加動畫狀態旗標
+            var isAnimating = false; //用來判斷動畫狀態
 		
 			function init() {
-				// 複製圖片陣列，並在開頭和結尾添加額外的圖片
+				// 複製banner陣列，並在開頭和結尾個加一張圖，以用來做循環效果
                 var extendedBns = [];
-                extendedBns.push(bnArray[bnCount - 1]); // 最後一張圖片
+                extendedBns.push(bnArray[bnCount - 1]); // 最後一張banner
                 extendedBns = extendedBns.concat(bnArray);
-                extendedBns.push(bnArray[0]); // 第一張圖片
+                extendedBns.push(bnArray[0]); // 第一張banner
                 
-             // 動態放入圖片
+             	// 動態放入banner
                 for (var i = 0; i < extendedBns.length; i++) {
                     $('#banner-inner').append("<img class='banner' src='images/" + extendedBns[i] + "'>");
                 }
-
-                // 設定輪播內部的寬度
-                //$('#banner-inner').css('width', (extendedBns.length * 100) + '%');
 
                 // 動態生成點點
                 for (var i = 0; i < bnCount; i++) {
@@ -56,7 +53,7 @@
                 $('#prev').on('click', prevSlide);
                 $('.dot').on('click', function () {
                     var index = $(this).data('index');
-                    goToSlide(index + 1); // 因為有一張額外的圖片，所以加 1
+                    goToSlide(index + 1); // 因為有一張額外的banner，所以加 1
                 });
 
                 // 開始自動輪播
@@ -80,7 +77,7 @@
                 resetTimer();
             }
 
-            // 跳轉到指定的幻燈片
+            // 跳轉到指定的banner
             function goToSlide(index) {
             	if (isAnimating) return; // 若動畫正在進行，則不執行
             	bnIndex = index;
@@ -146,7 +143,7 @@
                 startTimer();
             }
 
-            // 處理無縫循環
+            // 處理循環
             $('#banner-inner').on('transitionend', function () {
                 if (bnIndex === 0) {
                     $('#banner-inner').css('transition', 'none');
@@ -261,9 +258,21 @@
 							%>		
 									<div class="productItem">
 										<a href="product_detail.jsp?productId=<%= p.getId() %>"><img src="<%= p.getPhotoUrl() %>"></a>    <!-- TODO:ajax+json -->
-										<a href="product_detail.jsp?productId=<%= p.getId() %>"><h4><%= p.getName() %></h4></a>			 <!-- 同步GET請求 -->
-										
-										<div>售價$ <%= p.getUnitPrice() %> | 優惠折扣: <%= p instanceof SpecialOffer ? ((SpecialOffer)p).getDiscountString(): "" %></div>
+										<a href="product_detail.jsp?productId=<%= p.getId() %>"> <!-- 同步GET請求 -->
+											<div class="product-name">
+												<h4><%= p.getName() %></h4>		 
+											</div>
+											
+											<div class="productPrice">
+												<%if(p instanceof SpecialOffer){ %>
+													<span class="list-price">原價：<%= ((SpecialOffer)p).getListPrice() %>元</span>
+													<span class="discount">折扣：<%= ((SpecialOffer)p).getDiscountString()%></span>
+													<span class="price">優惠價：<%= ((SpecialOffer)p).getUnitPrice()%></span>
+												<%}else{ %>
+													<span class="price">售價： <%= p.getUnitPrice() %> </span>
+												<%}%>
+											</div>
+										</a>	
 									</div>
 									
 							<%	} %>

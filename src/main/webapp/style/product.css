@@ -79,7 +79,6 @@
 
 .productContent section{
 	flex-grow: 1;
-	width: 15%;
 	text-align: center;
 	padding: 0px 25px 0px 0px;
 	display: inline-block;
@@ -135,7 +134,7 @@
 }
 
 #productListDiv{
-    margin: 0 auto; /* 將整個容器水平居中 */
+    margin: -20px 0px auto;
 }
 
 .productItem{
@@ -144,10 +143,18 @@
 	width: 250px;
 	height: 370px;
 	vertical-align: top;
-	box-shadow: lightgray 2px 3px;
-	margin: 25px ;
-	}	/*border: lightgray 1px solid ;*/
+	border-radius: 10px;
+  	margin: 25px;
+  	border: black 2px solid;
+}
 	
+
+.productItem h4{
+	text-align: left;
+	color: #f04624;
+	margin: 15px auto;
+	word-spacing: 3px;
+}
 
 .productItem a{
 	text-decoration: none;
@@ -155,12 +162,42 @@
 }
 	
 .productItem img{
+	border-radius: 10px;
 	width: 250px;
 	display: block;
 	margin: auto
-	}
+}
 
-	
-.productItem div{
-	text-align: center;
-	}
+.product-name{
+	margin: 0px 18px;
+	height: 50px;
+}
+
+.productPrice{
+	margin: 0px 18px;
+	text-align: right;
+}
+
+.list-price{
+	display: inline-block;
+	font-size: 14px;
+	text-decoration: line-through;
+	text-decoration-color: #f04624; 
+	text-decoration-thickness: 2px;	
+}
+
+
+.discount{
+	display: inline-block;
+	margin-left: 10px;
+	font-size:14px;
+}
+
+.price{
+	display: block;
+	margin-top:10px;
+	color: #f04624;
+	font-size:16px;
+}
+
+
