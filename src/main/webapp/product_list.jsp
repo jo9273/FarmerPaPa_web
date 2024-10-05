@@ -14,9 +14,154 @@
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/fpapa.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/product.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/footer.css">
+		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
+		
+		<script type="text/javascript">
+			
+			$(document).ready(init);
+			
+			var bnIndex = 1;
+			var bnArray = ["banner_1.jpg","banner_2.jpg","banner_1.jpg","banner_2.jpg","banner_1.jpg","banner_2.jpg"];
+			var bnCount = bnArray.length;
+			var interval = 3000; // 3 秒
+            var timer;
+            var isAnimating = false; // 添加動畫狀態旗標
+		
+			function init() {
+				// 複製圖片陣列，並在開頭和結尾添加額外的圖片
+                var extendedBns = [];
+                extendedBns.push(bnArray[bnCount - 1]); // 最後一張圖片
+                extendedBns = extendedBns.concat(bnArray);
+                extendedBns.push(bnArray[0]); // 第一張圖片
+                
+             // 動態放入圖片
+                for (var i = 0; i < extendedBns.length; i++) {
+                    $('#banner-inner').append("<img class='banner' src='images/" + extendedBns[i] + "'>");
+                }
 
-		<style>
-		</style>
+                // 設定輪播內部的寬度
+                //$('#banner-inner').css('width', (extendedBns.length * 100) + '%');
+
+                // 動態生成點點
+                for (var i = 0; i < bnCount; i++) {
+                    $('#dots').append('<span class="dot" data-index="' + i + '"></span>');
+                }
+                $('.dot').eq(0).addClass('active-dot');
+
+                // 初始位置
+                $('#banner-inner').css('transform', 'translateX(-100%)');
+
+                // 綁定事件
+                $('#next').on('click', nextSlide);
+                $('#prev').on('click', prevSlide);
+                $('.dot').on('click', function () {
+                    var index = $(this).data('index');
+                    goToSlide(index + 1); // 因為有一張額外的圖片，所以加 1
+                });
+
+                // 開始自動輪播
+                startTimer();
+	
+			}
+			
+			// 下一張
+            function nextSlide() {
+            	if (isAnimating) return; // 若動畫正在進行，則不執行
+            	bnIndex++;
+                updateCarousel();
+                resetTimer();
+            }
+
+            // 上一張
+            function prevSlide() {
+            	if (isAnimating) return; // 若動畫正在進行，則不執行
+            	bnIndex--;
+                updateCarousel();
+                resetTimer();
+            }
+
+            // 跳轉到指定的幻燈片
+            function goToSlide(index) {
+            	if (isAnimating) return; // 若動畫正在進行，則不執行
+            	bnIndex = index;
+                updateCarousel();
+                resetTimer();
+            }
+
+            // 更新輪播狀態
+            function updateCarousel() {
+            	isAnimating = true; // 設置動畫狀態為進行中
+                $('#banner-inner').css('transition', 'transform 0.5s ease-in-out');
+                $('#banner-inner').css('transform', 'translateX(-' + (bnIndex * 100) + '%)');
+
+                // 更新點點的狀態
+                var dotIndex = bnIndex - 1;
+                if (dotIndex >= bnCount) {
+                    dotIndex = 0;
+                } else if (dotIndex < 0) {
+                    dotIndex = bnCount - 1;
+                }
+                $('.dot').removeClass('active-dot');
+                $('.dot').eq(dotIndex).addClass('active-dot');
+                
+                // 動態綁定 transitionend 事件
+                $('#banner-inner').one('transitionend webkitTransitionEnd oTransitionEnd', function() {
+                    if (bnIndex === 0) {
+                        // 無縫跳轉到最後一張
+                        $('#banner-inner').css('transition', 'none');
+                        bnIndex = bnCount;
+                        $('#banner-inner').css('transform', 'translateX(-' + (bnIndex * 100) + '%)');
+                        // 強制重繪，確保 transition 屬性已移除
+                        setTimeout(function() {
+                            $('#banner-inner').css('transition', 'transform 0.5s ease-in-out');
+                            isAnimating = false; // 動畫結束，允許新的點擊
+                        }, 0);
+                    } else if (bnIndex === bnCount + 1) {
+                        // 無縫跳轉到第一張
+                        $('#banner-inner').css('transition', 'none');
+                        bnIndex = 1;
+                        $('#banner-inner').css('transform', 'translateX(-' + (bnIndex * 100) + '%)');
+                        // 強制重繪，確保 transition 屬性已移除
+                        setTimeout(function() {
+                            $('#banner-inner').css('transition', 'transform 0.5s ease-in-out');
+                            isAnimating = false; // 動畫結束，允許新的點擊
+                        }, 0);
+                    } else {
+                        // 正常情況
+                        isAnimating = false; // 動畫結束，允許新的點擊
+                    }
+                });
+            }
+
+            // 自動輪播
+            function startTimer() {
+                timer = setInterval(function () {
+                    nextSlide();
+                }, interval);
+            }
+
+            // 重置計時器
+            function resetTimer() {
+                clearInterval(timer);
+                startTimer();
+            }
+
+            // 處理無縫循環
+            $('#banner-inner').on('transitionend', function () {
+                if (bnIndex === 0) {
+                    $('#banner-inner').css('transition', 'none');
+                    bnIndex = bnCount;
+                    $('#banner-inner').css('transform', 'translateX(-' + (bnIndex * 100) + '%)');
+                } else if (bnIndex === bnCount + 1) {
+                    $('#banner-inner').css('transition', 'none');
+                    bnIndex = 1;
+                    $('#banner-inner').css('transform', 'translateX(-' + (bnIndex * 100) + '%)');
+                }
+            });
+
+           
+			
+		</script>
 		
 	</head>
 	<body>
@@ -25,11 +170,26 @@
 		<%@include file="./subviews/header.jsp" %>
 				
 		<div class="pageContent">
+			<!-- 
 			<div>
 			<img class="banner" alt="banner" src="images/banner01.jpg">
 			</div>
-	
-			<div class="productContent">	
+			 -->
+
+			<div id="banner-outer">
+				<div id="banner-inner">
+				</div>
+				
+				<div class="carousel-controls">
+					<div id="prev" >&#10094;</div>
+					<div id="next">&#10095;</div>
+				</div>
+				
+				<div id="dots"></div>
+			</div>
+
+
+		<div class="productContent">	
 				<section>
 					<div class="category">
 					<h3>當季新品</h3>

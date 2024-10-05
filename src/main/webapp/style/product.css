@@ -10,42 +10,46 @@
 }
 
 #banner-outer{
-	position: relative;
-	width: 753px;
-	overflow: hidden;
-	margin: auto;
+	 position: relative;
+     overflow: hidden;
+     width: 100%;
+     margin: auto;
 }
 
-#banners{
-	position: relative;
-	width: 6024px;
+#banner-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+
+.banner {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.carousel-controls {
+	position: absolute;
+	top: 50%;
+	width: 100%;
 	display: flex;
-	left:-753px;
+	justify-content: space-between;
+	transform: translateY(-50%);
 }
-
-
-.banner{
-	width: 753px;
-}
-
 
 #prev, #next {
-	position: absolute;
-	width: 30px;
-	height: 100%;
-	color: #f04624;
-	cursor: pointer;
-	font-size: 3em;
-	top: 35%;
-	opacity: 0.5;
+	 cursor: pointer;
+     font-size: 2em;
+     color: #f04624;
+     padding: 0 10px;
+     user-select: none;   
 }
 
 #prev {
-	left: 0px;
+	left: 10px;
 }
 
 #next {
-	right: 0px;
+	right: 10px;
 }
 
 #prev:hover, #next:hover {
@@ -53,24 +57,25 @@
 }
 
 #dots {
-	width: 250px;
-	/*(16+5x2)x5=130px*/
-	margin: auto;
-	display: flex;
+	position: absolute;
+	bottom: 15px;
+	width: 100%;
+	text-align: center;
 }
 
 .dot {
-	width: 16px;
-	height: 16px;
-	background-color: gray;
+	cursor: pointer;
+	height: 12px;
+	width: 12px;
+	margin: 0 5px;
+	background-color: #e6dd9c;
 	border-radius: 50%;
-	margin: 5px;
-}
+	display: inline-block;}
 
-.dot:first-child {
-	background-color: white;
-}
 
+.active-dot {
+    background-color: #f04624;
+}
 
 .productContent section{
 	flex-grow: 1;
