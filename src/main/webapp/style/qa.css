@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.qa-content{
+	width: 70%;
+  	margin: 50px auto;
+}
+
+
+.qa-content h2{
+	text-align: center;
+}
+

@@ -196,12 +196,14 @@ header{
 
 .keyword{
 	padding: 10px;
-	border : none;
+	border: none;
 	border-radius: 35px;
-	background-color :  #e3e3dc;
-	outline:none;
+	background-color: #e3e3dc;
+	outline: none;
 	width: 230px;
 	height: 30px;
+	font-family: inherit;
+	font-size: inherit;
 }
 
 .searchForm button{

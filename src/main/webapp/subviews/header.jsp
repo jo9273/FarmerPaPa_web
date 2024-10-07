@@ -34,7 +34,7 @@
 				<div class="menu">
 					<a href="<%= request.getContextPath()%>/product_list.jsp">買果物</a>	<!-- ? 意思是產品列表預設為查詢全部產品或直接寫product_list.jsp -->
 					<a href="<%= request.getContextPath()%>/news_list.jsp">最新情報</a>
-					<a href="">常見問題</a>
+					<a href="<%= request.getContextPath()%>/qa.jsp">常見問題</a>
 				</div>
 				
 				<div class="logo">

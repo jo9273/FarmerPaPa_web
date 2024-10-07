@@ -145,15 +145,14 @@
 	vertical-align: top;
 	border-radius: 10px;
   	margin: 25px;
-  	border: black 2px solid;
+  	border: #0b4227 1px solid;
 }
 	
 
 .productItem h4{
 	text-align: left;
-	color: #f04624;
-	margin: 15px auto;
-	word-spacing: 3px;
+	color: #0b4227;
+	margin: 10px auto;
 }
 
 .productItem a{
@@ -195,9 +194,9 @@
 
 .price{
 	display: block;
-	margin-top:10px;
-	color: #f04624;
-	font-size:16px;
+  	color: #f04624;
+  	font-size: 16px;
+  	font-weight: bold;
 }
 
 

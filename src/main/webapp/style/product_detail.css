@@ -106,41 +106,6 @@
 }
 
 
-
-
-.tabs {
-  overflow: hidden;
-  margin-top: 30px;
-}
-
-.tab-button {
-  background-color: #f1f1f1;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 10px 20px;
-  font-size: 16px;
-  margin-right: 5px;
-}
-
-.tab-button:hover {
-  background-color: #ddd;
-}
-
-/* tab的樣式 */
-.active-tab {
-  background-color: #ccc;
-}
-
-.tab-content {
-  display: none;
-  padding: 20px;
-  border: 1px solid #ccc;
-  margin-top: 10px;
-}
-
-
-
 /* HIDE RADIO */
 .spec input[type=radio] { 
 	position: absolute;
