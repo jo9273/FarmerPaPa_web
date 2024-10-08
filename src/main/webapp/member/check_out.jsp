@@ -171,7 +171,7 @@
 					</li>
 				</ul>
 
-				<form action="" method="">
+				<form action="check_out.do" method="post">
 					<section>
 						<h2 class="section-title">訂購人資料</h2>
 						<div class="form-detail">
