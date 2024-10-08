@@ -171,7 +171,7 @@
 					</li>
 				</ul>
 
-				<form action="check_out.do" method="post">
+				<form id="checkOutForm" action="check_out.do" method="post">
 					<section>
 						<h2 class="section-title">訂購人資料</h2>
 						<div class="form-detail">
@@ -251,7 +251,7 @@
 									<label><sup>*</sup>收件人姓名：</label>
 								</div>
 								<div class="row-content">	
-						       		<input id="recipt-name-home" type="text" name="name" required placeholder="請輸入姓名2~20字" minlength="2" maxlength="20">
+						       		<input id="recipt-name-home" type="text" name="sh-name" required placeholder="請輸入姓名2~20字" minlength="2" maxlength="20">
 								</div>
 							</div>
 							<div class="form-detail">
@@ -259,7 +259,7 @@
 									<label><sup>*</sup>收件人手機號碼：</label>
 								</div>
 								<div class="row-content">	
-									<input id="recipt-phone-home" type="tel" name="phone" required placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}">
+									<input id="recipt-phone-home" type="tel" name="sh-phone" required placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}">
 								</div>
 							</div>
 							
@@ -268,7 +268,7 @@
 									<label><sup>*</sup>收件人地址：</label>
 								</div>
 								<div class="row-content">	
-					           		<textarea id="recipt-address-home" name="address" required placeholder="請輸入地址" rows="2" cols="30"></textarea>
+					           		<textarea id="recipt-address-home" name="sh-address" required placeholder="請輸入地址" rows="2" cols="30"></textarea>
 								</div>
 							</div>
 							<div class="form-detail">
@@ -460,7 +460,7 @@
 					
 					<div class="cartAction">	
 						<input class="gotoshop-btn" type="button" value="再逛一下" onclick="location.href='../product_list.jsp';">		
-						<input id="login-check" class="checkout-btn" type="button" value="確認結帳" onclick="location.href='check_out.jsp';">
+						<input id="login-check" class="checkout-btn" type="submit" value="確認結帳">
 					</div>	
 
 				</form>
