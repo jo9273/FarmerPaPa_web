@@ -129,3 +129,25 @@
 	margin-right: 10px;
 	vertical-align: middle;
 }
+
+
+.specGrade select{
+	height: 30px;
+ 	width: 150px;
+}
+
+
+
+
+.addToCart-btn{
+	font-family: inherit;
+	display: inline-flex; 
+    margin: 10px;
+	background: #f04624;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 120px;
+    border: 0px;
+    color: #E3E3DC;
+	width: 200px;
+}

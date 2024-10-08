@@ -9,7 +9,18 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    	<title>product detail</title>
+		
+		<%	// 取得request中的queryString
+				String productId = "1"; //request.getParameter("productId");
+				Product p = null;
+				
+				ProductService pService = new ProductService();
+				if(productId != null && (productId = productId.trim()).length()>0){
+					p = pService.getProductById(productId);
+				}
+		%>
+		
+    	<title><%= p.getName()%></title>
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/header.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/fpapa.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/product_detail.css">
@@ -34,7 +45,8 @@
     			
     			// 預設打開第一個頁籤
     			$(".tab-button").on("click", tabClickHandler);
-    			openTabById('product-desc'); 
+    			openTabById('product-desc');
+    			$(".tab-button:first").addClass('active-tab');
     		}
     	
     		function changeSpecData(){
@@ -128,15 +140,7 @@
 		<%@include file="./subviews/header.jsp" %>
 		
 		<div class="pageContent">
-			<%	// 取得request中的queryString
-				String productId = "1"; //request.getParameter("productId");
-				Product p = null;
-				
-				ProductService pService = new ProductService();
-				if(productId != null && (productId = productId.trim()).length()>0){
-					p = pService.getProductById(productId);
-				}
-			%>
+			
 			<%
 				// 查無資料
 				if(p == null){
@@ -263,7 +267,7 @@
 									
 								</div>
 								<div>
-									<input type="submit" value="加入購物車">
+									<input class="addToCart-btn" type="submit" value="加入購物車">
 								</div>
 							</form>
 						</div>

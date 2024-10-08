@@ -203,7 +203,7 @@ header{
 	width: 230px;
 	height: 30px;
 	font-family: inherit;
-	font-size: inherit;
+	font-size: 14px;
 }
 
 .searchForm button{
