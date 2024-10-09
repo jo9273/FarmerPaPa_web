@@ -74,7 +74,7 @@
 								</div>
 							</div>
 							
-							<img alt="會員專區/登出" src="/fpapa/images/user_circle_icon.png">
+							<img alt="會員專區/登出" src="/fpapa/images/user-profile.png">
 							
 						<% } %>
 							

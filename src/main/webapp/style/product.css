@@ -11,9 +11,10 @@
 
 #banner-outer{
 	 position: relative;
-     overflow: hidden;
-     width: 100%;
-     margin: auto;
+	overflow: hidden;
+	width: 100%;
+	margin: auto;
+	top: -10px;
 }
 
 #banner-inner {
