@@ -8,32 +8,144 @@
 }
 
 .kv{
-	position: relative; 
-    width: 100%; /* 設置影片寬度自適應 */
-    max-width: 100%;
-    z-index: 0;  /* 位於 header 下層 */
+	position: relative;
+	width: 90%;
+	max-width: 100%;
+	z-index: 0;
+	top: 49px;
+	margin: 40px auto 0px;
 }
 
+
+.kv-outer  {
+	position: relative;
+	clip-path: ellipse(50% 100% at 50% 0%);
+	background-image: url('/fpapa/images/apples-6741164_1920.jpg');
+	background-size: cover;
+	background-position: center;
+	width: 100%;
+	height: 90.95vh;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.kv-image {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	clip-path: ellipse(0% 100% at 50% 100%);
+	animation-duration: 20s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+.kv-image:nth-child(1) {
+	animation-name: openFan1;
+}
+
+.kv-image:nth-child(2) {
+	animation-name: openFan2;
+}
+
+.kv-image:nth-child(3) {
+	animation-name: openFan3;
+}
+
+.kv-image:nth-child(4) {
+	animation-name: openFan4;
+}
+
+@keyframes openFan1 {
+    0% {
+        clip-path: ellipse(0% 100% at 50% 0%);
+    }
+    10% {
+        clip-path: ellipse(0% 100% at 50% 0%);
+    }
+    20% {
+        clip-path: ellipse(100% 100% at 50% 0%);
+    }
+    99.99% {
+        clip-path: ellipse(100% 100% at 50% 0%);
+    }
+    100% {
+        clip-path: ellipse(0% 100% at 50% 0%);
+    }
+}
+
+@keyframes openFan2 {
+    0% {
+        clip-path: ellipse(0% 100% at 50% 0%);
+    }
+    30% {
+        clip-path: ellipse(0% 100% at 50% 0%);
+    }
+    40% {
+        clip-path: ellipse(100% 100% at 50% 0%);
+    }
+    99.99% {
+        clip-path: ellipse(100% 100% at 50% 0%);
+    }
+    100% {
+         clip-path: ellipse(0% 100% at 50% 0%);
+    }
+}
+
+@keyframes openFan3 {
+     0% {
+         clip-path: ellipse(0% 100% at 50% 0%);
+     }
+     50% {
+         clip-path: ellipse(0% 100% at 50% 0%);
+     }
+     60% {
+         clip-path: ellipse(100% 100% at 50% 0%);
+     }
+     99.99% {
+         clip-path: ellipse(100% 100% at 50% 0%);
+     }
+     100% {
+         clip-path: ellipse(0% 100% at 50% 0%);
+     }
+}
+
+@keyframes openFan4 {
+     0% {
+         clip-path: ellipse(0% 100% at 50% 0%);
+     }
+     70% {
+         clip-path: ellipse(0% 100% at 50% 0%);
+     }
+     80% {
+         clip-path: ellipse(100% 100% at 50% 0%);
+     }
+     99.99% {
+         clip-path: ellipse(100% 100% at 50% 0%);
+     }
+     100% {
+         clip-path: ellipse(0% 100% at 50% 0%);
+     }
+}
+
+/* for video
 #indexKV{
-	width: 100%; /* 讓影片寬度隨螢幕大小變化 */
-    height: auto; /* 高度自適應 */
+	width: 100%; 讓影片寬度隨螢幕大小變化 
+    height: auto; 高度自適應 
 	position: relative;
 	top: -90px;
 }
-
+*/
 .kv h1{
 	position: absolute;
     top: 50%; /* 讓文字居中 */
     left: 50%;
     transform: translate(-50%, -50%); /* 將文字移到畫面的正中央 */
-    color: #0b4227; /* 文字顏色 */
-    font-size: 5vw; /* 使用 vw 作為字體大小單位，讓字體隨螢幕縮放 */
+    color: #e3e3dc; /* 文字顏色 */
+    font-size: 3.5vw; /* 使用 vw 作為字體大小單位，讓字體隨螢幕縮放 */
     font-weight: bold;
-    text-align: center; /* 讓文字居中對齊 */
-    padding: 10px 20px;
-    background-color: #FFFFFF80; /* 半透明背景讓文字更清晰 */
-    border-radius: 10px; /* 圓角效果 */
-	
+    text-align: center; /* 讓文字居中對齊 */	
 }
 
 

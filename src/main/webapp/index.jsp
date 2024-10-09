@@ -24,11 +24,19 @@
 		<div class="indexContent">	
 			<article>
 				<div class="kv">
-					<!--  <img id="indexKV" alt="banner" src="images/pic-1.jpg" > -->
-					<video id="indexKV" autoplay loop muted>
-    					<source src="/fpapa/images/index-1.mp4" type="video/mp4" >
-    				</video>    
-					
+					<div class="kv-outer">
+						<div class="kv-image" style="background-image: url('images/strawberries-5977280_1920.jpg');"></div>
+						<div class="kv-image" style="background-image: url('images/juniper-5831917_1920.jpg');"></div>
+						<div class="kv-image" style="background-image: url('images/tomatoes-5566741_1920.jpg');"></div>
+						<div class="kv-image" style="background-image: url('images/apples-6741164_1920.jpg');"></div>
+						
+						<!-- 
+						<video id="indexKV" autoplay loop muted>
+	    					<source src="/fpapa/images/index-1.mp4" type="video/mp4" >
+	    				</video>    
+						 -->
+					</div>
+						 
 					<h1>小農真心．果然新鮮</h1>
 				</div>
 				
