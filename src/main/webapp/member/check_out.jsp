@@ -21,6 +21,7 @@
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/footer.css">
 		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
     	<script type="text/javascript" src="/fpapa/js/loginCheck.js"></script>
+    	
     	<script>
     	 	$(init);
 			
@@ -108,24 +109,51 @@
 			    calculateFee();
 			}
 			
-			
+			<%
+    		double maxWithoutFee = new Order().MAX_WITHOUT_FEE;
+			%>
 			function calculateFee(){
 				//alert("calculateFee");
 				var amount = Number($("#totalAmount").text());
-				var shippingFee=0;
-				var paymentFee=0;
+				var defShippingFee = 0;  //原始運費
+				var shippingFee = 0;	 //實際運費
+				var waivedShippingFee = 0 //減免運費
+				//var paymentFee = 0;
+				var MAX_WITHOUT_FEE = <%= maxWithoutFee %>;
+				
 				if($("select[name=shippingType] option:selected").val()!=''){
-					shippingFee = Number($("select[name=shippingType] option:selected").attr("data-fee"));
+					defShippingFee = Number($("select[name=shippingType] option:selected").attr("data-fee"));
 				}
-				if($("select[name=paymentType] option:selected").val()!=''){
-					paymentFee = Number($("select[name=paymentType] option:selected").attr("data-fee"));
-				}
+				
+				//if($("select[name=paymentType] option:selected").val()!=''){
+				//	paymentFee = Number($("select[name=paymentType] option:selected").attr("data-fee"));
+				//}
+				
+				// 檢查是否達到免運門檻
+			    if(amount >= MAX_WITHOUT_FEE){
+			        waivedShippingFee = defShippingFee; // 被減免的運費金額
+			        shippingFee = 0; // 將運費設為 0
+			    }else{
+			    	shippingFee = defShippingFee;
+			    }
+				
+			 	// 更新運費的顯示
+			    $("#shippingFee").text(defShippingFee);
+			 	
+			 	// 更新免運費的顯示
+			    if(waivedShippingFee > 0){
+			        $("#free-shipping-row").show();
+			        $("#free-shipping").text(waivedShippingFee);
+			    } else {
+			        $("#free-shipping-row").hide();
+			    }
+				
 				//alert(amount+shippingFee+paymentFee);
-				$("#totalAmountWithFee").text(amount + shippingFee + paymentFee);				
+				$("#totalAmountWithFee").text(amount + shippingFee);
+				$("#totalAmountWithFee-tr").text(amount + shippingFee);
+					
 			}
-			
-			
-			
+					
     	</script>
         
     	
@@ -450,7 +478,17 @@
 									</tr>
 									<tr class="table-count">
 										<td colspan="5">運費：
-											<span id="shippingFee"></span>元
+											<span id="shippingFee">0</span>元
+										</td>
+									</tr>
+									<tr class="table-count" id="free-shipping-row" style="display:none;">
+										<td colspan="5">免運費：
+											-<span id="free-shipping">0</span>元
+										</td>
+									</tr>
+									<tr class="table-count">
+										<td colspan="5" class="totalAmountWithFee-tr">訂單總金額：
+											<span id="totalAmountWithFee-tr"><%= cart.getTotalAmount() %></span>元
 										</td>
 									</tr>
 								</tfoot>	

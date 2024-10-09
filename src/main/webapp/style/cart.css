@@ -215,7 +215,7 @@
   	text-align: center;
 }
 
-.update-btn, .gotoshop-btn, .checkout-btn {
+.update-btn, .gotoshop-btn, .checkout-btn, .orders-history-btn, .check-order-btn {
 	font-family: inherit;
 	display: inline-flex; 
     margin: 10px;
@@ -239,3 +239,8 @@
   	margin: 30px auto;
 }
 
+.totalAmountWithFee-tr{
+	color: #f04624;
+	font-size: 18px;
+	font-weight: 3px;
+}

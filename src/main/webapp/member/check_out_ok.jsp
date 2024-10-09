@@ -44,14 +44,14 @@
 				
 				<div class="check-out-ok">
 					<h2>購買完成, 訂單已成立</h2>
-					<img alt="empty" src="../images/order-confirmed.png">
-					<a class="empty-a" href="../">回首頁</a>
+					<img alt="order completed" src="../images/order-confirmed.png">
+					<input class="orders-history-btn" type="button" value="歷史訂單" onclick='location.href="orders_history.jsp";'>
+					<input class="check-order-btn" type="button" value="檢視訂單" onclick='location.href="order.jsp?orderId=1";'>
+					
 				</div>
 				
-				<div>
-					<input id="login-check" type="button" value="歷史訂單" onclick='location.href="orders_history.jsp";'>
-					<input id="login-check" type="button" value="檢視訂單" onclick='location.href="order.jsp?orderId=1";'>
-				</div>
+				
+									
 		
 			</div>
 		</div>
