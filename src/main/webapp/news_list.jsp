@@ -1,3 +1,7 @@
+<%@page import="java.util.Collections"%>
+<%@page import="jojo.farmerpapa.entity.News"%>
+<%@page import="jojo.farmerpapa.service.NewsService"%>
+
 <%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +19,33 @@
 	<body>
 		<%@include file="./subviews/header.jsp" %>
 		
+		<%
+			String category = request.getParameter("category");
+			String NewsYear = request.getParameter("year") ;
+					
+			NewsService nService = new NewsService();
+			List<News> list = null;
+					
+			if(category != null && (category.trim().length()>0)){
+				list = nService.getNewsByCategory(category);
+					
+			}else if(NewsYear != null && (NewsYear.trim().length()>0)){
+				int year = Integer.parseInt(NewsYear);
+				list =  nService.getNewsByYear(year);
+					
+			}else{
+				list = nService.getAllNews();
+			}
+			
+			// 撈取所有類別和年份，用於下拉選單
+	        List<String> categoryList = nService.getAllCategories();
+	        Collections.sort(categoryList);
 
+	        List<Integer> yearList = nService.getAllYears();
+	        Collections.sort(yearList, Collections.reverseOrder());
+		%>
+		
+		
 		<div class="pageContent">	<!-- fpapa -->
 			<div class="newsContent">
 				<div class="topInfoWrapper">	<!-- fpapa -->
@@ -23,66 +53,67 @@
 					<h1 class="topTitle">最新情報</h1>	<!-- fpapa -->
 					
 					<div class="filterWrapper">	<!-- fpapa -->
-					
-						<div class="filterSelectWrapper">	<!-- fpapa -->
-							<label for="select">類別</label>
-				  			<select id="select">
-					  				<option value="all">全部</option>
-					  				<option value="News">公告</option>
-					  				<option value="Promotions">優惠活動</option>
-					  				<option value="Knowsledge">小知識</option>
-							</select>
-							<img class="iconDropDown" src="">	<!-- fpapa -->
-						</div>
+						<form method="get" action="news_list.jsp">					
+							<div class="filterSelectWrapper">	<!-- fpapa -->
+								<label for="select">類別</label>
+					  			<select id="select" name="category" onchange="this.form.submit()">
+					  				<option value="">全部</option>
+                               		 <% for(String cat : categoryList){ %>
+                                	<option value="<%= cat %>" <%= cat.equals(category) ? "selected" : "" %>><%= cat %></option>
+                               		<% } %>
+								</select>
+							</div>
+						</form>
 						
-						<div class="filterTimeWrapper">		<!-- fpapa -->
-							<label for="time">時間</label>
-				  			<select id="time">
-					  				<option value="all">全部</option>
-					  				<option value="2024">2024</option>
-					  				<option value="2023">2023</option>
-					  				<option value="2022">2022</option>
-							</select>
-							<img class="iconDropDown" src="">	<!-- fpapa -->
-						</div>
+						<form method="get" action="news_list.jsp">	
+							<div class="filterTimeWrapper">		<!-- fpapa -->
+								<label for="year">時間</label>
+					  			<select id="year" name="year" onchange="this.form.submit()">
+						  			<option value="">全部</option>
+                               		<% for(Integer year : yearList){ %>
+                                	<option value="<%= year %>" <%= year.toString().equals(NewsYear) ? "selected" : "" %>><%= year %></option>
+                                	<% } %>
+								</select>
+							</div>
+						</form>
+						
 					</div>
 				</div>
-			
-				<div class="newsInfoList">	<!-- news -->
-					<a class="newsLink" href="news_detail.jsp?newsId=">
-						<div class="newsItem">	<!-- news -->
-								<div class="newsImg">
-									<img src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2FproductInfo%2Fcover%403x-undefined-TRSgnrqZei17252655062501.jpg?alt=media">
-								</div>
-									
-								<div class="newsDetail">
-									<span>2024/09/11</span>
-									<br>
-									<ul>
-										<li id="newsTag">小知識</li>
-									</ul>								
-									<p class="newsTitle">水蜜桃知識篇 - 日本果物共選場</p>
-									<p class="newsDescription">在台灣的我們之所以可以享用到美味的水蜜桃，有很大的原因是源自日本 _ 果物選果場 ( #共選場 )。</p>
-								</div>
-						</div>
-					</a>
-					<a class="newsLink" href="">
-						<div class="newsItem">	<!-- news -->
-								<div class="newsImg">
-									<img src="https://firebasestorage.googleapis.com/v0/b/wanwaninfo-public-tw/o/www.syunkaya.com.tw%2FproductInfo%2Fcover%403x-undefined-TRSgnrqZei17252655062501.jpg?alt=media">
-								</div>
-									
-								<div class="newsDetail">
-									<span>2024/09/11</span>
-									<br>
-									<ul>
-										<li id="newsTag">小知識</li>
-									</ul>								<p class="newsTitle">水蜜桃知識篇 - 日本果物共選場</p>
-									<p class="newsDescription">在台灣的我們之所以可以享用到美味的水蜜桃，有很大的原因是源自日本 _ 果物選果場 ( #共選場 )。</p>
-								</div>
-						</div>
-					</a>
+				
+				<% 	
+					if(list == null || list.size() == 0){
+				%>
+				<div class="noData">
+					<h2>查無最新情報資料</h2>
+					<img src="images/no_data.png">
 				</div>
+				<%}else{ %>	
+					
+				<div class="newsInfoList">	<!-- news -->
+					<%for(int i = 0 ; i < list.size() ; i++){
+						News news = list.get(i);
+					%>
+					<a class="newsLink" href="news_detail.jsp?newsId=<%= news.getId() %>">
+						<div class="newsItem">	<!-- news -->
+								<div class="newsImg">
+									<img src="<%= news.getImageUrl()%>">
+								</div>
+									
+								<div class="newsDetail">
+									<span><%= news.getPublishDate() %></span>
+									<br>
+									<ul>
+										<li id="newsTag"><%= news.getCategory() %></li>
+									</ul>								
+									<p class="newsTitle"><%= news.getTitle() %></p>
+									<p class="newsDescription"><%= news.getDesc() %></p>
+								</div>
+						</div>
+					</a>
+					<%} %>
+				</div>
+				
+				<%} %>
 			</div>
 			
 		</div>
