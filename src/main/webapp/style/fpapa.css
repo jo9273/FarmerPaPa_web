@@ -66,20 +66,19 @@ body{
 }
 
 .filterWrapper{
-	flex-grow: 1;
 	display: flex;
-	padding: 0px 50px;
-	
 }
 
 .filterSelectWrapper{
 	min-height: 1vw;
   	flex-grow: 1;
+  	margin: auto 20px;
 }
 
 .filterTimeWrapper{
 	min-height: 1vw;
 	flex-grow: 1;
+	margin: auto 20px;
 }
 
 
@@ -97,7 +96,6 @@ body{
 	list-style: none;
 	display: inline-block;
 }
-
 
 .socialIcon {
     width: 30px;

@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.order-content{
+	width: 70%;
+	margin: 50px auto;
+}
+
+.orderInfoList{
+	margin: 50px auto;
+}
+
+.search-time-btn{
+	font-family: inherit;
+	display: inline-flex; 
+    margin: 10px;
+	background: #476730;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 120px;
+    border: 0px;
+    color: #E3E3DC;
+	width: 100px;
+}

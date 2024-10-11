@@ -27,6 +27,7 @@
 	width: 200px;
 	display: block; /* 讓按鈕變為塊級元素 */
     margin: 25px auto 0px auto; /* 水平置中 */
+    font-family: inherit;
 }
 
 .form-detail{

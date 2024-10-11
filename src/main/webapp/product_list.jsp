@@ -250,7 +250,7 @@
 							</div>
 							
 					<% 	}else{	%>
-							<!-- <%= list %>  -->
+							<%-- <%= list %>  for test--%>
 							
 						<div id="productListDiv">
 							<% for(int i = 0 ; i < list.size() ; i++){	
