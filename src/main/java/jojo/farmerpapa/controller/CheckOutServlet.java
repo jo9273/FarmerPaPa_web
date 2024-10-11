@@ -57,10 +57,10 @@ public class CheckOutServlet extends HttpServlet {
 			String shippingAddress = request.getParameter("sh-address");	
 			
 			//TODO: 檢查
-			if(shippingType == null || shippingType.length() == 0) 
+			if(shippingType == null || (shippingType = shippingType.trim()).length() == 0)  //防止空白造成java.lang.IllegalArgumentException, 使用trim處理
 				errors.add("必須選擇貨運方式");			
 			
-			if(paymemntType == null || paymemntType.length() == 0) 
+			if(paymemntType == null || (paymemntType = paymemntType.trim()).length() == 0) 
 				errors.add("必須選擇付款方式");			
 			
 			if(name == null || (name = name.trim()).length() == 0) 
@@ -78,33 +78,34 @@ public class CheckOutServlet extends HttpServlet {
 			
 			//建立訂單()
 			if(errors.isEmpty()) {
-				ShippingType shType = ShippingType.valueOf(shippingType);				
-				PaymentType pType = PaymentType.valueOf(paymemntType);
-				
-				Order order = new Order();
-				order.setMember(cart.getMember());
-				order.setCreatedDate(LocalDate.now());
-				order.setCreatedTime(LocalTime.now());
-				
-				order.setShippingType(shType);
-				order.setShippingFee(shType.getFee());
-				
-				order.setPaymentType(pType);
-				order.setPaymentFee(pType.getFee());
-				
-				order.setRecipientName(name);
-				order.setRecipientEmail(email);
-				order.setRecipientPhone(phone);
-				order.setRecipientAddress(shippingAddress);
-				order.add(cart);
-				
-				
-				OrderService oService = new OrderService();
-				
 				try {
+					ShippingType shType = ShippingType.valueOf(shippingType);		//編譯時 valueOf 會自動加static method		
+					PaymentType pType = PaymentType.valueOf(paymemntType);
+					
+					Order order = new Order();
+					order.setMember(cart.getMember());
+					order.setCreatedDate(LocalDate.now());
+					order.setCreatedTime(LocalTime.now());
+					
+					order.setShippingType(shType);
+					order.setShippingFee(shType.getFee());
+					
+					order.setPaymentType(pType);
+					order.setPaymentFee(pType.getFee());
+					
+					order.setRecipientName(name);
+					order.setRecipientEmail(email);
+					order.setRecipientPhone(phone);
+					order.setRecipientAddress(shippingAddress);
+					order.add(cart);
+					
+					
+					OrderService oService = new OrderService();
 					oService.checkOut(order);
 					
 					//3.1轉交給成功check_out_ok.jsp
+					session.removeAttribute("cart");  //結帳務必要清除購物車session資料
+					
 					request.setAttribute("order", order);
 					request.getRequestDispatcher("check_out_ok.jsp").forward(request, response);;
 					return;

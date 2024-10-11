@@ -26,10 +26,10 @@
 			NewsService nService = new NewsService();
 			List<News> list = null;
 					
-			if(category != null && (category.trim().length()>0)){
+			if(category != null && (category=category.trim()).length()>0){
 				list = nService.getNewsByCategory(category);
 					
-			}else if(NewsYear != null && (NewsYear.trim().length()>0)){
+			}else if(NewsYear != null && (NewsYear=NewsYear.trim()).length()>0){
 				int year = Integer.parseInt(NewsYear);
 				list =  nService.getNewsByYear(year);
 					

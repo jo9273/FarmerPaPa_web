@@ -23,6 +23,14 @@
 		<%@include file="../subviews/header.jsp" %>
 		<div class="pageContent">
 			<div class="cart-content">
+				<div>
+					<span>查詢訂單</span>
+					<input type="radio" value="1個月">
+					<input type="radio" value="2個月">
+					<input type="radio" value="半年">
+					<input type="button" value="submit">
+					
+				</div>
 			
 		
 		
