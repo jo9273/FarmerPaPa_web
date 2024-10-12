@@ -107,7 +107,7 @@ public class CheckOutServlet extends HttpServlet {
 					session.removeAttribute("cart");  //結帳務必要清除購物車session資料
 					
 					request.setAttribute("order", order);
-					request.getRequestDispatcher("check_out_ok.jsp").forward(request, response);;
+					request.getRequestDispatcher("check_out_ok.jsp").forward(request, response);
 					return;
 					
 				}catch(FarmerpapaException e) {

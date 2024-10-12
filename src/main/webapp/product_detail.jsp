@@ -19,8 +19,16 @@
 					p = pService.getProductById(productId);
 				}
 		%>
-		
+		<%
+				// 查無資料
+				if(p == null){
+		%>	
+					<title>查無產品資料</title>
+		<%
+				}else{
+		%>
     	<title><%= p.getName()%></title>
+    	<%} %>
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/header.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/fpapa.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/product_detail.css">

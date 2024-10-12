@@ -9,7 +9,7 @@
 	margin: 50px auto;
 }
 
-.search-time-btn{
+.search-time-btn, .order-detail-btn{
 	font-family: inherit;
 	display: inline-flex; 
     margin: 10px;
@@ -20,4 +20,9 @@
     border: 0px;
     color: #E3E3DC;
 	width: 100px;
+}
+
+.order-payment-type{
+	font-size: 14px;
+  	margin-top: 10px;
 }

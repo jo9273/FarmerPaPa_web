@@ -1,3 +1,5 @@
+<%@page import="jojo.farmerpapa.service.OrderService"%>
+<%@page import="jojo.farmerpapa.entity.Order"%>
 <%@page import="java.util.List"%>
 <%@page pageEncoding="UTF-8"%>
 
@@ -44,9 +46,10 @@
 				
 				<div class="check-out-ok">
 					<h2>購買完成, 訂單已成立</h2>
+					<span>訂單編號：${order.id}</span>
 					<img alt="order completed" src="../images/order-confirmed.png">
 					<input class="orders-history-btn" type="button" value="歷史訂單" onclick='location.href="orders_history.jsp";'>
-					<input class="check-order-btn" type="button" value="檢視訂單" onclick='location.href="order.jsp?orderId=1";'>
+					<input class="check-order-btn" type="button" value="檢視訂單" onclick='location.href="order.jsp?orderId=${order.id}";'>
 					
 				</div>
 				

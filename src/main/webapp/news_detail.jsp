@@ -15,7 +15,17 @@
 					news = nService.getNewsById(newsId);
 				}
 		%>
-		<title><%=news.getTitle() %></title>
+		<%
+				// 查無資料
+				if(news == null){
+		%>	
+					<title>查無最新情報資料</title>
+		<%
+				}else{
+		%>
+    	<title><%=news.getTitle() %></title>
+    	<%} %>
+	
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/header.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/fpapa.css">
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/news.css">
