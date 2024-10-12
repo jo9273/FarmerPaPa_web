@@ -20,16 +20,18 @@
     	$(document).ready(init);
     	
     	function init(){
-    		selectTimeHandler();
+    		selectRangeHandler();
     	}
-    	function selectTimeHandler(){
+    	function selectRangeHandler(){
     		 // 取得 URL 中的 range 參數，沒有則預設為 '1'
-            var urlParams = new URLSearchParams(window.location.search);
-            var range = urlParams.get('range') || '1';
+            var rangeValue = new URLSearchParams(window.location.search).get('range') || '1';
 
-            // 選中對應的 radio button
-            $('input[name="range"][value="' + range + '"]').prop('checked', true);
-        
+            // 選中對應的 radio button，抓取 value 並設定 checked 屬性
+            $('input[name="range"]').each(function() {
+                if ($(this).val() === rangeValue) {
+                    $(this).prop('checked', true);
+                }
+            });
     	}
     	
     	
@@ -118,7 +120,7 @@
 								</td>
 								<td>
 									<input class="order-detail-btn" type="button" value="檢視訂單"
-											onclick='location.href="order.jsp?orderId=${order.id}";'>
+											onclick='location.href="order.jsp?orderId=<%=order.getId()%>";'>
 								</td>
 							<%} %>
 						</tbody>
