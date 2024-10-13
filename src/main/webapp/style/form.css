@@ -48,6 +48,7 @@
 	width: 200px;
 	height: 30px;
 	border: 1px solid #476730;
+	border-radius: 5px;
 }
 
 .row-title{
