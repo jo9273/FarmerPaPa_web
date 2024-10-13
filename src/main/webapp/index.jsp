@@ -1,3 +1,6 @@
+<%@page import="jojo.farmerpapa.entity.News"%>
+<%@page import="jojo.farmerpapa.service.NewsService"%>
+<%@page import="java.util.List"%>
 <%@ page pageEncoding="UTF-8"%>
 <%@ page import="jojo.farmerpapa.entity.Customer"%>
 <!DOCTYPE html>
@@ -38,12 +41,42 @@
 					</div>
 						 
 					<h1>小農真心．果然新鮮</h1>
+					<img alt="scorll down" src="/fpapa/images/down-arrow.png">
 				</div>
 				
+				<%
+					NewsService nService = new NewsService();
+					List<News> list = nService.getLatesNews();
+				%>
+				<% 	if(list != null || list.size() != 0){ %>
 				<div class="newsList">
-					<h2>最新情報</h2>
+					<div class="title-wrapper">
+						<h2>最新情報</h2>
+						<a class="more-btn" href="/fpapa/news_list.jsp">
+							更多情報 
+							<img class="more-img" alt="more" src="/fpapa/images/right_arrow.png">
+						</a>
+					</div>
+					<% 	for(News news : list ){ %>
+					<div class="info-wrapper">
+						<a class="newsLink" href="news_detail.jsp?newsId=<%= news.getId() %>">
+							<div class="newsItem">	<!-- news -->
+								<img src="<%= news.getImageUrl()%>">			
+								<div class="newsDetail">
+									<span><%= news.getPublishDate() %></span>
+									<br>
+									<ul>
+										<li id="newsTag" class="tag"><%= news.getCategory() %></li>
+									</ul>								
+									<p class="newsTitle"><%= news.getTitle() %></p>
+									<p class="newsDescription"><%= news.getDesc() %></p>
+								</div>
+							</div>
+						</a>
+					</div>	
+					<%} %>
 				</div>
-				
+			<%} %>
 				<div class="productList">
 					<h2>當季主打</h2>
 				</div>

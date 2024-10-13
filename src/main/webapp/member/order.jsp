@@ -28,7 +28,6 @@
 		<%@include file="../subviews/header.jsp" %>
 		<div class="pageContent">
 			<div class="order-content">
-				<h1 class="topTitle">查詢訂單</h1>
 				
 				<%
 					String orderId = request.getParameter("orderId");
@@ -39,15 +38,36 @@
 						order = oService.getOrderById(member, orderId);
 					}
 				%>
+				
 				<%if(order == null){ %>
 					<div class="noData">
 						<h2>查無歷史訂單</h2>
 						<img src="../images/no_data.png">
 					</div>
 				<%}else{ %>
+					<div class = "breadCrumbs">
+						<ul>
+							<li>
+								<a href="./">首頁</a>
+							</li>
+							<li>
+								>
+							</li>
+							<li>
+								<a href="orders_history.jsp">歷史訂單</a>
+							</li>
+							<li>
+								>
+							</li>
+							<li>
+								訂單編號：<%=order.getId()%>
+							</li>
+						</ul>
+					</div>
+				
 					<div class="orderInfoList">
 						<table class="cartDetails">
-							<caption>歷史訂單</caption>
+							<caption>訂單資訊</caption>
 							
 							<thead>
 								<tr class="table-header">
@@ -56,7 +76,6 @@
 									<td>訂單狀態</td>
 									<td>運送方式</td>
 									<td>訂單總金額</td>
-									<td>檢視明細</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -76,10 +95,6 @@
 									<td>
 										<div>$<%=order.getTotalAmountWithFee()%></div>
 										<div class="order-payment-type"><%=order.getPaymentType()%></div>
-									</td>
-									<td>
-										<input class="order-detail-btn" type="button" value="檢視訂單"
-												onclick='location.href="order.jsp?orderId=${order.id}";'>
 									</td>
 							</tbody>
 						</table>
@@ -141,18 +156,19 @@
 								<tr class="table-count">
 									<td colspan="5">產品總金額：<span id="totalAmount"><%= order.getTotalAmount() %></span>元</td>
 								</tr>
+								
+								<%if(order.isFreeShipping()){ %>
+									<tr class="table-count" id="free-shipping-row">
+										<td colspan="5">免運費</td>
+									</tr>
+								<%}else{ %>
 								<tr class="table-count">
 									<td colspan="5">運費：
 										<span id="shippingFee"><%=order.getShippingFee()%></span>元
 									</td>
 								</tr>
-								<%if(order.isFreeShipping()){ %>
-									<tr class="table-count" id="free-shipping-row">
-										<td colspan="5">免運費：
-											-<span id="free-shipping"><%=order.getShippingFee()%></span>元
-										</td>
-									</tr>
 								<%} %>
+								
 								<tr class="table-count">
 									<td colspan="5" class="totalAmountWithFee-tr">訂單總金額：
 										<span id="totalAmountWithFee-tr"><%= order.getTotalAmount() %></span>元
