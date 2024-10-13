@@ -260,7 +260,7 @@
 										<a href="product_detail.jsp?productId=<%= p.getId() %>"><img src="<%= p.getPhotoUrl() %>"></a>    <!-- TODO:ajax+json -->
 										<a href="product_detail.jsp?productId=<%= p.getId() %>"> <!-- 同步GET請求 -->
 											<div class="product-name">
-												<h4><%= p.getName() %></h4>		 
+												<p><%= p.getName() %></p>		 
 											</div>
 											
 											<div class="productPrice">

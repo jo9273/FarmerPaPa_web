@@ -41,16 +41,19 @@
 	 cursor: pointer;
      font-size: 2em;
      color: #f04624;
+     background-color: rgba(255, 255, 255, 0.7);
      padding: 0 10px;
      user-select: none;   
 }
 
 #prev {
 	left: 10px;
+	margin-left: 10px;
 }
 
 #next {
 	right: 10px;
+	margin-right: 10px;
 }
 
 #prev:hover, #next:hover {
@@ -124,8 +127,6 @@
 
 .productContent article{
 	flex-grow: 2;
-	margin-left: 50px;
-	width: 80%;
 	padding: 0px 0px 0px 25px;
 	text-align: center;
 	display: flex;
@@ -141,20 +142,15 @@
 .productItem{
 	display: inline-block;
 	float: left;
-	width: 250px;
-	height: 370px;
+	width: 300px;
+	height: 440px;
 	vertical-align: top;
 	border-radius: 10px;
   	margin: 25px;
-  	border: #0b4227 1px solid;
+  	background-color: lightgray;
+	border-radius: 10px;
 }
 	
-
-.productItem h4{
-	text-align: left;
-	color: #0b4227;
-	margin: 10px auto;
-}
 
 .productItem a{
 	text-decoration: none;
@@ -163,7 +159,7 @@
 	
 .productItem img{
 	border-radius: 10px;
-	width: 250px;
+	width: 100%;
 	display: block;
 	margin: auto
 }
@@ -173,14 +169,24 @@
 	height: 50px;
 }
 
+.product-name p{
+	font-size: 16px;
+  	line-height: 1.2;
+  	letter-spacing: 1.2px;
+  	text-align: left;
+  	color: #f04624;
+  	font-weight: bold;
+}
+
 .productPrice{
-	margin: 0px 18px;
+	margin: 15px 18px;
 	text-align: right;
 }
 
 .list-price{
 	display: inline-block;
 	font-size: 14px;
+	color: #707070;
 	text-decoration: line-through;
 	text-decoration-color: #f04624; 
 	text-decoration-thickness: 2px;	
@@ -191,13 +197,14 @@
 	display: inline-block;
 	margin-left: 10px;
 	font-size:14px;
+	color: #707070;
 }
 
 .price{
 	display: block;
-  	color: #f04624;
   	font-size: 16px;
   	font-weight: bold;
+  	margin-top: 5px;
 }
 
 
