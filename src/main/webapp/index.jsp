@@ -55,7 +55,7 @@
 				// 只有當索引小於總篇數時，才允許進行下一頁
 				if (newsIndex < newsNum - 1) {
 					newsIndex++;  // 移動到下一篇
-			        $("#news-container").animate({"left": -(newsIndex * 520) + "px"}, 500);  // 每次移動一篇寬度
+			        $("#news-container").animate({"left": -(newsIndex * 480) + "px"}, 500);  // 每次移動一篇寬度
 			        updateNewsBtns();  // 每次更新按鈕狀態
 			    }
 				
@@ -66,7 +66,7 @@
 				// 只有當索引大於0時，才允許返回上一頁
 		        if (newsIndex > 0) {
 		            newsIndex--;  // 移動到上一篇
-		            $("#news-container").animate({"left": -(newsIndex * 520) + "px"}, 500);  // 每次移動一篇寬度
+		            $("#news-container").animate({"left": -(newsIndex * 480) + "px"}, 500);  // 每次移動一篇寬度
 		            updateNewsBtns();  // 每次更新按鈕狀態
 		        }
 			}

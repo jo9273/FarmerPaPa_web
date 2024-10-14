@@ -171,7 +171,7 @@
 								
 								<tr class="table-count">
 									<td colspan="5" class="totalAmountWithFee-tr">訂單總金額：
-										<span id="totalAmountWithFee-tr"><%= order.getTotalAmount() %></span>元
+										<span id="totalAmountWithFee-tr"><%= order.getTotalAmountWithFee()%></span>元
 									</td>
 								</tr>
 							</tfoot>	

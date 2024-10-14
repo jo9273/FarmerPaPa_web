@@ -19,6 +19,7 @@ import jojo.farmerpapa.entity.PaymentType;
 import jojo.farmerpapa.entity.ShippingType;
 import jojo.farmerpapa.entity.ShoppingCart;
 import jojo.farmerpapa.exception.FarmerpapaException;
+import jojo.farmerpapa.exception.StockShortageException;
 import jojo.farmerpapa.service.OrderService;
 
 /**
@@ -110,6 +111,10 @@ public class CheckOutServlet extends HttpServlet {
 					request.getRequestDispatcher("check_out_ok.jsp").forward(request, response);
 					return;
 					
+				}catch(StockShortageException e) {
+					errors.add(e.getMessage() + ",請聯絡Admin");
+					response.sendRedirect("cart.jsp");
+					return;
 				}catch(FarmerpapaException e) {
 					errors.add(e.getMessage() + ", 請聯絡Admin");
 					this.log(e.getMessage(), e);
@@ -119,7 +124,7 @@ public class CheckOutServlet extends HttpServlet {
 					this.log("發生系統錯誤!", e);
 				}
 			}
-		}else errors.add("購物車是空的,無法結帳");
+		}else errors.add("購物車是空的, 無法結帳");
 		
 		
 		if(!errors.isEmpty())  
