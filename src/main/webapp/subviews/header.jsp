@@ -88,7 +88,7 @@
 	
 						<a id="login-check" class="cart-a" href="<%= request.getContextPath()%>/member/cart.jsp">
 							<div class="cart">
-								<span>(${sessionScope.cart.getTotalQuantity()+0})</span>  <%--EL寫法:null會顯示空字串,且沒有字串相加, 所以null就會顯示0 --%>							
+								(<span class="totalQtySpan">${sessionScope.cart.getTotalQuantity()+0}</span>)  <%--EL寫法:null會顯示空字串,且沒有字串相加, 所以null就會顯示0 --%>							
 								<img alt="購物車" src="/fpapa/images/basket.png">
 							</div>
 						</a>

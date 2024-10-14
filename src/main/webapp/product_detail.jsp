@@ -139,6 +139,32 @@
     		    $("#" + tabId).show();
     		}
     		
+    		
+    		
+    		//非同步請求加入購物車
+    		function sendAjaxAddToCart(){
+				//alert("add to cart");
+				
+				//自行送出ajax非同步請求
+				$.ajax({
+					url: $("#cart-form").attr("action"),
+					method: $("#cart-form").attr("method"),
+					data: $("#cart-form").serialize()
+				
+				}).done(sendAjaxAddToCartDoneHandler);
+				
+				
+				//取消同步請求
+				return false;
+				
+    		}
+    		
+    		function sendAjaxAddToCartDoneHandler(result, status, xhr){
+				//alert(result);
+				
+				$(".totalQtySpan").text(result.totalQty);
+    		}
+    		
     	</script>
 
 	</head>
@@ -237,7 +263,8 @@
 						
 						
 						<div>
-							<form action="add_to_cart.do" method="POST">
+											  <!-- 把ajax的return false, 到這邊return給onsubmit, 取消送出同步請求 -->
+							<form id="cart-form" action="add_to_cart.do" method="POST" onsubmit="return sendAjaxAddToCart()">  
 								<input type="hidden" name="productId" value="<%= p.getId()%>">
 								
 								<% if(p.getSpecList() != null && p.getSpecList().size()>0){%>
