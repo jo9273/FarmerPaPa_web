@@ -35,6 +35,8 @@
 		<link rel="stylesheet" type="text/css" href="/fpapa/style/footer.css">
 		
 		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
+    	<script type="text/javascript" src="/fpapa/js/loginCheck.js"></script>
+    	<!-- TODO 直接購買 -->
     	
     	<script>
     		
@@ -142,25 +144,28 @@
     		
     		
     		//非同步請求加入購物車
+    		
+    		var notAjax = false;
     		function sendAjaxAddToCart(){
 				//alert("add to cart");
 				
 				//自行送出ajax非同步請求
-				$.ajax({
-					url: $("#cart-form").attr("action"),
-					method: $("#cart-form").attr("method"),
-					data: $("#cart-form").serialize()
-				
-				}).done(sendAjaxAddToCartDoneHandler);
-				
+				if(!notAjax){
+					$.ajax({
+						url: $("#cart-form").attr("action"),
+						method: $("#cart-form").attr("method"),
+						data: $("#cart-form").serialize()
+					
+					}).done(sendAjaxAddToCartDoneHandler);
+    			}
 				
 				//取消同步請求
-				return false;
+				return notAjax;
 				
     		}
     		
     		function sendAjaxAddToCartDoneHandler(result, status, xhr){
-				//alert(result);
+				alert("加入購物車成功, 共" + result.totalQty + "件");
 				
 				$(".totalQtySpan").text(result.totalQty);
     		}
@@ -303,6 +308,7 @@
 								</div>
 								<div>
 									<input class="addToCart-btn" type="submit" value="加入購物車">
+									<!--  <button id="login-check" class="addToCart-btn" type="submit" name="submit" value="notAjax" onclick="notAjax = true;">直接購買</button>  -->
 								</div>
 							</form>
 						</div>

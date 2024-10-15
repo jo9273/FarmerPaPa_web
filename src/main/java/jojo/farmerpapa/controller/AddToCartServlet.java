@@ -83,13 +83,16 @@ public class AddToCartServlet extends HttpServlet {
 			this.log("加入Cart發生錯誤" + addToCartErrors);
 		
 		
-		//3.原來是同步請求, 才會用外部轉址到cart.jsp
-		//response.sendRedirect("member/cart.jsp");
-	
+		String submit = request.getParameter("submit");
+		if( submit != null) {
+			//3.原來是同步請求, 才會用外部轉址到cart.jsp
+			// TODO 直接購買功能
+			response.sendRedirect("member/cart.jsp");
+		}else {
 		
 		//3.現在改成非同步請求, 內部轉交到small_cart.jsp
 		request.getRequestDispatcher("small_cart.jsp").forward(request, response);
-	
+		}
 	}
 
 }

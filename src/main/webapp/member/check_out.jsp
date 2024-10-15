@@ -21,7 +21,7 @@
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/footer.css">
 		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
     	<script type="text/javascript" src="/fpapa/js/loginCheck.js"></script>
-    	
+    	    	
     	<script>
     	 	$(init);
 			
