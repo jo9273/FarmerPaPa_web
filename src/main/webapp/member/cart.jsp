@@ -1,3 +1,4 @@
+<%@page import="jojo.farmerpapa.service.ProductService"%>
 <%@page import="jojo.farmerpapa.entity.SpecialOffer"%>
 <%@page import="java.util.Set"%>
 <%@page import="jojo.farmerpapa.entity.ShoppingCart"%>
@@ -132,11 +133,18 @@
 							</tr>
 						</thead>
 						<tbody>
-						
+							
+							
 							<%
 								Set<CartItem> itemSet = cart.getCartItemsSet();
 								for(CartItem item:itemSet){	
 							%>
+								<%  ProductService pService = new ProductService(); 
+									int stock = pService.getStockByProductIdSpecNameSpecGrade(item.getProductId(), item.getSpecName(), item.getSpecGrade());
+								
+									item.setStock(stock);
+								%>
+							
 							
 							<tr class="table-detail">
 								<td class="order-products">
@@ -183,12 +191,12 @@
 								</td>
 								
 								<td><%= cart.getAmount(item) %>元</td>
-																
+														
 								<td>
 									<input type="checkbox" name="delete<%=item.hashCode()%>">
 								</td>	
 							</tr>
-							
+								
 							<% } %>
 							
 						</tbody>
