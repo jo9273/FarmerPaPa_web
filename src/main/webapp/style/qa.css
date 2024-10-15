@@ -3,6 +3,7 @@
 .qa-content{
 	width: 70%;
   	margin: 50px auto;
+  	min-height: 80vh;
 }
 
 

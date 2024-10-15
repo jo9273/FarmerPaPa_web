@@ -154,7 +154,7 @@
 					$.ajax({
 						url: $("#cart-form").attr("action"),
 						method: $("#cart-form").attr("method"),
-						data: $("#cart-form").serialize()
+						data: $("#cart-form").serialize()   //打包成
 					
 					}).done(sendAjaxAddToCartDoneHandler);
     			}
