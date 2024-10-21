@@ -48,7 +48,7 @@
 					<div class = "breadCrumbs">
 						<ul>
 							<li>
-								<a href="./">首頁</a>
+								<a href="../">首頁</a>
 							</li>
 							<li>
 								>
