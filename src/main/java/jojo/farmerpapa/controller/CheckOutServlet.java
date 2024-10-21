@@ -108,6 +108,21 @@ public class CheckOutServlet extends HttpServlet {
 					session.removeAttribute("cart");  //結帳務必要清除購物車session資料
 					
 					request.setAttribute("order", order);
+					
+					
+					//信用卡(若paymentType.equals("CARD"))則轉交/WEB-INF/credit_card.jsp來送出對於第三方支付的請求
+
+		             if(order.getPaymentType()==PaymentType.CARD){               
+
+		                request.getRequestDispatcher("/WEB-INF/credit_card.jsp").forward(request, response);                 
+
+		                return;
+
+		              }
+
+		             //信用卡處理程式end
+					
+					
 					request.getRequestDispatcher("check_out_ok.jsp").forward(request, response);
 					return;
 					
