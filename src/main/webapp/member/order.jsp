@@ -1,3 +1,4 @@
+<%@page import="jojo.farmerpapa.entity.PaymentType"%>
 <%@page import="jojo.farmerpapa.entity.OrderItem"%>
 <%@page import="java.util.Set"%>
 <%@page import="jojo.farmerpapa.entity.Order"%>
@@ -88,6 +89,12 @@
 									</td>
 									<td>
 										<div><%=order.getStatusDescription()%></div>
+										
+										<!-- 通知轉帳 -->
+										<% if(order.getStatus() == 0 && order.getPaymentType() == PaymentType.ATM){ %>
+										<a href='atm_transfered.jsp?orderId=<%= order.getId()%>'>已轉帳通知</a>
+										<%} %>
+										
 									</td>
 									<td>
 										<div><%=order.getShippingType().getDescription()%></div>
