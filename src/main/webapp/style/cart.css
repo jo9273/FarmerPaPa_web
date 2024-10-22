@@ -209,13 +209,14 @@
 	text-align: right;
 }
 
-.cartAction{
+.cartAction, .atmAction{
   	width: 85%;
   	margin: 0px auto;
   	text-align: center;
 }
 
-.update-btn, .gotoshop-btn, .checkout-btn, .orders-history-btn, .check-order-btn {
+.update-btn, .gotoshop-btn, .checkout-btn, .orders-history-btn, .check-order-btn, 
+.atm-reset-btn, .atm-submit-btn {
 	font-family: inherit;
 	display: inline-flex; 
     margin: 10px;
@@ -228,7 +229,7 @@
 	width: 200px;
 }
 
-.checkout-btn{
+.checkout-btn, .atm-submit-btn{
 	background: #f04624;
 	justify-content: center;
 }

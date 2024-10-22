@@ -30,6 +30,10 @@
     font-family: inherit;
 }
 
+.formContent h2{
+	text-align: center;
+}
+
 .form-detail{
 	width: 85%;
 	height: 50px;

@@ -1,3 +1,4 @@
+<%@page import="jojo.farmerpapa.entity.OrderStatusLog"%>
 <%@page import="jojo.farmerpapa.entity.PaymentType"%>
 <%@page import="jojo.farmerpapa.entity.OrderItem"%>
 <%@page import="java.util.Set"%>
@@ -34,10 +35,17 @@
 					String orderId = request.getParameter("orderId");
 					Order order = null;
 					
+					List<OrderStatusLog> statusLogList = null;
 					OrderService oService = new OrderService();
-					if(orderId != null && (orderId = orderId.trim()).length() > 0){
-						order = oService.getOrderById(member, orderId);
+					
+					if(member!=null && orderId!=null){
+						order = oService.getOrderById(member, orderId); 
+						
+						if(order!=null){
+							statusLogList = oService.getOrderStatusLog(orderId);
+						}
 					}
+						
 				%>
 				
 				<%if(order == null){ %>
