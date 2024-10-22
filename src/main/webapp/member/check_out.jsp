@@ -23,14 +23,35 @@
     	<script type="text/javascript" src="/fpapa/js/loginCheck.js"></script>
     	    	
     	<script>
-    	 	$(init);
+    	 	$(initCC);
 			
-			function init(){
+			function initCC(){
 				$('#the-buyer-checkbox').on('change', sameWithBuyerHandler);
 				
 			    $("select[name=shippingType]").on("change", changeShippingOption);
-
+			    
+			    alert("<%="POST".equalsIgnoreCase(request.getMethod())%>");
+			    
+			    
+			    repopulateFormDataCC();
 			}
+			
+			
+			function repopulateFormDataCC(){
+				<%if("POST".equalsIgnoreCase(request.getMethod())){ %>
+				alert("${param["cvs-address"]}");
+				$("select[name=shippingType]").val("${param["shippingType"]}");
+				$("select[name=shippingType]").trigger("change");
+				$("select[name=paymentType]").val("${param["paymentType"]}");
+				
+				$("input[name=sh-name]").val("${param["sh-name"]}");
+				$("input[name=email]").val("${param["sh-email"]");
+				$("input[name=phone]").val("${param["sh-phone"]");
+				$("input[name='cvs-address']").val("${param["cvs-address"]}");
+
+				<%}%>
+			}     
+			
 			
 			function sameWithBuyerHandler(){
 
@@ -119,7 +140,7 @@
 				var shippingFee = 0;	 //實際運費
 				var waivedShippingFee = 0 //減免運費
 				//var paymentFee = 0;
-				var MAX_WITHOUT_FEE = <%= maxWithoutFee %>;
+				var MAX_WITHOUT_FEE = <%=maxWithoutFee%>;
 				
 				if($("select[name=shippingType] option:selected").val()!=''){
 					defShippingFee = Number($("select[name=shippingType] option:selected").attr("data-fee"));
@@ -318,7 +339,7 @@
 									<label><sup>*</sup>收件人姓名：</label>
 								</div>
 								<div class="row-content">	
-						       		<input id="recipt-name-cvs" type="text" name="name" required placeholder="請輸入姓名2~20字" minlength="2" maxlength="20">
+						       		<input id="recipt-name-cvs" type="text" name="cvs-name" required placeholder="請輸入姓名2~20字" minlength="2" maxlength="20">
 								</div>
 							</div>
 							<div class="form-detail">
@@ -326,7 +347,7 @@
 									<label><sup>*</sup>收件人手機號碼：</label>
 								</div>
 								<div class="row-content">	
-									<input id="recipt-phone-cvs" type="tel" name="phone" required placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}">
+									<input id="recipt-phone-cvs" type="tel" name="cvs-phone" required placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}">
 								</div>
 							</div>
 							<div class="form-detail">
@@ -334,7 +355,15 @@
 									<label><sup>*</sup>選擇超商門市：</label>
 								</div>
 								<div class="row-content">	
-									<input type="button" value="選擇超商">	
+									<input type="button" value="選擇超商" onclick="goEZShip()">	
+								</div>
+							</div>
+							<div class="form-detail">
+								<div class="row-title">
+									<label><sup>*</sup>超商門市地址：</label>
+								</div>
+								<div class="row-content">	
+					           		<input id="recipt-address-cvs" type="text" name="cvs-address" required placeholder="超商門市地址" minlength="2" maxlength="30">
 								</div>
 							</div>
 						</div>
@@ -502,7 +531,78 @@
 					</div>	
 
 				</form>
+				
 
+				<script>
+					function goEZShip() {//前往EZShip選擇門市
+						if (confirm("Go EZShip前，你的網址已經改用ip Address了嗎?")) {
+							alert("出發至EZShip[選擇超商]");
+			 			
+						} else {
+							alert("快改網址!並重新登入與購買");
+							return;
+						}
+			
+			 		//去除文字欄位資料前後的多餘空白
+			
+			           $("input[name=name]").val($("input[name=name]").val().trim());
+						
+			           //$("input[name=recipientEmail]").val($("input[name=recipientEmail]").val().trim());
+			           
+			           $("input[name=phone]").val($("input[name=phone]").val().trim());
+			           //alert(123);
+			           $("input[name=cvs-address]").val($("input[name=cvs-address]").val().trim());
+                
+			               var protocol = "https"; //之後務必要改成https
+			
+			               var ipAddress = "<%= java.net.InetAddress.getLocalHost().getHostAddress()%>";
+			
+			               var url = protocol + "://" + ipAddress + ":" + location.port + "<%=request.getContextPath()%>/member/ezship_callback.jsp";                 
+			
+			               $("#rtURL").val(url);           
+			
+			              
+			
+			           //$("#webPara").val($("form[action='check_out.do']").serialize());              
+			
+			               $("#webPara").val($("#checkOutForm").serialize());           
+			
+			               alert('現在網址不得為[locolhost]: '+url); //測試用，測試完畢後請將此行comment            
+			
+			               alert($("#webPara").val()) //測試用，測試完畢後請將此行comment
+			
+			              
+			
+			               $("#ezForm").submit();          
+			
+			           }
+	
+	 
+	
+	           </script>
+	           
+	           <form id="ezForm" method="post" name="simulation_from"
+					action="https://map.ezship.com.tw/ezship_map_web.jsp">
+	
+					<input type="hidden" name="suID" value="test@fpapa.com">
+					<!-- 業主在 ezShip 使用的帳號, 隨便寫 -->
+	
+					<input type="hidden" name="processID" value="fpapa202407050000005">
+					<!-- 購物網站自行產生之訂單編號, 隨便寫 -->
+	
+					<input type="hidden" name="stCate" value="">
+					<!-- 取件門市通路代號 -->
+	
+					<input type="hidden" name="stCode" value="">
+					<!-- 取件門市代號 -->
+	
+					<input type="hidden" name="rtURL" id="rtURL" value="">
+					<!-- 回傳路徑及程式名稱 -->
+	
+					<input type="hidden" id="webPara" name="webPara" value="">
+					<!-- 結帳網頁中cartForm中的輸入欄位資料。ezShip將原值回傳，才能帶回結帳網頁 -->
+	
+				</form>
 				<% } %>
 			</div>
 		</div>

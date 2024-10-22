@@ -1,3 +1,5 @@
+<%@page import="jojo.farmerpapa.entity.PaymentType"%>
+<%@page import="jojo.farmerpapa.entity.OrderStatusLog"%>
 <%@page import="jojo.farmerpapa.entity.Order"%>
 <%@page import="jojo.farmerpapa.service.OrderService"%>
 <%@page import="java.util.List"%>
@@ -69,6 +71,7 @@
 					//Customer member = (Customer)session.getAttribute("member");  //已經在header.jsp子網頁宣告過
 					
 					List<Order> list = null;
+					List<OrderStatusLog> statusLogList = null;
 					OrderService oService = new OrderService();
 					list = oService.getOrdersHistory(member, rangeInMonths);
 				
@@ -110,6 +113,10 @@
 								</td>
 								<td>
 									<div><%=order.getStatusDescription()%></div>
+									<!-- 通知轉帳 -->
+										<% if(order.getStatus() == 0 && order.getPaymentType() == PaymentType.ATM){ %>
+										<a href='atm_transfered.jsp?orderId=<%= order.getId()%>'>已轉帳通知</a>
+										<%} %>
 								</td>
 								<td>
 									<div><%=order.getShippingType().getDescription()%></div>

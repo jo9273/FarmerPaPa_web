@@ -42,12 +42,15 @@
               <input name="stName" type="text" value="<%=stName%>">
               <input name="stAddr" type="text" value="<%=stAddr%>">
               <input name="stTel" type="text" value="<%=stTel%>">
-              <input name="shippingAddress" type="text" value="<%=stName%>,<%=stAddr%>,店號:<%=stCode%>"> <!--shippingAddress必須與check_out.jsp中要帶入超商資料的欄位name一樣 -->
+              <input id="address" type="text" value="<%=stName%>,<%=stAddr%>,店號:<%=stCode%>"> <!--shippingAddress必須與check_out.jsp中要帶入超商資料的欄位name一樣 -->
               <% for (String name : paramsMap.keySet()) {%>
-              <input name="<%=name%>" type="text" value="<%= paramsMap.get(name)%>">
+              <input id="<%=name%>" name="<%=name%>" type="text" value="<%= paramsMap.get(name)%>">
               <%}%>
               <input type='submit' value='回結帳畫面'>
               <script>
+              		var add = document.getElementById("cvs-address");
+              		alert(address.value);
+              		add.value=address.value; 
                  //document.getElementById("myForm").submit();<!-- 測試完畢後，請將此行uncomment，讓資料立刻submit回check+out.jsp  -->
               </script>
           </form>
