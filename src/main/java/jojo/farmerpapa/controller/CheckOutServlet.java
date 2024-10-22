@@ -52,11 +52,40 @@ public class CheckOutServlet extends HttpServlet {
 			String shippingType = request.getParameter("shippingType");
 			String paymemntType = request.getParameter("paymentType");
 			
-			String name = request.getParameter("sh-name");
-			String email = member.getEmail();
-			String phone = request.getParameter("sh-phone");
-			String shippingAddress = request.getParameter("sh-address");	
+			String name = null;
+	        String phone = null;
+	        String shippingAddress = null;
+
+	        // 從會員取得 email
+	        String email = member.getEmail();
 			
+	        
+	     // 根据取貨方式取得收件資料
+	        if (shippingType != null) {
+	            shippingType = shippingType.trim();
+	            switch (shippingType) {
+	                case "HOME":
+	                    name = request.getParameter("sh-name");
+	                    phone = request.getParameter("sh-phone");
+	                    shippingAddress = request.getParameter("sh-address");
+	                    break;
+	                case "CVS":
+	                    name = request.getParameter("cvs-name");
+	                    phone = request.getParameter("cvs-phone");
+	                    shippingAddress = request.getParameter("cvs-address");
+	                    break;
+	                case "STORE":
+	                    name = request.getParameter("store-name");
+	                    phone = request.getParameter("store-phone");
+	                    shippingAddress = request.getParameter("storeList");  //storeList 包含了地址
+	                    break;
+	                default:
+	                    errors.add("未知的配送方式");
+	            }
+	        } else {
+	            errors.add("必須選擇配送方式");
+	        }
+	        
 			//TODO: 檢查
 			if(shippingType == null || (shippingType = shippingType.trim()).length() == 0)  //防止空白造成java.lang.IllegalArgumentException, 使用trim處理
 				errors.add("必須選擇貨運方式");			

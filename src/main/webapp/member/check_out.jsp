@@ -20,7 +20,7 @@
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/form.css">
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/footer.css">
 		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
-    	<script type="text/javascript" src="/fpapa/js/loginCheck.js"></script>
+    
     	    	
     	<script>
     	 	$(initCC);
@@ -30,24 +30,57 @@
 				
 			    $("select[name=shippingType]").on("change", changeShippingOption);
 			    
-			    alert("<%="POST".equalsIgnoreCase(request.getMethod())%>");
-			    
 			    
 			    repopulateFormDataCC();
+			    
+			    $("select[name=shippingType]").trigger("change");
 			}
 			
 			
 			function repopulateFormDataCC(){
 				<%if("POST".equalsIgnoreCase(request.getMethod())){ %>
-				alert("${param["cvs-address"]}");
+				//alert("${param["cvs-address"]}");
+				$("input[name=memberName]").val("${param["memberName"]}");
+				$("input[name=memberPhone]").val("${param["memberPhone"]}");
+				$("input[name=memberEmail]").val("${param["memberEmail"]}");
+				$("textarea[name=memberAddress]").val("${param["memberAddress"]}");
+				
+				
 				$("select[name=shippingType]").val("${param["shippingType"]}");
 				$("select[name=shippingType]").trigger("change");
-				$("select[name=paymentType]").val("${param["paymentType"]}");
 				
-				$("input[name=sh-name]").val("${param["sh-name"]}");
-				$("input[name=email]").val("${param["sh-email"]");
-				$("input[name=phone]").val("${param["sh-phone"]");
-				$("input[name='cvs-address']").val("${param["cvs-address"]}");
+				// 同訂購人
+		        $("input[name='same-with-buyer']").prop("checked", <%= (request.getParameter("same-with-buyer") != null) %>);
+		        
+		        // 是否送禮
+		        $("input[name='check-for-gift']").prop("checked", <%= (request.getParameter("check-for-gift") != null) %>);
+		        
+		     	// 根據取貨方式帶入資料
+		        <% String shippingType = request.getParameter("shippingType"); %>
+		        <% if("CVS".equals(shippingType)) { %>
+		            // 超商取貨
+		            $("input[name='cvs-name']").val("${param["cvs-name"]}");
+		            $("input[name='cvs-phone']").val("${param["cvs-phone"]}");
+		            $("input[name='cvs-address']").val("${param["cvs-address"]}");
+		        <% } else if("STORE".equals(shippingType)) { %>
+		            // 門市取貨
+		            $("input[name='store-name']").val("${param["store-name"]}");
+		            $("input[name='store-phone']").val("${param["store-phone"]}");
+		            $("select[name='storeList']").val("${param["storeList"]}");
+		        <% } else if("HOME".equals(shippingType)) { %>
+		            // 貨運宅配
+		            $("input[name='sh-name']").val("${param["sh-name"]}");
+		            $("input[name='sh-phone']").val("${param["sh-phone"]}");
+		            $("textarea[name='sh-address']").val("${param["sh-address"]}");
+		            // 配送時段
+		            $("input[name='delivery_time'][value='${param["delivery_time"]}']").prop("checked", true);
+		        <% } %>
+				
+		        $("textarea[name='remark']").val("${param["remark"]}");
+
+				
+				$("select[name=paymentType]").val("${param["paymentType"]}");
+
 
 				<%}%>
 			}     
@@ -67,7 +100,7 @@
 			    // 將訂購人資料同步到貨運宅配
 			    $('#recipt-name-home').val('${sessionScope.member.getName()}');
 			    $('#recipt-phone-home').val('${sessionScope.member.getPhone()}');
-			    $('#recipt-address-home').text('${sessionScope.member.getAddress()}');
+			    $('#recipt-address-home').val('${sessionScope.member.getAddress()}');
 			    
 			    // 同步到超商取貨
 			    $('#recipt-name-cvs').val('${sessionScope.member.getName()}');
@@ -83,11 +116,12 @@
 			    // 清空貨運宅配資料
 			    $('#recipt-name-home').val('');
 			    $('#recipt-phone-home').val('');
-			    $('#recipt-address-home').text('');
+			    $('#recipt-address-home').val('');
 			    
 			    // 清空超商取貨資料
 			    $('#recipt-name-cvs').val('');
 			    $('#recipt-phone-cvs').val('');
+			    $('#recipt-address-cvs').val('');
 			    
 			    // 清空門市取貨資料
 			    $('#recipt-name-store').val('');
@@ -100,32 +134,39 @@
 			    var selectedShipping = $("select[name=shippingType] option:selected").val();
 			    
 			    // 隱藏所有的配送選項
-			    $(".delivery-option").hide();
+    			$(".delivery-option").hide().find("input, select, textarea").prop("disabled", true);
 
 			    // 根據選擇的配送方式顯示對應的輸入欄位
 			    if (selectedShipping === 'HOME') {
-			        $("#home-delivery").show();
-			    } else if (selectedShipping === 'STORE') {
-			        $("#store-pickup").show();
-			    } else if (selectedShipping === 'CVS') {
-			        $("#cvs-pickup").show();
-			    }
+        			$("#home-delivery").show().find("input, select, textarea").prop("disabled", false);
+    			} else if (selectedShipping === 'STORE') {
+        			$("#store-pickup").show().find("input, select, textarea").prop("disabled", false);
+    			} else if (selectedShipping === 'CVS') {
+        			$("#cvs-pickup").show().find("input, select, textarea").prop("disabled", false);
+    			}
 				
 			 	//處理付款方式的邏輯
+			   // 处理付款方式的逻辑
+			    var paymentTypeSelected = $("select[name=paymentType]").val();
+			    
 			    $("select[name=paymentType] option").prop("disabled", true);
-			    $("select[name=paymentType] option[value='']").removeAttr("disabled");
-
-			    if ($("select[name=shippingType] option:selected").val() != '') {
-			        var array = $("select[name=shippingType] option:selected").attr("data-array").split(',');
-			        for (var i = 0; i < array.length; i++) {
-			            $("select[name=paymentType] option[value='" + array[i] + "']").removeAttr("disabled");
+			    $("select[name=paymentType] option[value='']").prop("disabled", false);
+			
+			    if (selectedShipping !== '') {
+			        var paymentOptions = $("select[name=shippingType] option:selected").attr("data-array").split(',');
+			        for (var i = 0; i < paymentOptions.length; i++) {
+			            $("select[name=paymentType] option[value='" + paymentOptions[i] + "']").prop("disabled", false);
 			        }
 			    }
-
-			    if ($("select[name=paymentType] option:selected").prop("disabled")) {
+			
+			    // 检查当前选择的付款方式是否被禁用
+			    if ($("select[name=paymentType] option[value='" + paymentTypeSelected + "']").prop("disabled")) {
 			        $("select[name=paymentType]").val("");
+			    } else {
+			        // 保持已选择的付款方式
+			        $("select[name=paymentType]").val(paymentTypeSelected);
 			    }
-			    
+    
 			    // 呼叫 calculateFee 函數，計算費用
 			    calculateFee();
 			}
@@ -228,8 +269,8 @@
 								<label><sup>*</sup>訂購人姓名：</label>
 							</div>
 							<div class="row-content">
-					        	<input type="text" name="name" required 
-					        			placeholder="請輸入姓名2~20字" disabled minlength="2" maxlength="20"
+					        	<input type="text" name="memberName" required 
+					        			placeholder="請輸入姓名2~20字" readonly minlength="2" maxlength="20"
 					        			value="${sessionScope.member.getName()}">
 							</div>
 						</div>
@@ -238,7 +279,7 @@
 								<label><sup>*</sup>訂購人手機號碼：</label>
 							</div>
 							<div class="row-content">	
-								<input type="tel" name="phone" disabled required 
+								<input type="tel" name="memberPhone" readonly required 
 										placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}"
 										value="${sessionScope.member.getPhone()}">
 							</div>
@@ -248,7 +289,7 @@
 								<label><sup>*</sup>訂購人Email：</label>
 							</div>
 							<div class="row-content">	
-								<input type="email" name="email" disabled required 
+								<input type="email" name="memberEmail" readonly required 
 										placeholder="請輸入email"
 										value="${sessionScope.member.getEmail()}">
 							</div>
@@ -258,7 +299,7 @@
 								<label><sup>*</sup>訂購人地址：</label>
 							</div>
 							<div class="row-content">	
-					            <textarea name="address" disabled placeholder="尚未設定地址" rows="2" cols="30">${sessionScope.member.getAddress()}</textarea>
+					            <textarea name="memberAddress" readonly placeholder="尚未設定地址" rows="2" cols="30">${sessionScope.member.getAddress()}</textarea>
 							</div>
 						</div>
 					</section>
@@ -375,7 +416,7 @@
 									<label><sup>*</sup>收件人姓名：</label>
 								</div>
 								<div class="row-content">	
-						       		<input id="recipt-name-store" type="text" name="name" required placeholder="請輸入姓名2~20字" minlength="2" maxlength="20">
+						       		<input id="recipt-name-store" type="text" name="store-name" required placeholder="請輸入姓名2~20字" minlength="2" maxlength="20">
 								</div>
 							</div>
 							<div class="form-detail">
@@ -383,7 +424,7 @@
 									<label><sup>*</sup>收件人手機號碼：</label>
 								</div>
 								<div class="row-content">	
-									<input id="recipt-phone-store" type="tel" name="phone" required placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}">
+									<input id="recipt-phone-store" type="tel" name="store-phone" required placeholder="請輸入手機號碼" pattern="[0][9][0-9]{8}">
 								</div>
 							</div>
 							<div class="form-detail">
@@ -527,7 +568,7 @@
 					
 					<div class="cartAction">	
 						<input class="gotoshop-btn" type="button" value="再逛一下" onclick="location.href='../product_list.jsp';">		
-						<input id="login-check" class="checkout-btn" type="submit" value="確認結帳">
+						<input id="checkOut" class="checkout-btn" type="submit" value="確認結帳">
 					</div>	
 
 				</form>
