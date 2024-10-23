@@ -608,9 +608,9 @@
 			
 			               $("#webPara").val($("#checkOutForm").serialize());           
 			
-			               alert('現在網址不得為[locolhost]: '+url); //測試用，測試完畢後請將此行comment            
+			               //alert('現在網址不得為[locolhost]: '+url); //測試用，測試完畢後請將此行comment            
 			
-			               alert($("#webPara").val()) //測試用，測試完畢後請將此行comment
+			               //alert($("#webPara").val()) //測試用，測試完畢後請將此行comment
 			
 			              
 			

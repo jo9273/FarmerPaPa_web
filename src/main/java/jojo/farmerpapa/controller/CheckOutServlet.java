@@ -60,7 +60,7 @@ public class CheckOutServlet extends HttpServlet {
 	        String email = member.getEmail();
 			
 	        
-	     // 根据取貨方式取得收件資料
+	     // 根據取貨方式取得收件資料
 	        if (shippingType != null) {
 	            shippingType = shippingType.trim();
 	            switch (shippingType) {
