@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    	<title>常見問題</title>
+    	<title>FarmerPaPa 常見問題</title>
 				
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/header.css">
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/fpapa.css">

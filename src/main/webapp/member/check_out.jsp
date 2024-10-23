@@ -12,7 +12,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    	<title>購物車結帳</title>
+    	<title>FarmerPaPa 購物車結帳</title>
 				
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/header.css">
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/fpapa.css">
@@ -549,6 +549,8 @@
 									<tr class="table-count">
 										<td colspan="5">運費：
 											<span id="shippingFee">0</span>元
+											<br>
+											<span class="maxWithoutFee">產品總金額達 <%=maxWithoutFee%> 元，即可免運費</span>
 										</td>
 									</tr>
 									<tr class="table-count" id="free-shipping-row" style="display:none;">
