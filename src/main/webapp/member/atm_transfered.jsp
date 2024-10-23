@@ -104,7 +104,7 @@
 				
 				         <div class="atmAction">
 				
-				             <input class="atm-reset-btn" type="reset" value='Reset'>
+				             <input class="atm-reset-btn" type="reset" value='重新填寫'>
 				
 				             <input class="atm-submit-btn" type="submit" value='確定'>
 				
