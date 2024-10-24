@@ -17,7 +17,6 @@
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/cart.css">
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/style/footer.css">
 		<script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
-    	<script type="text/javascript" src="/fpapa/js/loginCheck.js"></script>
     	<script>
 	    	$(document).ready(init);
 	    	
@@ -213,7 +212,7 @@
 					<div class="cartAction">	
 						<input class="update-btn" type="submit" value="修改購物車">
 						<input class="gotoshop-btn" type="button" value="再逛一下" onclick="location.href='../product_list.jsp';">		
-						<button id="login-check" class="checkout-btn" type="submit" name="submit" value="checkout">我要結帳</button>
+						<button class="checkout-btn" type="submit" name="submit" value="checkout">我要結帳</button>
 					</div>				
 				</form>
 				<% } %>
