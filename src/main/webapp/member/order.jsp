@@ -81,7 +81,7 @@
 							<thead>
 								<tr class="table-header">
 									<td>訂單編號</td>
-									<td>訂單日期</td>
+									<td>訂單時間</td>
 									<td>訂單狀態</td>
 									<td>運送方式</td>
 									<td>訂單總金額</td>
@@ -94,6 +94,7 @@
 									</td>
 									<td>
 										<div><%=order.getCreatedDate()%></div>
+										<div><%=order.getCreatedTime()%></div>
 									</td>
 									<td>
 										<div><%=order.getStatusDescription()%></div>
